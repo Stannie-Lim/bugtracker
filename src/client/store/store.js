@@ -10,9 +10,14 @@ import { login, register } from "./user/thunks";
 import projects from "./projects/reducer";
 import { getProjects } from "./projects/thunks";
 
+// tickets
+import tickets from "./tickets/reducer";
+import { getTickets } from "./tickets/thunks";
+
 const reducer = combineReducers({
   user,
   projects,
+  tickets,
 });
 
 const store = createStore(
@@ -22,4 +27,4 @@ const store = createStore(
 
 export default store;
 
-export { login, register, getProjects };
+export { login, register, getProjects, getTickets };

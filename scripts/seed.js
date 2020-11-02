@@ -29,8 +29,32 @@ const seed = async () => {
     await user.addProject(project);
     await user.addProject(project2);
 
-    await project.setUsers(user);
-    await project2.setUsers(user);
+    // await project.setUsers(user);
+    // await project2.setUsers(user);
+
+    const ticket = await Ticket.create({
+      type: "BUG",
+      priority: "MEDIUM",
+      info: "Ticket1 for project1",
+      projectId: project.id,
+      userId: user.id,
+    });
+
+    const ticket2 = await Ticket.create({
+      type: "FEATURE_REQUEST",
+      priority: "HIGH",
+      info: "Ticket2 for project1",
+      projectId: project.id,
+      userId: user.id,
+    });
+
+    const ticket3 = await Ticket.create({
+      type: "TO-DO",
+      priority: "NONE",
+      info: "Ticket1 for project2",
+      projectId: project2.id,
+      userId: user.id,
+    });
   } catch (err) {
     console.log(err);
   }

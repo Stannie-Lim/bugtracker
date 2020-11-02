@@ -10,6 +10,9 @@ import "./home.css";
 // cards
 import TicketInfoCard from "./cards/TicketInfoCard";
 
+// store
+import { getTickets } from "../../store/store";
+
 const Home = () => {
   const [cards, setCards] = useState([
     { id: 1, text: "Tickets by priority", image: "" },
@@ -38,6 +41,15 @@ const Home = () => {
   };
 
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
+
+  const dispatch = useDispatch();
+  const findTickets = async () => {
+    dispatch(getTickets());
+  };
+
+  useEffect(() => {
+    findTickets();
+  }, []);
 
   return (
     <main className="main">

@@ -1,12 +1,12 @@
 import { GET_PROJECTS } from "../constants";
 
-const ticketsReducer = (state = [], action) => {
+const projectsReducer = (state = [], action) => {
   switch (action.type) {
     case GET_PROJECTS:
-      state = action.tickets;
+      state = action.projects;
       break;
   }
   return state;
 };
 
-export default ticketsReducer;
+export default projectsReducer;

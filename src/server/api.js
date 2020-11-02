@@ -8,4 +8,5 @@ router.get("/", async (req, res, next) => {
 });
 
 router.use("/auth", require("./routes/auth"));
+router.use("/tickets", require("./routes/tickets"));
 router.use("/projects", require("./routes/projects"));

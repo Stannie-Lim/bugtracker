@@ -15,8 +15,9 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
 // authed components
-import Home from "./components/dashboard/Home";
 import Nav from "./components/dashboard/Nav";
+import Home from "./components/dashboard/Home";
+import Projects from "./components/dashboard/Projects";
 import TicketInfo from "./components/dashboard/TicketInfo";
 
 // store
@@ -38,6 +39,11 @@ const App = () => {
 
         <AuthenticatedRoute path="/" component={Nav} />
         <AuthenticatedRoute exact={true} path="/home" component={Home} />
+        <AuthenticatedRoute
+          exact={true}
+          path="/projects"
+          component={Projects}
+        />
         <AuthenticatedRoute
           exact={true}
           path="/home/:filter"

@@ -1,7 +1,7 @@
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import update from "immutability-helper";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
 
 // css
@@ -9,9 +9,6 @@ import "./home.css";
 
 // cards
 import TicketInfoCard from "./cards/TicketInfoCard";
-
-// store
-import { getProjects } from "../../store/store";
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -41,18 +38,6 @@ const Home = () => {
   };
 
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
-
-  const dispatch = useDispatch();
-  const findProjects = async () => {
-    dispatch(getProjects());
-  };
-
-  const projects = useSelector(({ projects }) => projects);
-  console.log(projects);
-
-  useEffect(() => {
-    findProjects();
-  });
 
   return (
     <main className="main">

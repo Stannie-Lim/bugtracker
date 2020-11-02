@@ -3,10 +3,16 @@ import React from "react";
 // css
 import "./home.css";
 
+// cards
+import TicketInfoCard from "../cards/TicketInfoCard";
+
 const Home = () => {
   return (
     <main className="main">
-      <h1>you are logged in</h1>
+      <TicketInfoCard />
+      <TicketInfoCard />
+      <TicketInfoCard />
+      <TicketInfoCard />
     </main>
   );
 };

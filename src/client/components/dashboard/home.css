@@ -1,5 +1,8 @@
 .main {
   margin-left: 20rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .main > * {

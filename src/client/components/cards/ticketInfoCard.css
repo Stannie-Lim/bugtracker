@@ -1,0 +1,10 @@
+.ticket-info-card {
+  border: 1px solid black;
+  height: 25rem;
+  width: 40rem;
+  margin: 5rem 3rem;
+}
+
+.tag {
+  border: 1px solid black;
+}

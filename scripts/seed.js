@@ -21,8 +21,16 @@ const seed = async () => {
       description: "Description for project 1",
     });
 
+    const project2 = await Project.create({
+      title: "Project 2",
+      description: "Description for project 2",
+    });
+
     await user.addProject(project);
+    await user.addProject(project2);
+
     await project.setUsers(user);
+    await project2.setUsers(user);
   } catch (err) {
     console.log(err);
   }

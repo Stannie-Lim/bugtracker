@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, Redirect } from "react-router-dom";
 
 // css
 import "./login.css";
@@ -18,6 +19,11 @@ const Login = () => {
     ev.preventDefault();
     dispatch(login(email, password));
   };
+
+  const isLoggedIn = useSelector(({ user }) => !!user.id);
+  if (isLoggedIn) {
+    return <Redirect to="/home" />;
+  }
 
   return (
     <div className="authform">

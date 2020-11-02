@@ -7,8 +7,7 @@ dotenv.config();
 const generateJWT = ({ firstName, lastName, id, email }) => {
   return jwt.sign(
     { firstName, lastName, id, email },
-    process.env.JWT_SECRET || "YOUARETHECAUSEOFMYEUPHORIA",
-    { expiresIn: "1h" }
+    process.env.JWT_SECRET || "YOUARETHECAUSEOFMYEUPHORIA"
   );
 };
 

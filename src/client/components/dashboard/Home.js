@@ -1,6 +1,6 @@
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import update from "immutability-helper";
 
 // css
@@ -8,6 +8,9 @@ import "./home.css";
 
 // cards
 import TicketInfoCard from "./cards/TicketInfoCard";
+
+// store
+import { getTickets } from "../../store/store";
 
 const Home = () => {
   const [cards, setCards] = useState([
@@ -37,6 +40,12 @@ const Home = () => {
   };
 
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
+
+  const findTickets = async () => {};
+
+  useEffect(() => {
+    findTickets();
+  });
 
   return (
     <main className="main">

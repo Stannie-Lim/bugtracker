@@ -5,7 +5,7 @@ import { ItemTypes } from "../ItemTypes";
 // css
 import "./ticketInfoCard.css";
 
-const TicketInfoCard = ({ id, moveCard, findCard }) => {
+const TicketInfoCard = ({ id, moveCard, findCard, text, image }) => {
   const originalIndex = findCard(id).index;
 
   const [{ isDragging }, drag] = useDrag({
@@ -35,7 +35,7 @@ const TicketInfoCard = ({ id, moveCard, findCard }) => {
   return (
     <div className="ticket-info-card" ref={(node) => drag(drop(node))}>
       <div className="tag">
-        <h1>Priority {id}</h1>
+        <h1>{text}</h1>
       </div>
     </div>
   );

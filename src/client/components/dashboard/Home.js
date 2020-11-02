@@ -10,7 +10,12 @@ import "./home.css";
 import TicketInfoCard from "./cards/TicketInfoCard";
 
 const Home = () => {
-  const [cards, setCards] = useState([1, 2, 3, 4]);
+  const [cards, setCards] = useState([
+    { id: 1, text: "Tickets by priority", image: "" },
+    { id: 2, text: "Tickets by type", image: "" },
+    { id: 3, text: "Tickets by status", image: "" },
+    { id: 4, text: "Your current tickets", image: "" },
+  ]);
   const moveCard = (id, atIndex) => {
     const { card, index } = findCard(id);
     setCards(
@@ -24,7 +29,7 @@ const Home = () => {
   };
 
   const findCard = (id) => {
-    const card = cards.find((card) => card === id);
+    const card = cards.find((card) => card.id === id);
     return {
       card,
       index: cards.indexOf(card),
@@ -38,10 +43,12 @@ const Home = () => {
       <div ref={drop} className="main">
         {cards.map((card) => (
           <TicketInfoCard
-            key={card}
+            key={card.id}
             moveCard={moveCard}
             findCard={findCard}
-            id={card}
+            id={card.id}
+            text={card.text}
+            image={card.image}
           />
         ))}
       </div>

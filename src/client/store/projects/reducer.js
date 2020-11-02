@@ -1,8 +1,8 @@
-import { GET_TICKETS } from "../constants";
+import { GET_PROJECTS } from "../constants";
 
 const ticketsReducer = (state = [], action) => {
   switch (action.type) {
-    case GET_TICKETS:
+    case GET_PROJECTS:
       state = action.tickets;
       break;
   }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ItemTypes } from "../ItemTypes";
 import { useDrag, useDrop } from "react-dnd";
@@ -7,6 +7,8 @@ import { useDrag, useDrop } from "react-dnd";
 import "./ticketInfoCard.css";
 
 const TicketInfoCard = ({ id, moveCard, findCard, text, image }) => {
+  const [hover, setHover] = useState(false);
+
   const originalIndex = findCard(id).index;
 
   const [{ isDragging }, drag] = useDrag({
@@ -33,10 +35,16 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, image }) => {
     },
   });
 
+  const classes = hover
+    ? "ticket-info-card scale-up-center"
+    : "ticket-info-card scale-down-center";
+
   return (
     <Link
       to={`/home/${text.toLowerCase().split(" ").join("-")}`}
-      className="ticket-info-card"
+      className={classes}
+      onMouseOver={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
       ref={(node) => drag(drop(node))}
     >
       <div className="tag">

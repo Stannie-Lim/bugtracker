@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 const TicketInfo = ({ match }) => {
   const type = match.params.filter;
-  console.log(type);
+
   return (
     <div className="main">
       <Link to="/home">Back</Link>

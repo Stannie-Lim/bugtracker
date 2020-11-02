@@ -1,4 +1,6 @@
+import { DndProvider } from "react-dnd";
 import React, { useState, useEffect } from "react";
+import { HTML5Backend } from "react-dnd-html5-backend";
 import { useSelector, useDispatch } from "react-redux";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
 
@@ -27,13 +29,15 @@ const App = () => {
   });
 
   return (
-    <HashRouter>
-      <Route exact path="/" render={() => <Redirect to="/login" />} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <AuthenticatedRoute path="/" component={Nav} />
-      <AuthenticatedRoute exact={true} path="/home" component={Home} />
-    </HashRouter>
+    <DndProvider backend={HTML5Backend}>
+      <HashRouter>
+        <Route exact path="/" render={() => <Redirect to="/login" />} />
+        <Route path="/login" component={Login} />
+        <Route path="/register" component={Register} />
+        <AuthenticatedRoute path="/" component={Nav} />
+        <AuthenticatedRoute exact={true} path="/home" component={Home} />
+      </HashRouter>
+    </DndProvider>
   );
 };
 

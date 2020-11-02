@@ -17,6 +17,7 @@ import Register from "./components/auth/Register";
 // authed components
 import Home from "./components/dashboard/Home";
 import Nav from "./components/dashboard/Nav";
+import TicketInfo from "./components/dashboard/TicketInfo";
 
 // store
 import { login } from "./store/store";
@@ -34,8 +35,14 @@ const App = () => {
         <Route exact path="/" render={() => <Redirect to="/login" />} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
+
         <AuthenticatedRoute path="/" component={Nav} />
         <AuthenticatedRoute exact={true} path="/home" component={Home} />
+        <AuthenticatedRoute
+          exact={true}
+          path="/home/:filter"
+          component={TicketInfo}
+        />
       </HashRouter>
     </DndProvider>
   );

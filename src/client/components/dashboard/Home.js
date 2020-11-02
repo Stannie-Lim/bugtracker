@@ -39,8 +39,8 @@ const Home = () => {
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
 
   return (
-    <main>
-      <div ref={drop} className="main">
+    <main className="main">
+      <div ref={drop} className="ticket-cards">
         {cards.map((card) => (
           <TicketInfoCard
             key={card.id}

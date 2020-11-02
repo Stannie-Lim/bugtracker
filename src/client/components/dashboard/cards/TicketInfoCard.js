@@ -1,6 +1,7 @@
 import React from "react";
-import { useDrag, useDrop } from "react-dnd";
+import { Link } from "react-router-dom";
 import { ItemTypes } from "../ItemTypes";
+import { useDrag, useDrop } from "react-dnd";
 
 // css
 import "./ticketInfoCard.css";
@@ -33,11 +34,15 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, image }) => {
   });
 
   return (
-    <div className="ticket-info-card" ref={(node) => drag(drop(node))}>
+    <Link
+      to={`/home/${text.toLowerCase().split(" ").join("-")}`}
+      className="ticket-info-card"
+      ref={(node) => drag(drop(node))}
+    >
       <div className="tag">
         <h1>{text}</h1>
       </div>
-    </div>
+    </Link>
   );
 };
 

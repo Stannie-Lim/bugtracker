@@ -9,9 +9,9 @@ const { User, Project, Ticket } = require("../db/models");
 // root route is /api/projects
 
 router.get("/", isLoggedIn, async (req, res, next) => {
-  const { id } = req.user;
+  const userId = req.user.id;
   try {
-    res.send(await Project.findAll({ where: { userId: id } }));
+    res.send(await Project.findAll({ where: { userId } }));
   } catch (err) {
     next(err);
   }

@@ -10,7 +10,7 @@ const seed = async () => {
   try {
     const hashedPassword = bcrypt.hashSync("test", 15);
     const user = await User.create({
-      firstName: "test",
+      firstName: "test1",
       lastName: "test",
       email: "test",
       password: hashedPassword,

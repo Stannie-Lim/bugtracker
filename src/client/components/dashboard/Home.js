@@ -15,10 +15,10 @@ import { getTickets } from "../../store/store";
 
 const Home = () => {
   const [cards, setCards] = useState([
-    { id: 1, text: "Tickets by priority", image: "" },
-    { id: 2, text: "Tickets by type", image: "" },
-    { id: 3, text: "Tickets by status", image: "" },
-    { id: 4, text: "Your current tickets", image: "" },
+    { id: 1, text: "Tickets by priority", type: "PRIORITY" },
+    { id: 2, text: "Tickets by type", type: "TYPE" },
+    { id: 3, text: "Tickets by status", type: "STATUS" },
+    { id: 4, text: "Your current tickets", type: "YOURS" },
   ]);
   const moveCard = (id, atIndex) => {
     const { card, index } = findCard(id);
@@ -61,7 +61,7 @@ const Home = () => {
             findCard={findCard}
             id={card.id}
             text={card.text}
-            image={card.image}
+            type={card.type}
           />
         ))}
       </div>

@@ -62,6 +62,7 @@ const Home = () => {
             id={card.id}
             text={card.text}
             type={card.type}
+            status={card.status}
           />
         ))}
       </div>

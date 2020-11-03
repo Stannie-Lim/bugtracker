@@ -41,7 +41,7 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
     : "ticket-info-card scale-down-center";
 
   const tickets = useSelector(({ tickets }) => tickets);
-
+  const userId = useSelector(({ user }) => user.id);
   const displayedData = () => {
     switch (type) {
       case "PRIORITY":
@@ -64,8 +64,6 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
           </div>
         );
       case "TYPE":
-        //     values: ["BUG", "ERROR", "FEATURE_REQUEST", "TO-DO"],
-
         const categorizedByType = {
           BUG: 0,
           ERROR: 0,
@@ -85,9 +83,35 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
           </div>
         );
       case "STATUS":
-        return <h1>status</h1>;
+        const categorizedByStatus = {
+          OPEN: 0,
+          IN_PROGRESS: 0,
+          RESOLVED: 0,
+          ADDITIONAL_INFO: 0,
+        };
+
+        for (const ticket of tickets) {
+          categorizedByStatus[ticket.status]++;
+        }
+
+        return (
+          <div>
+            {Object.entries(categorizedByStatus).map(([category, count]) => (
+              <div key={category}>{`${category}: ${count}`}</div>
+            ))}
+          </div>
+        );
       case "YOURS":
-        return <h1>yours</h1>;
+        const yourTickets = [];
+        for (const ticket of tickets) {
+          if (ticket.userId === userId) yourTickets.push(ticket);
+        }
+
+        return (
+          <div>
+            <h1>You have {yourTickets.length} tickets.</h1>
+          </div>
+        );
       default:
         return <h1>Not a valid type</h1>;
     }

@@ -35,6 +35,7 @@ const seed = async () => {
     const ticket = await Ticket.create({
       type: "BUG",
       priority: "MEDIUM",
+      status: "OPEN",
       info: "Ticket1 for project1",
       projectId: project.id,
       userId: user.id,
@@ -43,6 +44,7 @@ const seed = async () => {
     const ticket2 = await Ticket.create({
       type: "FEATURE_REQUEST",
       priority: "HIGH",
+      status: "IN_PROGRESS",
       info: "Ticket2 for project1",
       projectId: project.id,
       userId: user.id,
@@ -51,6 +53,7 @@ const seed = async () => {
     const ticket3 = await Ticket.create({
       type: "TO-DO",
       priority: "NONE",
+      status: "RESOLVED",
       info: "Ticket1 for project2",
       projectId: project2.id,
       userId: user.id,

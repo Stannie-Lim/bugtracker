@@ -8,7 +8,7 @@ import { login, register } from "./user/thunks";
 
 // projects
 import projects from "./projects/reducer";
-import { getProjects } from "./projects/thunks";
+import { getProjects, createProject } from "./projects/thunks";
 
 // tickets
 import tickets from "./tickets/reducer";
@@ -27,4 +27,4 @@ const store = createStore(
 
 export default store;
 
-export { login, register, getProjects, getTickets };
+export { login, register, getProjects, getTickets, createProject };

@@ -16,3 +16,16 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/", isLoggedIn, async (req, res, next) => {
+  const userId = req.user.id;
+  const { title, description } = req.body;
+  try {
+    const user = await User.findByPk(userId);
+    const project = await Project.create({ title, description });
+    await user.addProject(project);
+    res.send(project);
+  } catch (err) {
+    next(err);
+  }
+});

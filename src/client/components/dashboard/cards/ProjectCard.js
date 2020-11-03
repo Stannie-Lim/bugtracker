@@ -3,9 +3,13 @@ import React from "react";
 // css
 import "./projectCard.css";
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, history }) => {
+  const linkToProject = () => {
+    history.push(`/projects/${project.id}`);
+  };
+
   return (
-    <tr>
+    <tr onClick={linkToProject}>
       <td>{project.title}</td>
       <td>{project.description}</td>
     </tr>

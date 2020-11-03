@@ -11,10 +11,12 @@ const { User, Project, Ticket } = require("../db/models");
 router.get("/", isLoggedIn, async (req, res, next) => {
   const userId = req.user.id;
   try {
-    const userAssignedProjects = await Project.findAll({ where: { userId } });
-    const allTickets = await Ticket.findAll({ where: { userId } });
-    const userAvailableTickets = allTickets.filter(
-      (ticket) => !userAssignedProjects.includes(ticket.projectId)
+    const userAssignedProjects = new Set(
+      await Project.findAll({ where: { userId } }).map((project) => project.id)
+    );
+    const allTickets = await Ticket.findAll();
+    const userAvailableTickets = allTickets.filter(({ projectId }) =>
+      userAssignedProjects.has(projectId)
     );
     res.send(userAvailableTickets);
   } catch (err) {

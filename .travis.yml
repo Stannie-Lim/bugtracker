@@ -1,6 +1,7 @@
 services:
   - postgresql
 before_script:
+  - npm run seed
   - psql -c 'create database bug_tracker;' -U postgres
 language: node_js
 node_js:

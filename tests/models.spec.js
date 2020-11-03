@@ -18,12 +18,17 @@ describe("Models relationships", () => {
     expect(user1.lastName).toEqual(lastName);
     expect(user1.email).toEqual(email);
     expect(user1.password).toEqual(password);
-
-    const projectName = faker.lorem.word();
-    const projectDescription = faker.lorem.sentence();
-    const project1 = await Project.create({
-      title: projectName,
-      description: projectDescription,
-    });
   });
+
+  // it('Successfully adds project to user', async() => {
+  //   const projectName = faker.lorem.word();
+  //   const projectDescription = faker.lorem.sentence();
+  //   const project1 = await Project.create({
+  //     title: projectName,
+  //     description: projectDescription
+  //   });
+
+  //   await user1.addProject(project1);
+  //   expect(project1.adminId === user1.id);
+  // });
 });

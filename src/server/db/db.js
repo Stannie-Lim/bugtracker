@@ -1,6 +1,7 @@
 const Sequelize = require("sequelize");
 const db = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost/bug_tracker"
+  process.env.DATABASE_URL || "postgres://localhost/bug_tracker",
+  { logging: false }
 );
 
 module.exports = db;

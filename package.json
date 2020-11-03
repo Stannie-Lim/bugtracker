@@ -5,13 +5,14 @@
   "main": "server.js",
   "scripts": {
     "test": "jest",
-    "build": "webpack",
+    "build": "webpack --mode=\"production\"",
+    "start": "node src/server.js",
     "build:dev": "npm run build -- --watch --mode=development",
     "seed": "node scripts/seed.js",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
-    "start:dev": "nodemon src/server --ignore dist/ --ignore src/client & npm run build:dev"
+    "start:dev": "nodemon src/server --ignore dist/ --ignore src/client & npm run build:dev",
   },
   "husky": {
     "hooks": {

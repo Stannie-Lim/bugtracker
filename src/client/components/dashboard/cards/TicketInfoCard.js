@@ -87,7 +87,6 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
           OPEN: 0,
           IN_PROGRESS: 0,
           RESOLVED: 0,
-          ADDITIONAL_INFO: 0,
         };
 
         for (const ticket of tickets) {

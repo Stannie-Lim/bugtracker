@@ -24,7 +24,7 @@ router.post("/", isLoggedIn, async (req, res, next) => {
     const user = await User.findByPk(userId);
     const project = await Project.create({ title, description });
     await user.addProject(project);
-    res.send(project);
+    res.status(201).json(project);
   } catch (err) {
     next(err);
   }

@@ -23,3 +23,24 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/:projectId", isLoggedIn, async (req, res, next) => {
+  const userId = req.user.id;
+  const { projectId } = req.params;
+  const { info, type, priority } = req.body;
+  try {
+    const _type = type.toUpperCase().split(" ").join("_");
+    const _priority = priority.toUpperCase();
+    const ticket = await Ticket.create({
+      type: _type,
+      priority: _priority,
+      info,
+      projectId,
+      userId,
+      status: "OPEN",
+    });
+    res.status(201).json(ticket);
+  } catch (err) {
+    next(err);
+  }
+});

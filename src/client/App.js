@@ -18,6 +18,7 @@ import Register from "./components/auth/Register";
 import Nav from "./components/dashboard/Nav";
 import Home from "./components/dashboard/Home";
 import Projects from "./components/dashboard/Projects";
+import AddTicket from "./components/dashboard/AddTicket";
 import TicketInfo from "./components/dashboard/TicketInfo";
 import AddProject from "./components/dashboard/AddProject";
 import ProjectDetail from "./components/dashboard/ProjectDetail";
@@ -50,6 +51,11 @@ const App = () => {
           exact={true}
           path="/add/projects"
           component={AddProject}
+        />
+        <AuthenticatedRoute
+          exact={true}
+          path="/projects/:projectId/add-ticket"
+          component={AddTicket}
         />
         <AuthenticatedRoute
           exact={true}

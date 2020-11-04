@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 
@@ -18,9 +19,11 @@ const ProjectDetail = ({ match }) => {
     <div className="main">
       <h1>{project.title}</h1>
       <h3>{project.description}</h3>
+
+      <Link to={`/projects/${projectId}/add-ticket`}>Create a new ticket</Link>
       {tickets &&
         tickets.map((ticket) => (
-          <div key={ticket.id}>
+          <div className="ticket" key={ticket.id}>
             <h1>{ticket.priority}</h1>
             <h1>{ticket.info}</h1>
           </div>

@@ -19,7 +19,7 @@ const Ticket = db.define("ticket", {
   },
   status: {
     type: ENUM,
-    values: ["OPEN", "IN_PROGRESS", "RESOLVED", "ADDITIONAL_INFO"],
+    values: ["OPEN", "IN_PROGRESS", "RESOLVED"],
     allowNull: false,
     validate: {
       notEmpty: true,

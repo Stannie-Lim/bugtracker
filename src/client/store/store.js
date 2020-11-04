@@ -12,7 +12,7 @@ import { getProjects, createProject } from "./projects/thunks";
 
 // tickets
 import tickets from "./tickets/reducer";
-import { getTickets } from "./tickets/thunks";
+import { getTickets, createTicket } from "./tickets/thunks";
 
 const reducer = combineReducers({
   user,
@@ -27,4 +27,11 @@ const store = createStore(
 
 export default store;
 
-export { login, register, getProjects, getTickets, createProject };
+export {
+  login,
+  register,
+  getProjects,
+  getTickets,
+  createProject,
+  createTicket,
+};

@@ -4,7 +4,7 @@ import { createLogger } from "redux-logger";
 
 // user auth
 import user from "./user/reducer";
-import { login, register } from "./user/thunks";
+import { login, register, setTicketCardOrder } from "./user/thunks";
 
 // projects
 import projects from "./projects/reducer";
@@ -43,4 +43,5 @@ export {
   assignTicket,
   unassignTicket,
   resolveTicket,
+  setTicketCardOrder,
 };

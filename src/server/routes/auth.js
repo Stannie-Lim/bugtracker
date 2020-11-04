@@ -77,3 +77,15 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
+
+router.post("/cardorder", isLoggedIn, async (req, res, next) => {
+  const { order } = req.body;
+  const { id } = req.user;
+  try {
+    const user = await User.findByPk(id);
+    await user.update({ cardOrder: order });
+    res.sendStatus(204);
+  } catch (err) {
+    next(err);
+  }
+});

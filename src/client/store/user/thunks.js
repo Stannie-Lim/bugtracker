@@ -41,3 +41,13 @@ export const register = (firstName, lastName, email, password) => {
     }
   };
 };
+
+export const setTicketCardOrder = (order) => {
+  return async () => {
+    try {
+      await AxiosHttpRequest("POST", `/api/auth/cardorder`, { order });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

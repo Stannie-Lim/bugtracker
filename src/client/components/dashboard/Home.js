@@ -11,7 +11,7 @@ import "./home.css";
 import TicketInfoCard from "./cards/TicketInfoCard";
 
 // store
-import { getTickets } from "../../store/store";
+import { getTickets, setTicketCardOrder } from "../../store/store";
 
 const DEFAULT_ORDER = [
   { id: 1, text: "Tickets by priority", type: "PRIORITY" },
@@ -22,6 +22,8 @@ const DEFAULT_ORDER = [
 
 const Home = () => {
   const [cards, setCards] = useState(DEFAULT_ORDER);
+
+  const dispatch = useDispatch();
   const moveCard = (id, atIndex) => {
     const { card, index } = findCard(id);
     const newCardOrder = update(cards, {
@@ -32,7 +34,7 @@ const Home = () => {
     });
     setCards(newCardOrder);
     const newOrder = newCardOrder.map((card) => card.id);
-    // TODO DISPATCH NEW ORDER TO USER TABLE
+    dispatch(setTicketCardOrder(newOrder));
   };
 
   const findCard = (id) => {
@@ -45,7 +47,6 @@ const Home = () => {
 
   const [, drop] = useDrop({ accept: ItemTypes.CARD });
 
-  const dispatch = useDispatch();
   const findTickets = async () => {
     dispatch(getTickets());
   };

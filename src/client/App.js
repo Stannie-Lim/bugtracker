@@ -19,9 +19,12 @@ import Nav from "./components/dashboard/Nav";
 import Home from "./components/dashboard/Home";
 import Projects from "./components/dashboard/Projects";
 import AddTicket from "./components/dashboard/AddTicket";
-import TicketInfo from "./components/dashboard/TicketInfo";
 import AddProject from "./components/dashboard/AddProject";
+import YourTickets from "./components/dashboard/YourTickets";
 import ProjectDetail from "./components/dashboard/ProjectDetail";
+import TicketsByType from "./components/dashboard/TicketsByType";
+import TicketsByStatus from "./components/dashboard/TicketsByStatus";
+import TicketsByPriority from "./components/dashboard/TicketsByPriority";
 
 // store
 import { login } from "./store/store";
@@ -64,8 +67,23 @@ const App = () => {
         />
         <AuthenticatedRoute
           exact={true}
-          path="/home/:filter"
-          component={TicketInfo}
+          path="/home/tickets-by-priority"
+          component={TicketsByPriority}
+        />
+        <AuthenticatedRoute
+          exact={true}
+          path="/home/tickets-by-type"
+          component={TicketsByType}
+        />
+        <AuthenticatedRoute
+          exact={true}
+          path="/home/tickets-by-status"
+          component={TicketsByStatus}
+        />
+        <AuthenticatedRoute
+          exact={true}
+          path="/home/your-current-tickets"
+          component={YourTickets}
         />
       </HashRouter>
     </DndProvider>

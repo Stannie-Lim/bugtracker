@@ -25,7 +25,6 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 });
 
 router.post("/:projectId", isLoggedIn, async (req, res, next) => {
-  const userId = req.user.id;
   const { projectId } = req.params;
   const { info, type, priority } = req.body;
   try {
@@ -36,7 +35,7 @@ router.post("/:projectId", isLoggedIn, async (req, res, next) => {
       priority: _priority,
       info,
       projectId,
-      userId,
+      userId: null,
       status: "OPEN",
     });
     res.status(201).json(ticket);

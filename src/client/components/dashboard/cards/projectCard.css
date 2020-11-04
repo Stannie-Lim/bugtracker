@@ -1,3 +1,7 @@
 .project-card {
   border: 1px solid black;
 }
+
+.project-card:hover {
+  background-color: lightgrey;
+}

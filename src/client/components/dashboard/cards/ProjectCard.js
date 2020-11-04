@@ -9,7 +9,7 @@ const ProjectCard = ({ project, history }) => {
   };
 
   return (
-    <tr onClick={linkToProject}>
+    <tr onClick={linkToProject} className="project-card">
       <td>{project.title}</td>
       <td>{project.description}</td>
     </tr>

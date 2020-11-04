@@ -21,13 +21,11 @@ const Projects = ({ history }) => {
     findProjects();
   }, []);
 
-  const addProject = () => {};
-
   const projects = useSelector(({ projects }) => projects);
   return (
     <div className="main">
       <Link to="/add/projects">Add Project</Link>
-      <table className="projects">
+      <table className="projects" cellSpacing={0} cellPadding={0}>
         <thead>
           <tr>
             <th>Project Name</th>

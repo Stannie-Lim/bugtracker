@@ -12,7 +12,12 @@ import { getProjects, createProject } from "./projects/thunks";
 
 // tickets
 import tickets from "./tickets/reducer";
-import { getTickets, createTicket } from "./tickets/thunks";
+import {
+  getTickets,
+  createTicket,
+  assignTicket,
+  unassignTicket,
+} from "./tickets/thunks";
 
 const reducer = combineReducers({
   user,
@@ -34,4 +39,6 @@ export {
   getTickets,
   createProject,
   createTicket,
+  assignTicket,
+  unassignTicket,
 };

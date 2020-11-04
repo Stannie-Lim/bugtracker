@@ -38,7 +38,7 @@ const seed = async () => {
       status: "OPEN",
       info: "Ticket1 for project1",
       projectId: project.id,
-      userId: user.id,
+      userId: null,
     });
 
     const ticket2 = await Ticket.create({
@@ -56,7 +56,7 @@ const seed = async () => {
       status: "RESOLVED",
       info: "Ticket1 for project2",
       projectId: project2.id,
-      userId: user.id,
+      userId: null,
     });
   } catch (err) {
     console.log(err);

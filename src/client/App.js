@@ -82,7 +82,7 @@ const App = () => {
         />
         <AuthenticatedRoute
           exact={true}
-          path="/home/your-current-tickets"
+          path="/home/your-assigned-tickets"
           component={YourTickets}
         />
       </HashRouter>

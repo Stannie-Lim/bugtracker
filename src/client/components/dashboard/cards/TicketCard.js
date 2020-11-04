@@ -10,7 +10,6 @@ import {
 
 const TicketCard = ({ ticket }) => {
   const ticketUser = ticket.user;
-  console.log(ticket);
   const userId = useSelector(({ user }) => user.id);
 
   const dispatch = useDispatch();

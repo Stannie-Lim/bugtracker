@@ -1,8 +1,8 @@
 import { useDrop } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
 import update from "immutability-helper";
-import { useDispatch } from "react-redux";
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // css
 import "./home.css";
@@ -13,23 +13,25 @@ import TicketInfoCard from "./cards/TicketInfoCard";
 // store
 import { getTickets } from "../../store/store";
 
+const DEFAULT_ORDER = [
+  { id: 1, text: "Tickets by priority", type: "PRIORITY" },
+  { id: 2, text: "Tickets by type", type: "TYPE" },
+  { id: 3, text: "Tickets by status", type: "STATUS" },
+  { id: 4, text: "Your assigned tickets", type: "YOURS" },
+];
+
 const Home = () => {
-  const [cards, setCards] = useState([
-    { id: 1, text: "Tickets by priority", type: "PRIORITY" },
-    { id: 2, text: "Tickets by type", type: "TYPE" },
-    { id: 3, text: "Tickets by status", type: "STATUS" },
-    { id: 4, text: "Your current tickets", type: "YOURS" },
-  ]);
+  const [cards, setCards] = useState(DEFAULT_ORDER);
   const moveCard = (id, atIndex) => {
     const { card, index } = findCard(id);
-    setCards(
-      update(cards, {
-        $splice: [
-          [index, 1],
-          [atIndex, 0, card],
-        ],
-      })
-    );
+    const newCardOrder = update(cards, {
+      $splice: [
+        [index, 1],
+        [atIndex, 0, card],
+      ],
+    });
+    setCards(newCardOrder);
+    console.log(newCardOrder);
   };
 
   const findCard = (id) => {
@@ -47,7 +49,23 @@ const Home = () => {
     dispatch(getTickets());
   };
 
+  const cardOrder = useSelector(({ user }) => user.cardOrder);
+  const getCardOrder = () => {
+    const copyOfCardOrder = cards.slice();
+    for (let i = 0; i < copyOfCardOrder.length; i++) {
+      const currentCard = cardOrder[i];
+      if (copyOfCardOrder[i].id !== currentCard) {
+        copyOfCardOrder[i] = DEFAULT_ORDER.find(
+          (order) => order.id === currentCard
+        );
+      }
+    }
+    console.log(copyOfCardOrder);
+    setCards(copyOfCardOrder);
+  };
+
   useEffect(() => {
+    getCardOrder();
     findTickets();
   }, []);
 

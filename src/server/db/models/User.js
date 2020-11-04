@@ -46,6 +46,10 @@ const User = db.define("user", {
     type: BOOLEAN,
     defaultValue: false,
   },
+  cardOrder: {
+    type: Sequelize.ARRAY(INTEGER),
+    defaultValue: [2, 1, 3, 4],
+  },
 });
 
 module.exports = User;

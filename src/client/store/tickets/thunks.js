@@ -59,3 +59,18 @@ export const unassignTicket = (userId, ticketId) => {
     }
   };
 };
+
+export const resolveTicket = (userId, ticketId) => {
+  return async (dispatch) => {
+    try {
+      const ticket = (
+        await AxiosHttpRequest("PUT", `/api/tickets/${ticketId}/resolve`, {
+          userId,
+        })
+      ).data;
+      dispatch(_editTicketUser(ticket));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

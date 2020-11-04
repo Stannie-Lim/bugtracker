@@ -76,13 +76,35 @@ router.put("/:ticketId/unassign", isLoggedIn, async (req, res, next) => {
     const _ticket = await Ticket.findByPk(ticketId);
     const user = await User.findByPk(userId);
     if (_ticket.userId !== user.id)
-      res
-        .status(403)
-        .json({
-          message: `You are not authorized to unassign ${user.fullName} from ticket`,
-        });
+      res.status(403).json({
+        message: `You are not authorized to unassign ${user.fullName} from ticket`,
+      });
 
     await _ticket.update({ userId: null, status: "OPEN" });
+    const ticket = await Ticket.findByPk(ticketId, {
+      include: User,
+      attributes: {
+        exclude: ["password"],
+      },
+    });
+    res.send(ticket);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
+  const { ticketId } = req.params;
+  const { userId } = req.body;
+  try {
+    const _ticket = await Ticket.findByPk(ticketId);
+    const user = await User.findByPk(userId);
+    if (_ticket.userId !== user.id)
+      res
+        .status(403)
+        .json({ message: `You are not authorized to resolve this ticket` });
+
+    await _ticket.update({ userId: null, status: "RESOLVED" });
     const ticket = await Ticket.findByPk(ticketId, {
       include: User,
       attributes: {

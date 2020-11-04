@@ -17,6 +17,7 @@ import {
   createTicket,
   assignTicket,
   unassignTicket,
+  resolveTicket,
 } from "./tickets/thunks";
 
 const reducer = combineReducers({
@@ -41,4 +42,5 @@ export {
   createTicket,
   assignTicket,
   unassignTicket,
+  resolveTicket,
 };

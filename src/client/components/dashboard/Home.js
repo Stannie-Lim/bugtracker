@@ -31,7 +31,8 @@ const Home = () => {
       ],
     });
     setCards(newCardOrder);
-    console.log(newCardOrder);
+    const newOrder = newCardOrder.map((card) => card.id);
+    // TODO DISPATCH NEW ORDER TO USER TABLE
   };
 
   const findCard = (id) => {
@@ -60,7 +61,6 @@ const Home = () => {
         );
       }
     }
-    console.log(copyOfCardOrder);
     setCards(copyOfCardOrder);
   };
 

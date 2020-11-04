@@ -12,7 +12,7 @@ const sortByPriority = (tickets) => {
           return { ...ticket, priority: 3 };
       }
     })
-    .sort((a, b) => a.priority - b.priority)
+    .sort((a, b) => b.priority - a.priority)
     .map((ticket) => {
       switch (ticket.priority) {
         case 0:

@@ -12,7 +12,7 @@ const sortByType = (tickets) => {
           return { ...ticket, type: 3 };
       }
     })
-    .sort((a, b) => a.type - b.type)
+    .sort((a, b) => b.type - a.type)
     .map((ticket) => {
       switch (ticket.type) {
         case 0:

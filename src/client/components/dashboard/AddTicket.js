@@ -10,18 +10,40 @@ const AddTicket = ({ match, history }) => {
 
   const [info, setInfo] = useState("");
   const [type, setType] = useState("");
+  const [error, setError] = useState("");
   const [priority, setPriority] = useState("");
 
-  const dispatch = useDispatch();
   const addTicket = (ev) => {
-    const { projectId } = match.params;
     ev.preventDefault();
+
+    const hasError = checkError();
+    if (hasError) return;
+
+    makeTicket();
+  };
+
+  const checkError = () => {
+    setError("");
+    if (type === "") {
+      setError("Please select a type from the dropdown menu");
+      return true;
+    } else if (priority === "") {
+      setError("Please select a priority from the dropdown menu");
+      return true;
+    }
+    return false;
+  };
+
+  const dispatch = useDispatch();
+  const makeTicket = () => {
+    const { projectId } = match.params;
     dispatch(createTicket(info, type, priority, projectId));
     history.push(`/projects/${projectId}`);
   };
 
   return (
     <div className="main">
+      <h1>{error}</h1>
       <form onSubmit={addTicket}>
         <select onChange={({ target }) => setType(target.value)}>
           <option defaultValue hidden>
@@ -44,6 +66,7 @@ const AddTicket = ({ match, history }) => {
         <textarea
           onChange={({ target }) => setInfo(target.value)}
           value={info}
+          required
         />
 
         <button>Create a new ticket</button>

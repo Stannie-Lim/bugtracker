@@ -15,7 +15,7 @@ import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
 
 // authed components
-import Nav from "./components/dashboard/Nav";
+import Nav from "./components/nav/Nav";
 import Home from "./components/dashboard/Home";
 import Projects from "./components/dashboard/Projects";
 import AddTicket from "./components/dashboard/AddTicket";

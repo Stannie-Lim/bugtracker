@@ -8,7 +8,11 @@ import { login, register, setTicketCardOrder } from "./user/thunks";
 
 // projects
 import projects from "./projects/reducer";
-import { getProjects, createProject } from "./projects/thunks";
+import {
+  getProjects,
+  createProject,
+  inviteUserToProject,
+} from "./projects/thunks";
 
 // tickets
 import tickets from "./tickets/reducer";
@@ -44,4 +48,5 @@ export {
   unassignTicket,
   resolveTicket,
   setTicketCardOrder,
+  inviteUserToProject,
 };

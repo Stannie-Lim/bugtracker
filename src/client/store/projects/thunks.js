@@ -1,4 +1,4 @@
-import { _getProjects, _createProject } from "./actions";
+import { _getProjects, _createProject, _inviteUserToProject } from "./actions";
 import { AxiosHttpRequest } from "../../utils/axios";
 
 export const getProjects = () => {
@@ -19,6 +19,16 @@ export const createProject = (title, description) => {
         await AxiosHttpRequest("POST", "/api/projects", { title, description })
       ).data;
       dispatch(_createProject(project));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const inviteUserToProject = (userToInvite, projectId) => {
+  return async (dispatch) => {
+    try {
+      console.log(userToInvite, projectId);
     } catch (err) {
       console.log(err);
     }

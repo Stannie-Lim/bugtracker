@@ -1,4 +1,4 @@
-import { GET_PROJECTS, CREATE_PROJECT } from "../constants";
+import { GET_PROJECTS, CREATE_PROJECT, INVITE_USER } from "../constants";
 
 export const _getProjects = (projects) => {
   return {
@@ -10,6 +10,13 @@ export const _getProjects = (projects) => {
 export const _createProject = (project) => {
   return {
     type: CREATE_PROJECT,
+    project,
+  };
+};
+
+export const _inviteUserToProject = (project) => {
+  return {
+    type: INVITE_USER,
     project,
   };
 };

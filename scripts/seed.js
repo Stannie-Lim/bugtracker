@@ -26,11 +26,8 @@ const seed = async () => {
       description: "Description for project 2",
     });
 
-    await user.addProject(project);
-    await user.addProject(project2);
-
-    // await project.setUsers(user);
-    // await project2.setUsers(user);
+    await project.setUsers(user.id);
+    await project2.setUsers(user.id);
 
     const ticket = await Ticket.create({
       type: "BUG",

@@ -2,11 +2,12 @@ const User = require("./User");
 const Project = require("./Project");
 const Ticket = require("./Ticket");
 
-User.hasMany(Project);
+User.belongsToMany(Project, {
+  through: "UserProject",
+});
+
 Project.belongsToMany(User, {
-  through: "project_admin",
-  as: "admins",
-  foreignKey: "adminId",
+  through: "UserProject",
 });
 
 Project.hasMany(Ticket);

@@ -22,6 +22,8 @@ const ProjectDetail = ({ match }) => {
   const project = useSelector(({ projects }) =>
     projects.find((project) => project.id === projectId)
   );
+  const { users } = project;
+
   const tickets = useSelector(({ tickets }) =>
     sortByPriority(tickets.filter((ticket) => ticket.projectId === projectId))
   );
@@ -55,6 +57,9 @@ const ProjectDetail = ({ match }) => {
 
       {tickets &&
         tickets.map((ticket) => <TicketCard key={ticket.id} ticket={ticket} />)}
+
+      <h1>Users assigned to {project.title}</h1>
+      {users && users.map((user) => <div key={user.id}>{user.fullName}</div>)}
     </div>
   );
 };

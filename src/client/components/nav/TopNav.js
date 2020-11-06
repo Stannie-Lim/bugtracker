@@ -1,30 +1,45 @@
+import clsx from "clsx";
 import React, { useState } from "react";
 import { removeJWT } from "../../utils/axios";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // css
+import List from "@material-ui/core/List";
 import Menu from "@material-ui/core/Menu";
 import Badge from "@material-ui/core/Badge";
+import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
+import HomeIcon from "@material-ui/icons/Home";
 import Toolbar from "@material-ui/core/Toolbar";
+import Divider from "@material-ui/core/Divider";
 import MenuItem from "@material-ui/core/MenuItem";
+import ListItem from "@material-ui/core/ListItem";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Typography from "@material-ui/core/Typography";
 import IconButton from "@material-ui/core/IconButton";
-import { fade, makeStyles } from "@material-ui/core/styles";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import AccountCircle from "@material-ui/icons/AccountCircle";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import AccountTreeIcon from "@material-ui/icons/AccountTree";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 
-// store 
+// store
 import { _login } from "./../../store/user/actions";
 
+const drawerWidth = 240;
+
 const TopNav = () => {
+  const theme = useTheme();
   const classes = useStyles();
+  const [open, setOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
 
@@ -44,24 +59,41 @@ const TopNav = () => {
   const dispatch = useDispatch();
   const handleMenuClose = (ev) => {
     const command = ev.target.textContent;
-    switch(command) {
-      case 'Log out': 
+    switch (command) {
+      case "Log out":
         removeJWT();
         dispatch(_login({}));
         break;
-      case 'Profile':
-        console.log('TODO make a profile page');
+      case "Profile":
+        console.log("TODO make a profile page");
         break;
-      case 'My account':
-        console.log('TODO make a my account page');
+      case "My account":
+        console.log("TODO make a my account page");
         break;
     }
     setAnchorEl(null);
     handleMobileMenuClose();
   };
 
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+    console.log("close");
+  };
+
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const goToHome = () => {
+    console.log("home");
+  };
+
+  const goToProjects = () => {
+    console.log("projects");
   };
 
   const menuId = "primary-search-account-menu";
@@ -124,13 +156,21 @@ const TopNav = () => {
   return (
     <nav className="top-ui-nav">
       <div className={classes.grow}>
-        <AppBar position="static">
+        <AppBar
+          position="fixed"
+          className={clsx(classes.appBar, {
+            [classes.appBarShift]: open,
+          })}
+        >
           <Toolbar>
             <IconButton
               edge="start"
-              className={classes.menuButton}
               color="inherit"
               aria-label="open drawer"
+              onClick={handleDrawerOpen}
+              className={clsx(classes.menuButton, {
+                [classes.hide]: open,
+              })}
             >
               <MenuIcon />
             </IconButton>
@@ -191,6 +231,63 @@ const TopNav = () => {
         </AppBar>
         {renderMobileMenu}
         {renderMenu}
+        <Drawer
+          variant="permanent"
+          className={clsx(classes.drawer, {
+            [classes.drawerOpen]: open,
+            [classes.drawerClose]: !open,
+          })}
+          classes={{
+            paper: clsx({
+              [classes.drawerOpen]: open,
+              [classes.drawerClose]: !open,
+            }),
+          }}
+        >
+          <div className={classes.toolbar}>
+            <IconButton onClick={handleDrawerClose}>
+              {theme.direction === "rtl" ? (
+                <ChevronRightIcon />
+              ) : (
+                <ChevronLeftIcon />
+              )}
+            </IconButton>
+          </div>
+          <Divider />
+          <List>
+            {["Home", "Projects"].map((text, index) => (
+              <ListItem
+                button
+                key={text}
+                onClick={text === "Home" ? goToHome : goToProjects}
+              >
+                <ListItemIcon>
+                  {index % 2 === 0 ? (
+                    <HomeIcon onClick={goToHome} />
+                  ) : (
+                    <AccountTreeIcon onClick={goToProjects} />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+          <Divider />
+          <List>
+            {["All mail", "Trash", "Spam"].map((text, index) => (
+              <ListItem button key={text}>
+                <ListItemIcon>
+                  {index % 2 === 0 ? (
+                    <HomeIcon onClick={goToHome} />
+                  ) : (
+                    <AccountTreeIcon onClick={goToProjects} />
+                  )}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
+            ))}
+          </List>
+        </Drawer>
       </div>
     </nav>
   );
@@ -200,11 +297,67 @@ export default TopNav;
 
 // css
 const useStyles = makeStyles((theme) => ({
-  grow: {
-    flexGrow: 1,
+  root: {
+    display: "flex",
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: 36,
+  },
+  hide: {
+    display: "none",
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+    whiteSpace: "nowrap",
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create("width", {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: "hidden",
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up("sm")]: {
+      width: theme.spacing(9) + 1,
+    },
+  },
+  toolbar: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+  grow: {
+    flexGrow: 1,
   },
   title: {
     display: "none",

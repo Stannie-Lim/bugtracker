@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 
 // components
 import TopNav from "./TopNav";
-import LeftNav from './LeftNav';
 
 // css
 import "./nav.css";
@@ -27,22 +26,14 @@ const Nav = ({ history }) => {
 
   return (
     <div>
-      <TopNav open={ open } setOpen={setOpen} handleDrawerClose={handleDrawerClose}  handleDrawerOpen={handleDrawerOpen} />
-      <LeftNav open={ open } setOpen={setOpen} handleDrawerClose={handleDrawerClose}  handleDrawerOpen={handleDrawerOpen} />
+      <TopNav
+        open={open}
+        setOpen={setOpen}
+        handleDrawerClose={handleDrawerClose}
+        handleDrawerOpen={handleDrawerOpen}
+      />
     </div>
   );
 };
-
-/*
-
-<div><nav className="left-nav">
-        <Link to="/home" className={selected("home")}>
-          Dashboard Home
-        </Link>
-        <Link to="/projects" className={selected("projects")}>
-          Projects
-        </Link>
-      </nav>
-*/
 
 export default Nav;

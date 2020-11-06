@@ -247,7 +247,7 @@ const Nav = () => {
               )}
             </IconButton>
           </div>
-          <Divider />
+          {/* <Divider /> */}
           <List>
             {["Home", "Projects"].map((text, index) => (
               <Link

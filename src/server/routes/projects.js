@@ -31,8 +31,19 @@ router.post("/", isLoggedIn, async (req, res, next) => {
   const { title, description } = req.body;
   try {
     const user = await User.findByPk(userId);
-    const project = await Project.create({ title, description });
-    await user.addProject(project);
+    const _project = await Project.create({ title, description });
+    await user.addProject(_project);
+
+    const project = await Project.findByPk(_project.id, {
+      include: {
+        model: User,
+        as: "users",
+        attributes: {
+          exclude: ["password"],
+        },
+      },
+    });
+
     res.status(201).json(project);
   } catch (err) {
     next(err);

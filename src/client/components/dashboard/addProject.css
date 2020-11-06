@@ -1,12 +1,14 @@
+.create-project-text-field {
+  width: 60%;
+}
+
 .create-project-form {
   margin-top: 5rem;
   text-align: center;
 }
 
-.create-project-text-field {
-  width: 85%;
-}
-
 .create-project-button {
-  margin-left: 74%;
+  position: absolute;
+  right: 20%;
+  margin-top: 0.5rem;
 }

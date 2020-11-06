@@ -26,7 +26,7 @@ const AddProject = ({ history }) => {
   const classes = useStyles();
   return (
     <div className="create-project-form">
-      <form onSubmit={addProject}>
+      <form onSubmit={addProject} className="asd">
         <div>
           <TextField
             label="Title"
@@ -54,7 +54,11 @@ const AddProject = ({ history }) => {
           />
         </div>
         <div className="create-project-button">
-          <Button variant="contained" classes={{ root: classes.button }}>
+          <Button
+            type="submit"
+            variant="contained"
+            classes={{ root: classes.button }}
+          >
             Create a new project
           </Button>
         </div>

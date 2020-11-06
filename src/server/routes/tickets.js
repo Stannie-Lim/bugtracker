@@ -114,7 +114,11 @@ router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
         .status(403)
         .json({ message: `You are not authorized to resolve this ticket` });
 
-    await _ticket.update({ userId: null, status: "RESOLVED" });
+    await _ticket.update({
+      userId: null,
+      status: "RESOLVED",
+      priority: "NONE",
+    });
     const ticket = await Ticket.findByPk(ticketId, {
       include: User,
       attributes: {

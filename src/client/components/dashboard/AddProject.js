@@ -4,6 +4,10 @@ import { useDispatch } from "react-redux";
 // store
 import { createProject } from "../../store/store";
 
+// materialui
+import TextField from "@material-ui/core/TextField";
+import { makeStyles } from "@material-ui/core/styles";
+
 const AddProject = ({ history }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -15,22 +19,25 @@ const AddProject = ({ history }) => {
     history.push("/projects");
   };
 
+  const classes = useStyles();
   return (
     <div className="main">
       <form onSubmit={addProject}>
-        <input
-          type="text"
-          onChange={({ target }) => setTitle(target.value)}
+        <TextField
+          label="Title"
+          id="outlined-size-normal"
+          variant="outlined"
           value={title}
-          placeholder="Project Title "
-          required
+          onChange={({ target }) => setTitle(target.value)}
+          required={true}
         />
-        <input
-          type="text"
-          onChange={({ target }) => setDescription(target.value)}
+        <TextField
+          label="Description"
+          id="outlined-size-normal"
+          variant="outlined"
           value={description}
-          placeholder="Project Description "
-          required
+          onChange={({ target }) => setDescription(target.value)}
+          required={true}
         />
         <button>Create a new project</button>
       </form>
@@ -39,3 +46,13 @@ const AddProject = ({ history }) => {
 };
 
 export default AddProject;
+
+// css
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& .MuiTextField-root": {
+      margin: theme.spacing(1),
+      width: 200,
+    },
+  },
+}));

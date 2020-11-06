@@ -91,14 +91,6 @@ const TopNav = () => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const goToHome = () => {
-    console.log("home");
-  };
-
-  const goToProjects = () => {
-    console.log("projects");
-  };
-
   const menuId = "primary-search-account-menu";
   const renderMenu = (
     <Menu
@@ -259,21 +251,10 @@ const TopNav = () => {
           <Divider />
           <List>
             {["Home", "Projects"].map((text, index) => (
-              <Link
-                to={`/${text.toLowerCase()}`}
-                key={text}
-                className="side-bar"
-              >
-                <ListItem
-                  button
-                  onClick={text === "Home" ? goToHome : goToProjects}
-                >
+              <Link to={`/${text.toLowerCase()}`} key={text}>
+                <ListItem button>
                   <ListItemIcon>
-                    {index % 2 === 0 ? (
-                      <HomeIcon onClick={goToHome} />
-                    ) : (
-                      <AccountTreeIcon onClick={goToProjects} />
-                    )}
+                    {index % 2 === 0 ? <HomeIcon /> : <AccountTreeIcon />}
                   </ListItemIcon>
                   <ListItemText primary={text} />
                 </ListItem>
@@ -285,11 +266,7 @@ const TopNav = () => {
             {["All mail", "Trash", "Spam"].map((text, index) => (
               <ListItem button key={text}>
                 <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <HomeIcon onClick={goToHome} />
-                  ) : (
-                    <AccountTreeIcon onClick={goToProjects} />
-                  )}
+                  {index % 2 === 0 ? <HomeIcon /> : <AccountTreeIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>

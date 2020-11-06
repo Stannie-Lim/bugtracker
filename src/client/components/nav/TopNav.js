@@ -5,6 +5,9 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
 // css
+import "./nav.css";
+
+// materialui
 import List from "@material-ui/core/List";
 import Menu from "@material-ui/core/Menu";
 import Badge from "@material-ui/core/Badge";
@@ -256,20 +259,25 @@ const TopNav = () => {
           <Divider />
           <List>
             {["Home", "Projects"].map((text, index) => (
-              <ListItem
-                button
+              <Link
+                to={`/${text.toLowerCase()}`}
                 key={text}
-                onClick={text === "Home" ? goToHome : goToProjects}
+                className="side-bar"
               >
-                <ListItemIcon>
-                  {index % 2 === 0 ? (
-                    <HomeIcon onClick={goToHome} />
-                  ) : (
-                    <AccountTreeIcon onClick={goToProjects} />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItem>
+                <ListItem
+                  button
+                  onClick={text === "Home" ? goToHome : goToProjects}
+                >
+                  <ListItemIcon>
+                    {index % 2 === 0 ? (
+                      <HomeIcon onClick={goToHome} />
+                    ) : (
+                      <AccountTreeIcon onClick={goToProjects} />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={text} />
+                </ListItem>
+              </Link>
             ))}
           </List>
           <Divider />

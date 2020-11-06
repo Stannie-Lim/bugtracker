@@ -11,6 +11,9 @@ import ProjectCard from "./cards/ProjectCard";
 // css
 import "./projects.css";
 
+// materialui
+import { DataGrid } from "@material-ui/data-grid";
+
 const Projects = ({ history }) => {
   const dispatch = useDispatch();
   const findProjects = async () => {
@@ -22,27 +25,34 @@ const Projects = ({ history }) => {
   }, []);
 
   const projects = useSelector(({ projects }) => projects);
+  const columns = [
+    { field: "Title", width: 200 },
+    { field: "Description", width: 500 },
+  ];
+
+  const rows = projects.map(({ id, title, description }) => {
+    return {
+      id,
+      Title: title,
+      Description: description,
+    };
+  });
+
+  const navigateToProject = ({ rowModel }) => {
+    const { id } = rowModel.data;
+    history.push(`/projects/${id}`);
+  };
+
   return (
     <div className="main">
       <Link to="/add/projects">Add Project</Link>
-      <table className="projects" cellSpacing={0} cellPadding={0}>
-        <thead>
-          <tr>
-            <th>Project Name</th>
-            <th>Project Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {projects &&
-            projects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                history={history}
-              />
-            ))}
-        </tbody>
-      </table>
+      <div style={{ height: 800, width: "85%" }}>
+        <DataGrid
+          columns={columns}
+          rows={rows}
+          onRowClick={navigateToProject}
+        />
+      </div>
     </div>
   );
 };

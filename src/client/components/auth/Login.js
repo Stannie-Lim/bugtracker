@@ -25,12 +25,12 @@ const Login = ({ history }) => {
     dispatch(login(email, password));
   };
 
+  const classes = useStyles();
   const isLoggedIn = useSelector(({ user }) => !!user.id);
   if (isLoggedIn) {
     return <Redirect to="/home" />;
   }
 
-  const classes = useStyles();
   return (
     <div className="main-page">
       <Typography variant="h4" gutterBottom>

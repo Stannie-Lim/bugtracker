@@ -1,4 +1,24 @@
-.authform {
+.main-page {
+  text-align: center;
+}
+
+.auth-text-field {
+  /* width: 100%; */
+}
+
+.auth-form {
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.auth-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+}
+
+.to-register {
+  color: blue;
 }

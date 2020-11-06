@@ -26,7 +26,7 @@ const AddProject = ({ history }) => {
   const classes = useStyles();
   return (
     <div className="create-project-form">
-      <form onSubmit={addProject} className="asd">
+      <form onSubmit={addProject}>
         <div>
           <TextField
             label="Title"

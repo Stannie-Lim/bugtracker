@@ -7,7 +7,6 @@ export const login = (email, password, signinToken = null) => {
       if (signinToken) {
         const user = (await AxiosHttpRequest("GET", "/api/auth/me")).data;
         dispatch(_login(user));
-        return;
       } else if (email && password) {
         const token = (
           await AxiosHttpRequest("POST", "/api/auth/login", { email, password })

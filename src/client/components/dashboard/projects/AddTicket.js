@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // store
-import { createTicket } from "../../store/store";
+import { createTicket } from "../../../store/store";
 
 const AddTicket = ({ match, history }) => {
   const types = ["Bug", "Error", "Feature Request", "To-Do"];

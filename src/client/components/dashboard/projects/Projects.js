@@ -3,10 +3,10 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 // store
-import { getProjects } from "../../store/store";
+import { getProjects } from "../../../store/store";
 
 // components
-import ProjectCard from "./cards/ProjectCard";
+import ProjectCard from "../cards/ProjectCard";
 
 // css
 import "./projects.css";

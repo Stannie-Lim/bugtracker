@@ -17,14 +17,14 @@ import Register from "./components/auth/Register";
 // authed components
 import Nav from "./components/nav/Nav";
 import Home from "./components/dashboard/Home";
-import Projects from "./components/dashboard/Projects";
-import AddTicket from "./components/dashboard/AddTicket";
-import AddProject from "./components/dashboard/AddProject";
 import YourTickets from "./components/dashboard/YourTickets";
-import ProjectDetail from "./components/dashboard/ProjectDetail";
+import Projects from "./components/dashboard/projects/Projects";
 import TicketsByType from "./components/dashboard/TicketsByType";
+import AddTicket from "./components/dashboard/projects/AddTicket";
+import AddProject from "./components/dashboard/projects/AddProject";
 import TicketsByStatus from "./components/dashboard/TicketsByStatus";
 import TicketsByPriority from "./components/dashboard/TicketsByPriority";
+import ProjectDetail from "./components/dashboard/projects/ProjectDetail";
 
 // store
 import { login } from "./store/store";

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 // store
-import { createProject } from "../../store/store";
+import { createProject } from "../../../store/store";
 
 // css
 import "./addProject.css";

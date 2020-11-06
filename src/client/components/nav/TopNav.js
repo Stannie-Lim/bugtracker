@@ -251,7 +251,11 @@ const TopNav = () => {
           <Divider />
           <List>
             {["Home", "Projects"].map((text, index) => (
-              <Link to={`/${text.toLowerCase()}`} key={text}>
+              <Link
+                to={`/${text.toLowerCase()}`}
+                key={text}
+                className="side-bar"
+              >
                 <ListItem button>
                   <ListItemIcon>
                     {index % 2 === 0 ? <HomeIcon /> : <AccountTreeIcon />}

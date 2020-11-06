@@ -1,3 +1,8 @@
 .table {
   border: none;
 }
+
+.add-project-button {
+  text-decoration: none;
+  color: inherit;
+}

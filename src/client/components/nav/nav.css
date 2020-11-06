@@ -2,11 +2,10 @@
   position: fixed;
 } */
 
-.top-nav {
-  border-bottom: 1px solid black;
-  margin-left: 20rem;
-  display: flex;
-  justify-content: space-between;
+.top-ui-nav {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
 }
 
 .left-nav {

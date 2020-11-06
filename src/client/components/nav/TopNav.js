@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { removeJWT } from "../../utils/axios";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 
@@ -19,6 +20,9 @@ import { fade, makeStyles } from "@material-ui/core/styles";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 
+// store 
+import { _login } from "./../../store/user/actions";
+
 const TopNav = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -37,7 +41,21 @@ const TopNav = () => {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const dispatch = useDispatch();
+  const handleMenuClose = (ev) => {
+    const command = ev.target.textContent;
+    switch(command) {
+      case 'Log out': 
+        removeJWT();
+        dispatch(_login({}));
+        break;
+      case 'Profile':
+        console.log('TODO make a profile page');
+        break;
+      case 'My account':
+        console.log('TODO make a my account page');
+        break;
+    }
     setAnchorEl(null);
     handleMobileMenuClose();
   };
@@ -104,7 +122,7 @@ const TopNav = () => {
     </Menu>
   );
   return (
-    <nav className="top-nav">
+    <nav className="top-ui-nav">
       <div className={classes.grow}>
         <AppBar position="static">
           <Toolbar>

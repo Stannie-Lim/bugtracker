@@ -89,6 +89,22 @@ const TopNav = ({ open, setOpen }) => {
     </Menu>
   );
 
+  const notificationMenu = (
+    <Menu
+      anchorEl={notificationAnchor}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isNotificationOpen}
+      onClose={closeNotificationMenu}
+    >
+      <MenuItem onClick={() => console.log("notifications")}>
+        Notifications
+      </MenuItem>
+    </Menu>
+  );
+
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -168,18 +184,6 @@ const TopNav = ({ open, setOpen }) => {
           >
             <Badge badgeContent={17} color="secondary">
               <NotificationsIcon />
-              <Menu
-                id="fade-menu"
-                anchorEl={notificationAnchor}
-                keepMounted
-                open={isNotificationOpen}
-                onClose={closeNotificationMenu}
-                TransitionComponent={Fade}
-              >
-                <MenuItem onClick={() => console.log("notifications")}>
-                  Notifications
-                </MenuItem>
-              </Menu>
             </Badge>
           </IconButton>
           <IconButton
@@ -207,6 +211,7 @@ const TopNav = ({ open, setOpen }) => {
       </Toolbar>
       {renderMobileMenu}
       {renderMenu}
+      {notificationMenu}
     </AppBar>
   );
 };

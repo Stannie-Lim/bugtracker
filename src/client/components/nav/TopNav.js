@@ -1,15 +1,6 @@
 import clsx from "clsx";
 import React, { useState } from "react";
-import { removeJWT } from "../../utils/axios";
-import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-
-// components
-import TopNav from "./TopNav";
-import SideNav from "./SideNav";
-
-// css
-import "./nav.css";
 
 // materialui
 import List from "@material-ui/core/List";
@@ -40,62 +31,187 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 
-// store
-import { _login } from "./../../store/user/actions";
-
 const drawerWidth = 240;
-
-const Nav = () => {
+const TopNav = ({ open, setOpen }) => {
+  const theme = useTheme();
   const classes = useStyles();
-  const [open, setOpen] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
+  const [notificationAnchor, setNotificationAnchor] = useState(null);
 
-  const handleProfileMenuOpen = (event) => {
+  const isMenuOpen = Boolean(anchorEl);
+  const isNotificationOpen = Boolean(notificationAnchor);
+  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+
+  const openAccountMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const dispatch = useDispatch();
-  const handleMenuClose = (ev) => {
-    const command = ev.target.textContent;
-    switch (command) {
-      case "Log out":
-        removeJWT();
-        dispatch(_login({}));
-        break;
-      case "Profile":
-        console.log("TODO make a profile page");
-        break;
-      case "My account":
-        console.log("TODO make a my account page");
-        break;
-    }
+  const closeAccountMenu = () => {
     setAnchorEl(null);
-    handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
+  const goToProfile = () => {
+    setAnchorEl(null);
   };
+
+  const goToAccount = () => {
+    setAnchorEl(null);
+  };
+
+  const logout = () => {
+    setAnchorEl(null);
+  };
+
+  const openNotificationMenu = (event) => {
+    setNotificationAnchor(event.currentTarget);
+  };
+
+  const closeNotificationMenu = () => {
+    setNotificationAnchor(null);
+  };
+
+  const user = useSelector(({ user }) => user);
+  const menuId = "primary-search-account-menu";
+  const renderMenu = (
+    <Menu
+      anchorEl={anchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={menuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMenuOpen}
+      onClose={closeAccountMenu}
+    >
+      <MenuItem onClick={goToProfile}>Profile</MenuItem>
+      <MenuItem onClick={goToAccount}>My account</MenuItem>
+      <MenuItem onClick={logout}>Log out</MenuItem>
+    </Menu>
+  );
+
+  const mobileMenuId = "primary-search-account-menu-mobile";
+  const renderMobileMenu = (
+    <Menu
+      anchorEl={mobileMoreAnchorEl}
+      anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      id={mobileMenuId}
+      keepMounted
+      transformOrigin={{ vertical: "top", horizontal: "right" }}
+      open={isMobileMenuOpen}
+      onClose={() => setMobileMoreAnchorEl(null)}
+    >
+      <MenuItem>
+        <IconButton aria-label="show 11 new notifications" color="inherit">
+          <Badge badgeContent={11} color="secondary">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+        <p>Notifications</p>
+      </MenuItem>
+      <MenuItem onClick={(event) => setMobileMoreAnchorEl(event.currentTarget)}>
+        <IconButton
+          aria-label="account of current user"
+          aria-controls="primary-search-account-menu"
+          aria-haspopup="true"
+          color="inherit"
+        >
+          <AccountCircle />
+        </IconButton>
+        <p>Profile</p>
+      </MenuItem>
+    </Menu>
+  );
 
   return (
-    <nav className="top-ui-nav">
-      <div className={classes.grow}>
-        <TopNav
-          open={open}
-          setOpen={setOpen}
-          handleProfileMenuOpen={handleProfileMenuOpen}
-          handleMobileMenuOpen={handleMobileMenuOpen}
-        />
-        <SideNav open={open} setOpen={setOpen} />
-      </div>
-    </nav>
+    <AppBar
+      position="fixed"
+      className={clsx(classes.appBar, {
+        [classes.appBarShift]: open,
+      })}
+    >
+      <Toolbar>
+        <IconButton
+          edge="start"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={() => setOpen(true)}
+          className={clsx(classes.menuButton, {
+            [classes.hide]: open,
+          })}
+        >
+          <MenuIcon />
+        </IconButton>
+        <Typography className={classes.title} variant="h6" noWrap>
+          Logged in as {user.fullName}
+        </Typography>
+        <div className={classes.search}>
+          <div className={classes.searchIcon}>
+            <SearchIcon />
+          </div>
+          <InputBase
+            placeholder="Search…"
+            classes={{
+              root: classes.inputRoot,
+              input: classes.inputInput,
+            }}
+            inputProps={{ "aria-label": "search" }}
+          />
+        </div>
+        <div className={classes.grow} />
+        <div className={classes.sectionDesktop}>
+          <IconButton
+            aria-controls="fade-menu"
+            aria-haspopup="true"
+            aria-label="show 17 new notifications"
+            onClick={openNotificationMenu}
+            color="inherit"
+          >
+            <Badge badgeContent={17} color="secondary">
+              <NotificationsIcon />
+              <Menu
+                id="fade-menu"
+                anchorEl={notificationAnchor}
+                keepMounted
+                open={isNotificationOpen}
+                onClose={closeNotificationMenu}
+                TransitionComponent={Fade}
+              >
+                <MenuItem onClick={() => console.log("notifications")}>
+                  Notifications
+                </MenuItem>
+              </Menu>
+            </Badge>
+          </IconButton>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            onClick={(event) => setAnchorEl(event.currentTarget)}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
+        </div>
+        <div className={classes.sectionMobile}>
+          <IconButton
+            aria-label="show more"
+            aria-controls={mobileMenuId}
+            aria-haspopup="true"
+            onClick={(event) => setMobileMoreAnchorEl(event.currentTarget)}
+            color="inherit"
+          >
+            <MoreIcon />
+          </IconButton>
+        </div>
+      </Toolbar>
+      {renderMobileMenu}
+      {renderMenu}
+    </AppBar>
   );
 };
 
-export default Nav;
+export default TopNav;
 
 // css
 const useStyles = makeStyles((theme) => ({

@@ -8,87 +8,24 @@ import { useSelector, useDispatch } from "react-redux";
 import TopNav from "./TopNav";
 import SideNav from "./SideNav";
 
-// css
-import "./nav.css";
-
 // materialui
-import List from "@material-ui/core/List";
-import Menu from "@material-ui/core/Menu";
-import Fade from "@material-ui/core/Fade";
-import Badge from "@material-ui/core/Badge";
-import Drawer from "@material-ui/core/Drawer";
-import AppBar from "@material-ui/core/AppBar";
-import MailIcon from "@material-ui/icons/Mail";
-import MenuIcon from "@material-ui/icons/Menu";
-import Button from "@material-ui/core/Button";
-import HomeIcon from "@material-ui/icons/Home";
-import Toolbar from "@material-ui/core/Toolbar";
-import Divider from "@material-ui/core/Divider";
-import MenuItem from "@material-ui/core/MenuItem";
-import ListItem from "@material-ui/core/ListItem";
-import MoreIcon from "@material-ui/icons/MoreVert";
-import SearchIcon from "@material-ui/icons/Search";
-import InputBase from "@material-ui/core/InputBase";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import NotificationsIcon from "@material-ui/icons/Notifications";
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 
 // store
 import { _login } from "./../../store/user/actions";
 
-const drawerWidth = 240;
+// css
+import "./nav.css";
 
+const drawerWidth = 240;
 const Nav = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
-  const dispatch = useDispatch();
-  const handleMenuClose = (ev) => {
-    const command = ev.target.textContent;
-    switch (command) {
-      case "Log out":
-        removeJWT();
-        dispatch(_login({}));
-        break;
-      case "Profile":
-        console.log("TODO make a profile page");
-        break;
-      case "My account":
-        console.log("TODO make a my account page");
-        break;
-    }
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
   return (
     <nav className="top-ui-nav">
       <div className={classes.grow}>
-        <TopNav
-          open={open}
-          setOpen={setOpen}
-          handleProfileMenuOpen={handleProfileMenuOpen}
-          handleMobileMenuOpen={handleMobileMenuOpen}
-        />
+        <TopNav open={open} setOpen={setOpen} />
         <SideNav open={open} setOpen={setOpen} />
       </div>
     </nav>

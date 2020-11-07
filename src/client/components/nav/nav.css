@@ -1,4 +1,5 @@
-a.side-bar {
+.top-ui-nav,
+.side-bar {
   text-decoration: none;
-  color: inherit;
+  color: white;
 }

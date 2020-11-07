@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, Fragment } from "react";
 
 // materialui
 import { makeStyles } from "@material-ui/core/styles";
@@ -25,19 +25,17 @@ const useRowStyles = makeStyles({
 });
 
 const ProjectDetailTicketsRow = ({ row }) => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
-  /*
-   bleCell>Information</TableCell>
-            <TableCell align="right">Priority</TableCell>
-            <TableCell align="right">Type</TableCell>
-            <TableCell align="right">Status</TableCell>
-            <TableCell align="right">User</TableCell>
-  */
+  const capitalize = (str) => {
+    // str = str.split('-').join(' ').split('_').join(' ');
+    // return `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
+    return str;
+  };
 
   return (
-    <React.Fragment>
+    <Fragment>
       <TableRow className={classes.root}>
         <TableCell>
           <IconButton
@@ -51,9 +49,9 @@ const ProjectDetailTicketsRow = ({ row }) => {
         <TableCell component="th" scope="row">
           {row.info}
         </TableCell>
-        <TableCell align="right">{row.priority}</TableCell>
-        <TableCell align="right">{row.type}</TableCell>
-        <TableCell align="right">{row.status}</TableCell>
+        <TableCell align="right">{capitalize(row.priority)}</TableCell>
+        <TableCell align="right">{capitalize(row.type)}</TableCell>
+        <TableCell align="right">{capitalize(row.status)}</TableCell>
         <TableCell align="right">{row.user}</TableCell>
       </TableRow>
       <TableRow>
@@ -86,7 +84,7 @@ const ProjectDetailTicketsRow = ({ row }) => {
           </Collapse>
         </TableCell>
       </TableRow>
-    </React.Fragment>
+    </Fragment>
   );
 };
 

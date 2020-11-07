@@ -74,35 +74,6 @@ const ProjectDetailTicketsList = ({ tickets }) => {
     setOrderBy(property);
   };
 
-  const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelecteds = rows.map((n) => n.name);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
   const createSortHandler = (property) => (event) => {
     handleRequestSort(event, property);
   };
@@ -115,12 +86,6 @@ const ProjectDetailTicketsList = ({ tickets }) => {
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
-  const isSelected = (name) => selected.indexOf(name) !== -1;
 
   const rows = tickets.map(({ info, priority, type, status, user, id }) => {
     return {
@@ -144,10 +109,10 @@ const ProjectDetailTicketsList = ({ tickets }) => {
             <TableHead>
               <TableRow>
                 <TableCell />
-                {headCells.map((headCell) => (
+                {headCells.map((headCell, index) => (
                   <TableCell
                     key={headCell.id}
-                    align={headCell.numeric ? "right" : "left"}
+                    align={index !== 0 ? "right" : "center"}
                     padding={headCell.disablePadding ? "none" : "default"}
                     sortDirection={orderBy === headCell.id ? order : false}
                   >

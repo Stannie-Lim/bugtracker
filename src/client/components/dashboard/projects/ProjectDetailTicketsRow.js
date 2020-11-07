@@ -1,4 +1,15 @@
 import React, { useState, Fragment } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+// store
+import {
+  assignTicket,
+  unassignTicket,
+  resolveTicket,
+} from "../../../store/store";
+
+// css
+import "./ProjectDetailTicketsRow.css";
 
 // materialui
 import { makeStyles } from "@material-ui/core/styles";
@@ -28,10 +39,25 @@ const ProjectDetailTicketsRow = ({ row }) => {
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
 
+  const ticketUser = row.user;
+  const userId = useSelector(({ user }) => user.id);
+
+  const dispatch = useDispatch();
+  const assignYourself = () => {
+    dispatch(assignTicket(userId, row.id));
+  };
+
+  const unassignYourself = () => {
+    dispatch(unassignTicket(userId, row.id));
+  };
+
+  const resolve = () => {
+    dispatch(resolveTicket(userId, row.id));
+  };
+
   const capitalize = (str) => {
-    // str = str.split('-').join(' ').split('_').join(' ');
-    // return `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
-    return str;
+    str = str.split("-").join(" ").split("_").join(" ");
+    return `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
   };
 
   return (
@@ -46,13 +72,28 @@ const ProjectDetailTicketsRow = ({ row }) => {
             {open ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
           </IconButton>
         </TableCell>
-        <TableCell component="th" scope="row">
-          {row.info}
-        </TableCell>
+        <TableCell align="center">{row.info}</TableCell>
         <TableCell align="right">{capitalize(row.priority)}</TableCell>
         <TableCell align="right">{capitalize(row.type)}</TableCell>
         <TableCell align="right">{capitalize(row.status)}</TableCell>
-        <TableCell align="right">{row.user}</TableCell>
+        <TableCell align="right">
+          {row.status === "RESOLVED" ? (
+            "Resolved"
+          ) : !ticketUser ? (
+            <div className="assign-buttons">
+              <button onClick={assignYourself}>Assign yourself</button>
+            </div>
+          ) : userId === ticketUser.id ? (
+            <div className="assign-buttons">
+              <button onClick={unassignYourself}>Unassign yourself</button>
+              <button onClick={resolve}>Resolve ticket</button>
+            </div>
+          ) : (
+            <div className="assign-buttons">
+              Assigned to {ticketUser.fullName}
+            </div>
+          )}
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>

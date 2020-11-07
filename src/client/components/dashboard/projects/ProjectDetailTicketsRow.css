@@ -1,0 +1,9 @@
+.assign-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.assign-buttons > button {
+  width: 50%;
+}

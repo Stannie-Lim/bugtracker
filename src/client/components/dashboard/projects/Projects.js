@@ -29,14 +29,19 @@ const Projects = ({ history }) => {
   const projects = useSelector(({ projects }) => projects);
   const columns = [
     { field: "Title", width: 200 },
-    { field: "Description", width: 500 },
+    { field: "Description", width: 600 },
+    { field: "Users", width: 100 },
+    { field: "Active tickets", width: 155 },
   ];
 
-  const rows = projects.map(({ id, title, description }) => {
+  const rows = projects.map(({ id, title, description, users, tickets }) => {
+    tickets = tickets.filter((ticket) => ticket.status !== "RESOLVED");
     return {
       id,
       Title: title,
       Description: description,
+      Users: users.length,
+      "Active tickets": tickets.length,
     };
   });
 

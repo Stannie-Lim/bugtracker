@@ -12,13 +12,18 @@ router.get("/", isLoggedIn, async (req, res, next) => {
   const userId = req.user.id;
   try {
     const projects = await Project.findAll({
-      include: {
-        model: User,
-        as: "users",
-        attributes: {
-          exclude: ["password"],
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: {
+            exclude: ["password"],
+          },
         },
-      },
+        {
+          model: Ticket,
+        },
+      ],
     }).filter(({ users }) => users.map((user) => user.id).includes(userId));
     res.send(projects);
   } catch (err) {

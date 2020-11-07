@@ -142,7 +142,7 @@ const ProjectDetailTicketsList = ({ tickets }) => {
                   <Row key={row.id} row={row} />
                 ))}
               {emptyRows > 0 && (
-                <TableRow style={{ height: 500 }}>
+                <TableRow>
                   <TableCell colSpan={6} />
                 </TableRow>
               )}

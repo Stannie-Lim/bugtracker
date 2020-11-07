@@ -1,0 +1,13 @@
+.add-ticket-button {
+  text-decoration: none;
+  /* margin: 0 2rem; */
+}
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+
+.controls-div {
+  width: 85%;
+}

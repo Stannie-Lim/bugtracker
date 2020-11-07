@@ -28,6 +28,14 @@ const ProjectDetailTicketsRow = ({ row }) => {
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
 
+  /*
+   bleCell>Information</TableCell>
+            <TableCell align="right">Priority</TableCell>
+            <TableCell align="right">Type</TableCell>
+            <TableCell align="right">Status</TableCell>
+            <TableCell align="right">User</TableCell>
+  */
+
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
@@ -41,12 +49,12 @@ const ProjectDetailTicketsRow = ({ row }) => {
           </IconButton>
         </TableCell>
         <TableCell component="th" scope="row">
-          {row.name}
+          {row.info}
         </TableCell>
-        <TableCell align="right">{row.calories}</TableCell>
-        <TableCell align="right">{row.fat}</TableCell>
-        <TableCell align="right">{row.carbs}</TableCell>
-        <TableCell align="right">{row.protein}</TableCell>
+        <TableCell align="right">{row.priority}</TableCell>
+        <TableCell align="right">{row.type}</TableCell>
+        <TableCell align="right">{row.status}</TableCell>
+        <TableCell align="right">{row.user}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -69,11 +77,6 @@ const ProjectDetailTicketsRow = ({ row }) => {
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
                         {historyRow.date}
-                      </TableCell>
-                      <TableCell>{historyRow.customerId}</TableCell>
-                      <TableCell align="right">{historyRow.amount}</TableCell>
-                      <TableCell align="right">
-                        {Math.round(historyRow.amount * row.price * 100) / 100}
                       </TableCell>
                     </TableRow>
                   ))}

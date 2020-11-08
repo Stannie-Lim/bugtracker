@@ -14,8 +14,6 @@ const StatusGraph = () => {
       categorized[status]++;
     }
 
-    console.log(tickets);
-
     const data = [
       {
         Status: "Open",
@@ -48,14 +46,7 @@ const StatusGraph = () => {
       borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
       axisTop={null}
       axisRight={null}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "Status",
-        legendPosition: "middle",
-        legendOffset: 32,
-      }}
+      axisBottom={null}
       axisLeft={{
         tickSize: 5,
         tickPadding: 5,

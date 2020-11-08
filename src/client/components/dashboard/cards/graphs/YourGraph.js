@@ -3,7 +3,9 @@ import { ResponsiveBar } from "@nivo/bar";
 import { useSelector } from "react-redux";
 
 const YourGraph = () => {
+  const user = useSelector(({ user }) => user);
   const data = useSelector(({ tickets }) => {
+    const _tickets = tickets.filter((ticket) => ticket.userId === user.id);
     const categorized = {
       NONE: 0,
       LOW: 0,
@@ -11,7 +13,7 @@ const YourGraph = () => {
       HIGH: 0,
     };
 
-    for (const { priority } of tickets) {
+    for (const { priority } of _tickets) {
       categorized[priority]++;
     }
 
@@ -46,7 +48,7 @@ const YourGraph = () => {
       padding={0.3}
       colorBy="index"
       valueScale={{ type: "linear" }}
-      colors={{ scheme: "reds" }}
+      colors={{ scheme: "paired" }}
       borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
       axisTop={null}
       axisRight={null}

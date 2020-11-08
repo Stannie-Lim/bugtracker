@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
-import { ResponsiveBar } from "@nivo/bar";
+import { ResponsivePie } from "@nivo/pie";
 import { useSelector } from "react-redux";
 
 const TypeGraph = () => {
   const data = useSelector(({ tickets }) => {
     const categorized = {
-      NONE: 0,
-      LOW: 0,
-      MEDIUM: 0,
-      HIGH: 0,
+      ERROR: 0,
+      BUG: 0,
+      "TO-DO": 0,
+      FEATURE_REQUEST: 0,
     };
 
-    for (const { priority } of tickets) {
-      categorized[priority]++;
+    for (const { type } of tickets) {
+      categorized[type]++;
     }
 
     const data = [
       {
-        Priority: "None",
-        Count: categorized.NONE,
+        id: "Error",
+        label: "Error",
+        value: categorized.ERROR,
       },
       {
-        Priority: "Low",
-        Count: categorized.LOW,
+        id: "BUG",
+        label: "Bug",
+        value: categorized.BUG,
       },
       {
-        Priority: "Medium",
-        Count: categorized.MEDIUM,
+        id: "To do",
+        label: "To do",
+        value: categorized["TO-DO"],
       },
       {
-        Priority: "High",
-        Count: categorized.HIGH,
+        id: "Feature Request",
+        label: "Feature Request",
+        value: categorized.FEATURE_REQUEST,
       },
     ];
 
@@ -38,39 +42,45 @@ const TypeGraph = () => {
   });
 
   return (
-    <ResponsiveBar
+    <ResponsivePie
       data={data}
-      keys={["Count"]}
-      indexBy="Priority"
-      margin={{ top: 30, right: 30, bottom: 60, left: 30 }}
-      padding={0.3}
-      colorBy="index"
-      valueScale={{ type: "linear" }}
-      colors={{ scheme: "reds" }}
-      borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-      axisTop={null}
-      axisRight={null}
-      axisBottom={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legend: "Priority",
-        legendPosition: "middle",
-        legendOffset: 32,
-      }}
-      axisLeft={{
-        tickSize: 5,
-        tickPadding: 5,
-        tickRotation: 0,
-        legendPosition: "middle",
-        legendOffset: -40,
-      }}
-      labelSkipWidth={12}
-      labelSkipHeight={12}
-      labelTextColor={{ from: "color", modifiers: [["darker", 1.6]] }}
-      animate={true}
-      motionStiffness={90}
-      motionDamping={15}
+      margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      innerRadius={0.5}
+      padAngle={0.7}
+      cornerRadius={3}
+      colors={{ scheme: "pink_yellowGreen" }}
+      borderWidth={1}
+      borderColor={{ from: "color", modifiers: [["darker", 0.2]] }}
+      radialLabelsSkipAngle={10}
+      radialLabelsTextColor="#333333"
+      radialLabelsLinkColor={{ from: "color" }}
+      sliceLabelsSkipAngle={10}
+      sliceLabelsTextColor="#333333"
+      legends={[
+        {
+          anchor: "bottom",
+          direction: "row",
+          justify: false,
+          translateX: 0,
+          translateY: 56,
+          itemsSpacing: 0,
+          itemWidth: 100,
+          itemHeight: 18,
+          itemTextColor: "#999",
+          itemDirection: "left-to-right",
+          itemOpacity: 1,
+          symbolSize: 18,
+          symbolShape: "circle",
+          effects: [
+            {
+              on: "hover",
+              style: {
+                itemTextColor: "#000",
+              },
+            },
+          ],
+        },
+      ]}
     />
   );
 };

@@ -5,8 +5,10 @@ import { useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
 // components
-import PriorityGraph from "./graphs/PriorityGraph";
+import YourGraph from "./graphs/YourGraph";
 import TypeGraph from "./graphs/TypeGraph";
+import StatusGraph from "./graphs/StatusGraph";
+import PriorityGraph from "./graphs/PriorityGraph";
 
 // css
 import "./ticketInfoCard.css";
@@ -74,24 +76,14 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
           categorizedByStatus[ticket.status]++;
         }
 
-        return (
-          <div>
-            {Object.entries(categorizedByStatus).map(([category, count]) => (
-              <div key={category}>{`${category}: ${count}`}</div>
-            ))}
-          </div>
-        );
+        return <StatusGraph />;
       case "YOURS":
         const yourTickets = [];
         for (const ticket of tickets) {
           if (ticket.userId === userId) yourTickets.push(ticket);
         }
 
-        return (
-          <div>
-            <h1>You have {yourTickets.length} tickets.</h1>
-          </div>
-        );
+        return <YourGraph />;
       default:
         return <h1>Not a valid type</h1>;
     }

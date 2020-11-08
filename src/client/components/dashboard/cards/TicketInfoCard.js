@@ -4,6 +4,10 @@ import { ItemTypes } from "../ItemTypes";
 import { useSelector } from "react-redux";
 import { useDrag, useDrop } from "react-dnd";
 
+// components
+import PriorityGraph from "./graphs/PriorityGraph";
+import TypeGraph from "./graphs/TypeGraph";
+
 // css
 import "./ticketInfoCard.css";
 
@@ -45,24 +49,7 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
   const displayedData = () => {
     switch (type) {
       case "PRIORITY":
-        const categorizedByPriority = {
-          NONE: 0,
-          LOW: 0,
-          MEDIUM: 0,
-          HIGH: 0,
-        };
-
-        for (const ticket of tickets) {
-          categorizedByPriority[ticket.priority]++;
-        }
-
-        return (
-          <div>
-            {Object.entries(categorizedByPriority).map(([category, count]) => (
-              <div key={category}>{`${category}: ${count}`}</div>
-            ))}
-          </div>
-        );
+        return <PriorityGraph />;
       case "TYPE":
         const categorizedByType = {
           BUG: 0,
@@ -75,13 +62,7 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
           categorizedByType[ticket.type]++;
         }
 
-        return (
-          <div>
-            {Object.entries(categorizedByType).map(([category, count]) => (
-              <div key={category}>{`${category}: ${count}`}</div>
-            ))}
-          </div>
-        );
+        return <TypeGraph />;
       case "STATUS":
         const categorizedByStatus = {
           OPEN: 0,

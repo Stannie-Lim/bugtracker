@@ -87,5 +87,3 @@ router.put("/:projectId", isLoggedIn, async (req, res, next) => {
     next(err);
   }
 });
-
-// test2

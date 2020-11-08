@@ -5,32 +5,29 @@ import { useSelector } from "react-redux";
 const StatusGraph = () => {
   const data = useSelector(({ tickets }) => {
     const categorized = {
-      NONE: 0,
-      LOW: 0,
-      MEDIUM: 0,
-      HIGH: 0,
+      IN_PROGRESS: 0,
+      OPEN: 0,
+      RESOLVED: 0,
     };
 
-    for (const { priority } of tickets) {
-      categorized[priority]++;
+    for (const { status } of tickets) {
+      categorized[status]++;
     }
+
+    console.log(tickets);
 
     const data = [
       {
-        Priority: "None",
-        Count: categorized.NONE,
+        Status: "Open",
+        Count: categorized.OPEN,
       },
       {
-        Priority: "Low",
-        Count: categorized.LOW,
+        Status: "In Progress",
+        Count: categorized.IN_PROGRESS,
       },
       {
-        Priority: "Medium",
-        Count: categorized.MEDIUM,
-      },
-      {
-        Priority: "High",
-        Count: categorized.HIGH,
+        Status: "Resolved",
+        Count: categorized.RESOLVED,
       },
     ];
 
@@ -41,12 +38,13 @@ const StatusGraph = () => {
     <ResponsiveBar
       data={data}
       keys={["Count"]}
-      indexBy="Priority"
-      margin={{ top: 30, right: 30, bottom: 60, left: 30 }}
+      indexBy="Status"
+      layout="horizontal"
+      margin={{ top: 30, right: 30, bottom: 60, left: 80 }}
       padding={0.3}
       colorBy="index"
       valueScale={{ type: "linear" }}
-      colors={{ scheme: "reds" }}
+      colors={{ scheme: "purple_orange" }}
       borderColor={{ from: "color", modifiers: [["darker", 1.6]] }}
       axisTop={null}
       axisRight={null}
@@ -54,7 +52,7 @@ const StatusGraph = () => {
         tickSize: 5,
         tickPadding: 5,
         tickRotation: 0,
-        legend: "Priority",
+        legend: "Status",
         legendPosition: "middle",
         legendOffset: 32,
       }}

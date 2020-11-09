@@ -40,13 +40,18 @@ router.post("/", isLoggedIn, async (req, res, next) => {
     await user.addProject(_project);
 
     const project = await Project.findByPk(_project.id, {
-      include: {
-        model: User,
-        as: "users",
-        attributes: {
-          exclude: ["password"],
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: {
+            exclude: ["password"],
+          },
         },
-      },
+        {
+          model: Ticket,
+        },
+      ],
     });
 
     res.status(201).json(project);
@@ -74,13 +79,18 @@ router.put("/:projectId", isLoggedIn, async (req, res, next) => {
     await _project.setUsers([..._project.users, user]);
 
     const project = await Project.findByPk(projectId, {
-      include: {
-        model: User,
-        as: "users",
-        attributes: {
-          exclude: ["password"],
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: {
+            exclude: ["password"],
+          },
         },
-      },
+        {
+          model: Ticket,
+        },
+      ],
     });
     res.send(project);
   } catch (err) {

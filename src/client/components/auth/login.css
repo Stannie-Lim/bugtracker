@@ -22,3 +22,16 @@
 .to-register {
   color: blue;
 }
+
+.github-icon > img {
+  max-height: 30px;
+}
+
+.github-icon > img:hover {
+  opacity: 50%;
+  transition: 0.2s;
+}
+
+.oauth {
+  margin: 2rem 0;
+}

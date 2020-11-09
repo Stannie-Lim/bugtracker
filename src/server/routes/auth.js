@@ -63,6 +63,21 @@ router.post("/register", async (req, res, next) => {
   }
 });
 
+router.get("/user", async (req, res, next) => {
+  if (req.token) {
+    return res.send(req.token);
+  }
+  res.sendStatus(401);
+});
+
+router.post("/logout", async (req, res, next) => {
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    expires: new Date(Date.now()),
+  });
+  res.sendStatus(200);
+});
+
 router.get("/me", isLoggedIn, async (req, res, next) => {
   try {
     const { email } = req.user;

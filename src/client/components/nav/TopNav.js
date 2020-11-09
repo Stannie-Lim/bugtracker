@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { removeJWT } from "../../utils/axios";
 
 // store
-import { _login } from "./../../store/user/actions";
+import { signout } from "../../store/store";
 
 // components
 import SearchBar from "./SearchBar";
@@ -75,7 +75,7 @@ const TopNav = ({ open, setOpen }) => {
 
   const logout = () => {
     removeJWT();
-    dispatch(_login({}));
+    dispatch(signout());
 
     closeAccountMenu();
     closeMobileMenu();

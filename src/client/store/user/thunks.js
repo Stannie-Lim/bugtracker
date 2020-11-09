@@ -50,3 +50,14 @@ export const setTicketCardOrder = (order) => {
     }
   };
 };
+
+export const signout = () => {
+  return async (dispatch) => {
+    try {
+      await AxiosHttpRequest("POST", "/api/auth/logout");
+      dispatch(_login({}));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

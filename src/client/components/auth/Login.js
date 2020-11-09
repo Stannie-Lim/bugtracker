@@ -1,12 +1,18 @@
+import axios from "axios";
+import { setJWT, getMe } from "../../utils/axios";
 import React, { useState, useEffect } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+
+// components
+import OAuth from "./OAuth";
 
 // css
 import "./login.css";
 
 // store
 import { login } from "../../store/store";
+import { _login } from "../../store/user/actions";
 
 // materialui
 import Button from "@material-ui/core/Button";
@@ -24,6 +30,23 @@ const Login = ({ history }) => {
     ev.preventDefault();
     dispatch(login(email, password));
   };
+
+  const checkAuth = async () => {
+    try {
+      const token = (await axios.get("/api/auth/user")).data;
+      if (token) {
+        setJWT(token);
+        const user = await getMe();
+        dispatch(_login(user));
+      }
+    } catch (err) {
+      // do nothing! it just means you're not logged in
+    }
+  };
+
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   const classes = useStyles();
   const isLoggedIn = useSelector(({ user }) => !!user.id);
@@ -84,6 +107,9 @@ const Login = ({ history }) => {
             >
               Sign in
             </Button>
+          </div>
+          <div className="oauth">
+            <OAuth />
           </div>
         </form>
       </div>

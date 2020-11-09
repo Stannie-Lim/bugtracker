@@ -17,13 +17,13 @@ const { User } = require("../../db/models");
 
 // root route is /api/oauth/google
 
-router.get("/login", async (req, res, next) => {
-  const oauth2Client = new google.auth.OAuth2(
-    process.env.GOOGLE_CLIENT_ID,
-    process.env.GOOGLE_CLIENT_SECRET,
-    "http://localhost:3000/api/oauth/google/callback"
-  );
+const oauth2Client = new google.auth.OAuth2(
+  process.env.GOOGLE_CLIENT_ID,
+  process.env.GOOGLE_CLIENT_SECRET,
+  "http://localhost:3000/api/oauth/google/callback"
+);
 
+router.get("/login", async (req, res, next) => {
   const scopes = [
     "https://www.googleapis.com/auth/userinfo.profile",
     "https://www.googleapis.com/auth/userinfo.email",
@@ -42,49 +42,42 @@ router.get("/login", async (req, res, next) => {
 
 router.get("/callback", async (req, res, next) => {
   const { code } = req.query;
-  // try {
-  //   const payload = {
-  //     client_id: process.env.GITHUB_CLIENT_ID,
-  //     client_secret: process.env.GITHUB_CLIENT_SECRET,
-  //     code,
-  //   };
-  //   const { data } = await axios.post(
-  //     `https://github.com/login/oauth/access_token`,
-  //     payload
-  //   );
-  //   const { access_token } = qs.parse(data);
-  //   const user = (
-  //     await axios.get("https://api.github.com/user", {
-  //       headers: { Authorization: `token ${access_token}` },
-  //     })
-  //   ).data;
-  //   const email = user.login;
-  //   const [firstName, lastName] = user.name.split(" ");
-  //   const password = bcrypt.hashSync(user.node_id, 15);
+  try {
+    const { tokens } = await oauth2Client.getToken(code);
+    const { access_token } = tokens;
+    const user = (
+      await axios.get(
+        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
+        { headers: { Authorization: `Bearer ${code}` } }
+      )
+    ).data;
+    const email = user.email;
+    const [firstName, lastName] = user.name.split(" ");
+    const password = bcrypt.hashSync(user.id, 15);
 
-  //   let _user = await User.findOne({ where: { email } });
-  //   if (!_user) {
-  //     _user = await User.create({
-  //       firstName,
-  //       lastName,
-  //       email,
-  //       password,
-  //     });
-  //   }
-  //   const token = generateJWT({
-  //     firstName: firstName,
-  //     lastName: lastName,
-  //     id: _user.id,
-  //     email,
-  //   });
+    let _user = await User.findOne({ where: { email } });
+    if (!_user) {
+      _user = await User.create({
+        firstName,
+        lastName,
+        email,
+        password,
+      });
+    }
+    const token = generateJWT({
+      firstName: firstName,
+      lastName: lastName,
+      id: _user.id,
+      email,
+    });
 
-  //   res.cookie("jwt", token, {
-  //     httpOnly: true, // This flag helps prevent cross site scripting (xss) attacks by not allowing javascript to access this cookie
-  //     // Read more here: https://owasp.org/www-community/HttpOnly
-  //   });
-  //   // We've successfully authenticated now redirect back to the front end server
-  //   res.redirect("http://localhost:3000");
-  // } catch (err) {
-  //   next(err);
-  // }
+    res.cookie("jwt", token, {
+      httpOnly: true, // This flag helps prevent cross site scripting (xss) attacks by not allowing javascript to access this cookie
+      // Read more here: https://owasp.org/www-community/HttpOnly
+    });
+    // We've successfully authenticated now redirect back to the front end server
+    res.redirect("http://localhost:3000");
+  } catch (err) {
+    next(err);
+  }
 });

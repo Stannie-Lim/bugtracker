@@ -108,9 +108,7 @@ const Login = ({ history }) => {
               Sign in
             </Button>
           </div>
-          <div className="oauth">
-            <OAuth />
-          </div>
+          <OAuth />
         </form>
       </div>
     </div>

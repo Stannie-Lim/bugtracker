@@ -23,15 +23,27 @@
   color: blue;
 }
 
-.github-icon > img {
+.github-oauth-icon > img {
   max-height: 30px;
 }
 
-.github-icon > img:hover {
+.github-oauth-icon > img:hover {
+  opacity: 50%;
+  transition: 0.2s;
+}
+
+.google-oauth-icon > img {
+  max-height: 37px;
+}
+
+.google-oauth-icon > img:hover {
   opacity: 50%;
   transition: 0.2s;
 }
 
 .oauth {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   margin: 2rem 0;
 }

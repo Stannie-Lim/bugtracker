@@ -1,15 +1,19 @@
 import React from "react";
 
+// assets
+import github from "../../../../static/assets/github.svg";
+import google from "../../../../static/assets/btn_google_dark_normal_ios.png";
+
 const OAuth = () => {
   return (
-    <div>
-      {/* <a href="/api/oauth/github/login" className="github-icon">
-        <img
-          src="https://www.flaticon.com/svg/static/icons/svg/25/25231.svg"
-          alt="github"
-        />
-      </a> */}
-      <a href="/api/oauth/google/login">Login with google</a>
+    <div className="oauth">
+      <a href="/api/oauth/github/login" className="github-oauth-icon">
+        <img src={github} alt="github" />
+      </a>
+
+      <a href="/api/oauth/google/login" className="google-oauth-icon">
+        <img src={google} alt="google" />
+      </a>
     </div>
   );
 };

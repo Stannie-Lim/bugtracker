@@ -39,3 +39,4 @@ router.use("/auth", require("./routes/auth"));
 router.use("/tickets", require("./routes/tickets"));
 router.use("/projects", require("./routes/projects"));
 router.use("/oauth/github", require("./routes/oauth/github"));
+router.use("/oauth/google", require("./routes/oauth/google"));

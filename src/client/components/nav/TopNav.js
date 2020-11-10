@@ -15,6 +15,7 @@ import TopRightBar from "./TopRightBar";
 // materialui
 import Menu from "@material-ui/core/Menu";
 import Badge from "@material-ui/core/Badge";
+import Button from "@material-ui/core/Button";
 import AppBar from "@material-ui/core/AppBar";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -87,6 +88,17 @@ const TopNav = ({ open, setOpen }) => {
     closeMobileMenu();
   };
 
+  const declineInvite = (inviterId, projectId, userId) => {
+    console.log("decline", inviterId, projectId, userId);
+  };
+
+  const acceptInvite = (inviterId, projectId, userId) => {
+    console.log("accept", inviterId, projectId, userId);
+  };
+
+  const userInvites = useSelector(({ user }) => user.invitee);
+  const userId = useSelector(({ user }) => user.id);
+
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -99,8 +111,8 @@ const TopNav = ({ open, setOpen }) => {
       onClose={closeMobileMenu}
     >
       <MenuItem onClick={goToNotifications}>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+        <IconButton aria-label="show new notifications" color="inherit">
+          <Badge badgeContent={userInvites.length} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
@@ -137,8 +149,6 @@ const TopNav = ({ open, setOpen }) => {
     </Menu>
   );
 
-  const userInvites = useSelector(({ user }) => user.invitee);
-  console.log(userInvites);
   const notificationMenu = (
     <Menu
       anchorEl={notificationAnchor}
@@ -149,14 +159,31 @@ const TopNav = ({ open, setOpen }) => {
       open={isNotificationOpen}
       onClose={closeNotificationMenu}
     >
-      {userInvites.map((invite) => {
+      {userInvites.map(({ inviter, project, id }) => {
         return (
-          <MenuItem>
-            {invite.inviter.fullName} invites you to {invite.project.title}
+          <MenuItem key={id} className="notification-item">
+            <div>
+              {inviter.fullName} invites you to {project.title}
+            </div>
+            <div>
+              <Button
+                variant="contained"
+                color="secondary"
+                onClick={() => declineInvite(inviter.id, project.id, userId)}
+              >
+                Decline
+              </Button>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={() => acceptInvite(inviter.id, project.id, userId)}
+              >
+                Accept
+              </Button>
+            </div>
           </MenuItem>
         );
       })}
-      {/* <MenuItem onClick={goToNotifications}>Notifications</MenuItem> */}
     </Menu>
   );
 
@@ -186,6 +213,7 @@ const TopNav = ({ open, setOpen }) => {
         <TopRightBar
           openNotificationMenu={openNotificationMenu}
           openAccountMenu={openAccountMenu}
+          notificationCount={userInvites.length}
         />
         <MobileBar openMobileMenu={openMobileMenu} />
       </Toolbar>

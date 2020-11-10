@@ -3,3 +3,8 @@
   text-decoration: none;
   color: white;
 }
+
+.notification-item {
+  display: flex;
+  flex-direction: column;
+}

@@ -65,9 +65,10 @@ router.post("/register", async (req, res, next) => {
 
 router.get("/user", async (req, res, next) => {
   if (req.token) {
-    return res.send(req.token);
+    res.send(req.token);
+  } else {
+    res.send("");
   }
-  res.sendStatus(401);
 });
 
 router.post("/logout", async (req, res, next) => {

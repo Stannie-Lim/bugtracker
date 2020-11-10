@@ -9,7 +9,11 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
-const TopRightBar = ({ openNotificationMenu, openAccountMenu }) => {
+const TopRightBar = ({
+  openNotificationMenu,
+  openAccountMenu,
+  notificationCount,
+}) => {
   const menuId = "primary-search-account-menu";
 
   const classes = useStyles();
@@ -18,11 +22,11 @@ const TopRightBar = ({ openNotificationMenu, openAccountMenu }) => {
       <IconButton
         aria-controls="fade-menu"
         aria-haspopup="true"
-        aria-label="show 17 new notifications"
+        aria-label="show new notifications"
         onClick={openNotificationMenu}
         color="inherit"
       >
-        <Badge badgeContent={17} color="secondary">
+        <Badge badgeContent={notificationCount} color="secondary">
           <NotificationsIcon />
         </Badge>
       </IconButton>

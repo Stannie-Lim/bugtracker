@@ -54,8 +54,7 @@ const seed = async () => {
     });
 
     const ticket2History = await TicketHistory.create({
-      priority: "NONE",
-      status: "RESOLVED",
+      priority: ticket2.priority,
       ticketId: ticket2.id,
       userId: user.id,
     });

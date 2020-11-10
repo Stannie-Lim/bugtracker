@@ -19,7 +19,8 @@ const TicketHistory = db.define("tickethistory", {
   },
   status: {
     type: ENUM,
-    values: ["OPEN", "IN_PROGRESS", "RESOLVED"],
+    values: ["OPEN", "IN_PROGRESS", "RESOLVED", "CREATED"],
+    defaultValue: "CREATED",
     allowNull: false,
     validate: {
       notEmpty: true,

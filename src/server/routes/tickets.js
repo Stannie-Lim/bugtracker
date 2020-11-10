@@ -71,7 +71,6 @@ router.post("/:projectId", isLoggedIn, async (req, res, next) => {
 
     await TicketHistory.create({
       priority: _ticket.priority,
-      status: "OPEN",
       ticketId: _ticket.id,
       userId: id,
     });

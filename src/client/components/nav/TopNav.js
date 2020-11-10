@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { removeJWT } from "../../utils/axios";
 
 // store
@@ -137,6 +137,8 @@ const TopNav = ({ open, setOpen }) => {
     </Menu>
   );
 
+  const userInvites = useSelector(({ user }) => user.invitee);
+  console.log(userInvites);
   const notificationMenu = (
     <Menu
       anchorEl={notificationAnchor}
@@ -147,7 +149,14 @@ const TopNav = ({ open, setOpen }) => {
       open={isNotificationOpen}
       onClose={closeNotificationMenu}
     >
-      <MenuItem onClick={goToNotifications}>Notifications</MenuItem>
+      {userInvites.map((invite) => {
+        return (
+          <MenuItem>
+            {invite.inviter.fullName} invites you to {invite.project.title}
+          </MenuItem>
+        );
+      })}
+      {/* <MenuItem onClick={goToNotifications}>Notifications</MenuItem> */}
     </Menu>
   );
 

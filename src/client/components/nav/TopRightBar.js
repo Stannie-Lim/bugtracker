@@ -12,9 +12,6 @@ const drawerWidth = 240;
 const TopRightBar = ({ openNotificationMenu, openAccountMenu }) => {
   const menuId = "primary-search-account-menu";
 
-  const userInvites = useSelector(({ user }) => user.invitee);
-  console.log(userInvites);
-
   const classes = useStyles();
   return (
     <div className={classes.sectionDesktop}>

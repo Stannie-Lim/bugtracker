@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 // materialui
 import Badge from "@material-ui/core/Badge";
@@ -10,6 +11,9 @@ import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 const drawerWidth = 240;
 const TopRightBar = ({ openNotificationMenu, openAccountMenu }) => {
   const menuId = "primary-search-account-menu";
+
+  const userInvites = useSelector(({ user }) => user.invitee);
+  console.log(userInvites);
 
   const classes = useStyles();
   return (

@@ -1,6 +1,12 @@
 const db = require("./db");
 
-const { User, Project, Ticket, TicketHistory } = require("./models/relations");
+const {
+  User,
+  Project,
+  Ticket,
+  TicketHistory,
+  ProjectInvite,
+} = require("./models/relations");
 
 module.exports = {
   db,
@@ -8,4 +14,5 @@ module.exports = {
   Project,
   Ticket,
   TicketHistory,
+  ProjectInvite,
 };

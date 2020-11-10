@@ -6,6 +6,7 @@ const {
   Project,
   Ticket,
   TicketHistory,
+  ProjectInvite,
 } = require("../src/server/db/models");
 const { generateJWT, checkPassword } = require("../src/server/common/auth");
 
@@ -22,6 +23,13 @@ const seed = async () => {
       password: hashedPassword,
     });
 
+    const user2 = await User.create({
+      firstName: "test2",
+      lastName: "test2",
+      email: "test2",
+      password: hashedPassword,
+    });
+
     const project = await Project.create({
       title: "Project 1",
       description: "Description for project 1",
@@ -30,6 +38,12 @@ const seed = async () => {
     const project2 = await Project.create({
       title: "Project 2",
       description: "Description for project 2",
+    });
+
+    const invite = await ProjectInvite.create({
+      inviterId: user.id,
+      inviteeId: user2.id,
+      projectId: project.id,
     });
 
     await project.setUsers(user.id);

@@ -6,7 +6,7 @@ const { generateJWT, checkPassword } = require("../common/auth");
 const { isLoggedIn } = require("../common/middleware");
 
 // models
-const { User } = require("../db/models");
+const { User, ProjectInvite } = require("../db/models");
 
 // root route is /api/auth
 
@@ -86,7 +86,13 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
       attributes: {
         exclude: ["password"],
       },
+      include: {
+        model: ProjectInvite,
+        as: "invitee",
+        foreignKey: "inviteeId",
+      },
     });
+
     res.send(user);
   } catch (err) {
     next(err);

@@ -1,6 +1,12 @@
 const bcrypt = require("bcrypt");
 
-const { db, User, Project, Ticket } = require("../src/server/db/models");
+const {
+  db,
+  User,
+  Project,
+  Ticket,
+  TicketHistory,
+} = require("../src/server/db/models");
 const { generateJWT, checkPassword } = require("../src/server/common/auth");
 
 const seed = async () => {
@@ -44,6 +50,13 @@ const seed = async () => {
       status: "IN_PROGRESS",
       info: "Ticket2 for project1",
       projectId: project.id,
+      userId: user.id,
+    });
+
+    const ticket2History = await TicketHistory.create({
+      priority: "NONE",
+      status: "RESOLVED",
+      ticketId: ticket2.id,
       userId: user.id,
     });
 

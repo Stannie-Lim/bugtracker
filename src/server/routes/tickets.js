@@ -4,7 +4,7 @@ module.exports = router;
 const { isLoggedIn } = require("../common/middleware");
 
 // models
-const { User, Project, Ticket } = require("../db/models");
+const { User, Project, Ticket, TicketHistory } = require("../db/models");
 
 // root route is /api/tickets
 
@@ -25,10 +25,24 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         .map((project) => project.id)
     );
     const allTickets = await Ticket.findAll({
-      include: User,
-      attributes: {
-        exclude: ["password"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: TicketHistory,
+          order: '"updatedAt" ASC',
+          include: {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        },
+      ],
     });
     const userAvailableTickets = allTickets.filter(({ projectId }) =>
       userAssignedProjects.has(projectId)
@@ -42,10 +56,11 @@ router.get("/", isLoggedIn, async (req, res, next) => {
 router.post("/:projectId", isLoggedIn, async (req, res, next) => {
   const { projectId } = req.params;
   const { info, type, priority } = req.body;
+  const { id } = req.user;
   try {
     const _type = type.toUpperCase().split(" ").join("_");
     const _priority = priority.toUpperCase();
-    const ticket = await Ticket.create({
+    const _ticket = await Ticket.create({
       type: _type,
       priority: _priority,
       info,
@@ -53,6 +68,35 @@ router.post("/:projectId", isLoggedIn, async (req, res, next) => {
       userId: null,
       status: "OPEN",
     });
+
+    await TicketHistory.create({
+      priority: _ticket.priority,
+      status: "OPEN",
+      ticketId: _ticket.id,
+      userId: id,
+    });
+
+    const ticket = await Ticket.findByPk(_ticket.id, {
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: TicketHistory,
+          order: '"updatedAt" ASC',
+          include: {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        },
+      ],
+    });
+
     res.status(201).json(ticket);
   } catch (err) {
     next(err);
@@ -62,16 +106,38 @@ router.post("/:projectId", isLoggedIn, async (req, res, next) => {
 router.put("/:ticketId/assign", isLoggedIn, async (req, res, next) => {
   const { ticketId } = req.params;
   const { userId } = req.body;
+  const { id } = req.user;
   try {
     const _ticket = await Ticket.findByPk(ticketId);
     const user = await User.findByPk(userId);
     await _ticket.update({ userId: user.id, status: "IN_PROGRESS" });
 
+    await TicketHistory.create({
+      priority: _ticket.priority,
+      status: "IN_PROGRESS",
+      ticketId: _ticket.id,
+      userId: id,
+    });
+
     const ticket = await Ticket.findByPk(ticketId, {
-      include: User,
-      attributes: {
-        exclude: ["password"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: TicketHistory,
+          order: '"updatedAt" ASC',
+          include: {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        },
+      ],
     });
     res.send(ticket);
   } catch (err) {
@@ -82,6 +148,7 @@ router.put("/:ticketId/assign", isLoggedIn, async (req, res, next) => {
 router.put("/:ticketId/unassign", isLoggedIn, async (req, res, next) => {
   const { ticketId } = req.params;
   const { userId } = req.body;
+  const { id } = req.user;
   try {
     const _ticket = await Ticket.findByPk(ticketId);
     const user = await User.findByPk(userId);
@@ -91,11 +158,33 @@ router.put("/:ticketId/unassign", isLoggedIn, async (req, res, next) => {
       });
 
     await _ticket.update({ userId: null, status: "OPEN" });
+
+    await TicketHistory.create({
+      priority: _ticket.priority,
+      status: "OPEN",
+      ticketId: _ticket.id,
+      userId: id,
+    });
+
     const ticket = await Ticket.findByPk(ticketId, {
-      include: User,
-      attributes: {
-        exclude: ["password"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: TicketHistory,
+          order: '"updatedAt" ASC',
+          include: {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        },
+      ],
     });
     res.send(ticket);
   } catch (err) {
@@ -106,6 +195,7 @@ router.put("/:ticketId/unassign", isLoggedIn, async (req, res, next) => {
 router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
   const { ticketId } = req.params;
   const { userId } = req.body;
+  const { id } = req.user;
   try {
     const _ticket = await Ticket.findByPk(ticketId);
     const user = await User.findByPk(userId);
@@ -119,11 +209,33 @@ router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
       status: "RESOLVED",
       priority: "NONE",
     });
+
+    await TicketHistory.create({
+      priority: "NONE",
+      status: "RESOLVED",
+      ticketId: _ticket.id,
+      userId: id,
+    });
+
     const ticket = await Ticket.findByPk(ticketId, {
-      include: User,
-      attributes: {
-        exclude: ["password"],
-      },
+      include: [
+        {
+          model: User,
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: TicketHistory,
+          order: '"updatedAt" ASC',
+          include: {
+            model: User,
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+        },
+      ],
     });
     res.send(ticket);
   } catch (err) {

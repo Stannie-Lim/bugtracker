@@ -1,5 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { capitalize } from "../../../utils/common";
 
 // store
 import {
@@ -55,11 +56,6 @@ const ProjectDetailTicketsRow = ({ row }) => {
     dispatch(resolveTicket(userId, row.id));
   };
 
-  const capitalize = (str) => {
-    str = str.split("-").join(" ").split("_").join(" ");
-    return `${str[0].toUpperCase()}${str.slice(1).toLowerCase()}`;
-  };
-
   return (
     <Fragment>
       <TableRow className={classes.root}>
@@ -106,9 +102,9 @@ const ProjectDetailTicketsRow = ({ row }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
-                    <TableCell align="right">Total price ($)</TableCell>
+                    <TableCell>Priority</TableCell>
+                    <TableCell>Status</TableCell>
+                    <TableCell>Modified by</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -116,6 +112,15 @@ const ProjectDetailTicketsRow = ({ row }) => {
                     <TableRow key={historyRow.date}>
                       <TableCell component="th" scope="row">
                         {historyRow.date}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {historyRow.priority}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {historyRow.status}
+                      </TableCell>
+                      <TableCell component="th" scope="row">
+                        {historyRow.modified_by}
                       </TableCell>
                     </TableRow>
                   ))}

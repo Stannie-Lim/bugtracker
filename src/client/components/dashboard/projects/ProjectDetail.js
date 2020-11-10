@@ -24,6 +24,8 @@ const ProjectDetail = ({ match }) => {
     sortByPriority(tickets.filter((ticket) => ticket.projectId === projectId))
   );
 
+  console.log(tickets);
+
   return (
     <div className="main">
       <ProjectDetailHeader project={project} />

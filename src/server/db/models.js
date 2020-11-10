@@ -1,10 +1,11 @@
 const db = require("./db");
 
-const { User, Project, Ticket } = require("./models/relations");
+const { User, Project, Ticket, TicketHistory } = require("./models/relations");
 
 module.exports = {
   db,
   User,
   Project,
   Ticket,
+  TicketHistory,
 };

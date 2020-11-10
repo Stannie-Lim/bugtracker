@@ -1,4 +1,6 @@
 import React from "react";
+import moment from "moment";
+import { capitalize } from "../../../utils/common";
 
 // components
 import Row from "./ProjectDetailTicketsRow";
@@ -61,7 +63,7 @@ const stableSort = (array, comparator) => {
 
 const ProjectDetailTicketsList = ({ tickets }) => {
   const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
+  const [orderBy, setOrderBy] = React.useState("priority");
   const [selected, setSelected] = React.useState([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(false);
@@ -87,17 +89,30 @@ const ProjectDetailTicketsList = ({ tickets }) => {
     setPage(0);
   };
 
-  const rows = tickets.map(({ info, priority, type, status, user, id }) => {
-    return {
-      info,
-      priority,
-      type,
-      status,
-      user,
-      id,
-      history: [{ date: "2020-01-05" }, { date: "2020-01-02" }],
-    };
-  });
+  const rows = tickets.map(
+    ({ info, priority, type, status, user, id, tickethistories }) => {
+      console.log(tickethistories, "hello");
+      const history = tickethistories.map(
+        ({ createdAt, priority, status, user }) => {
+          return {
+            date: moment(createdAt).format("llll"),
+            priority: capitalize(priority),
+            status: capitalize(status),
+            modified_by: user.fullName,
+          };
+        }
+      );
+      return {
+        info,
+        priority,
+        type,
+        status,
+        user,
+        id,
+        history,
+      };
+    }
+  );
   const emptyRows =
     rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
@@ -138,8 +153,8 @@ const ProjectDetailTicketsList = ({ tickets }) => {
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row) => (
-                  <Row key={row.id} row={row} />
+                .map((row, index) => (
+                  <Row key={index} row={row} />
                 ))}
               {emptyRows > 0 && (
                 <TableRow>

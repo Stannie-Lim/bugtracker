@@ -109,7 +109,7 @@ const ProjectDetailTicketsRow = ({ row }) => {
                 </TableHead>
                 <TableBody>
                   {row.history.map((historyRow) => (
-                    <TableRow key={historyRow.date}>
+                    <TableRow key={historyRow.id}>
                       <TableCell component="th" scope="row">
                         {historyRow.date}
                       </TableCell>

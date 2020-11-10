@@ -91,10 +91,10 @@ const ProjectDetailTicketsList = ({ tickets }) => {
 
   const rows = tickets.map(
     ({ info, priority, type, status, user, id, tickethistories }) => {
-      console.log(tickethistories, "hello");
       const history = tickethistories.map(
         ({ createdAt, priority, status, user }) => {
           return {
+            id: createdAt,
             date: moment(createdAt).format("llll"),
             priority: capitalize(priority),
             status: capitalize(status),
@@ -153,8 +153,8 @@ const ProjectDetailTicketsList = ({ tickets }) => {
             <TableBody>
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => (
-                  <Row key={index} row={row} />
+                .map((row) => (
+                  <Row key={row.id} row={row} />
                 ))}
               {emptyRows > 0 && (
                 <TableRow>

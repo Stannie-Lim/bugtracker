@@ -5,7 +5,6 @@ export const getProjects = () => {
   return async (dispatch) => {
     try {
       const projects = (await AxiosHttpRequest("GET", "/api/projects")).data;
-      console.log(projects);
       dispatch(_getProjects(projects));
     } catch (err) {
       console.log(err);

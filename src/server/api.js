@@ -35,6 +35,7 @@ router.use((req, res, next) => {
   }
 });
 
+router.use("/user", require("./routes/user"));
 router.use("/auth", require("./routes/auth"));
 router.use("/tickets", require("./routes/tickets"));
 router.use("/projects", require("./routes/projects"));

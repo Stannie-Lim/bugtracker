@@ -13,10 +13,3 @@ export const _createProject = (project) => {
     project,
   };
 };
-
-export const _inviteUserToProject = (project) => {
-  return {
-    type: INVITE_USER,
-    project,
-  };
-};

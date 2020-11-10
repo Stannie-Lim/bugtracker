@@ -4,15 +4,17 @@ import { createLogger } from "redux-logger";
 
 // user auth
 import user from "./user/reducer";
-import { login, register, setTicketCardOrder, signout } from "./user/thunks";
+import {
+  login,
+  register,
+  setTicketCardOrder,
+  signout,
+  inviteUserToProject,
+} from "./user/thunks";
 
 // projects
 import projects from "./projects/reducer";
-import {
-  getProjects,
-  createProject,
-  inviteUserToProject,
-} from "./projects/thunks";
+import { getProjects, createProject } from "./projects/thunks";
 
 // tickets
 import tickets from "./tickets/reducer";

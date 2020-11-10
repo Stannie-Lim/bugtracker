@@ -61,3 +61,18 @@ export const signout = () => {
     }
   };
 };
+
+export const inviteUserToProject = (userToInvite, projectId) => {
+  return async (dispatch) => {
+    try {
+      const user = (
+        await AxiosHttpRequest("POST", `/api/user/invite/${projectId}`, {
+          userToInvite,
+        })
+      ).data;
+      // dispatch(_inviteUserToProject(project));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};

@@ -88,13 +88,9 @@ const TopNav = ({ open, setOpen }) => {
     closeMobileMenu();
   };
 
-  const declineInvite = (inviterId, projectId, userId) => {
-    console.log("decline", inviterId, projectId, userId);
-  };
+  const declineInvite = (id) => {};
 
-  const acceptInvite = (inviterId, projectId, userId) => {
-    console.log("accept", inviterId, projectId, userId);
-  };
+  const acceptInvite = (id) => {};
 
   const userInvites = useSelector(({ user }) => user.invitee);
   const userId = useSelector(({ user }) => user.id);
@@ -169,14 +165,14 @@ const TopNav = ({ open, setOpen }) => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => declineInvite(inviter.id, project.id, userId)}
+                onClick={() => declineInvite(id)}
               >
                 Decline
               </Button>
               <Button
                 variant="contained"
                 color="primary"
-                onClick={() => acceptInvite(inviter.id, project.id, userId)}
+                onClick={() => acceptInvite(id)}
               >
                 Accept
               </Button>

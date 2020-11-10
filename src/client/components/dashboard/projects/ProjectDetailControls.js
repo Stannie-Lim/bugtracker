@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // store
 import { inviteUserToProject } from "../../../store/store";
@@ -17,10 +17,11 @@ const ProjectDetailControls = ({ projectId }) => {
   const [inviteUser, setInviteUser] = useState("");
   const [addUserVisibility, setAddUserVisibility] = useState(false);
 
+  const userId = useSelector(({ user }) => user.id);
   const dispatch = useDispatch();
   const sendUserInvite = (ev) => {
     ev.preventDefault();
-    dispatch(inviteUserToProject(inviteUser, projectId));
+    dispatch(inviteUserToProject(inviteUser, projectId, userId));
   };
 
   const classes = useStyles();

@@ -4,7 +4,7 @@ module.exports = router;
 const { isLoggedIn } = require("../common/middleware");
 
 // models
-const { User, Project, Ticket } = require("../db/models");
+const { User, Project, Ticket, ProjectInvite } = require("../db/models");
 
 // root route is /api/projects
 
@@ -93,6 +93,106 @@ router.put("/:projectId", isLoggedIn, async (req, res, next) => {
       ],
     });
     res.send(project);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/invitation/:id/decline", isLoggedIn, async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  try {
+    await ProjectInvite.destroy({ where: { id } });
+    const user = await User.findOne({
+      where: { id: userId },
+      attributes: {
+        exclude: ["password"],
+      },
+      include: {
+        model: ProjectInvite,
+        as: "invitee",
+        foreignKey: "inviteeId",
+        include: [
+          {
+            model: User,
+            as: "inviter",
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+          {
+            model: Project,
+          },
+        ],
+      },
+    });
+    res.send(user);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.post("/invitation/:id/accept", isLoggedIn, async (req, res, next) => {
+  const { id } = req.params;
+  const userId = req.user.id;
+  try {
+    const projectInvite = await ProjectInvite.findByPk(id);
+
+    const _project = await Project.findByPk(projectInvite.projectId, {
+      include: {
+        model: User,
+        as: "users",
+        attributes: {
+          exclude: ["password"],
+        },
+      },
+    });
+
+    await ProjectInvite.destroy({ where: { id } });
+    const user = await User.findOne({
+      where: { id: userId },
+      attributes: {
+        exclude: ["password"],
+      },
+      include: {
+        model: ProjectInvite,
+        as: "invitee",
+        foreignKey: "inviteeId",
+        include: [
+          {
+            model: User,
+            as: "inviter",
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+          {
+            model: Project,
+          },
+        ],
+      },
+    });
+    await _project.setUsers([..._project.users, user]);
+
+    const project = await Project.findByPk(projectInvite.projectId, {
+      include: [
+        {
+          model: User,
+          as: "users",
+          attributes: {
+            exclude: ["password"],
+          },
+        },
+        {
+          model: Ticket,
+        },
+      ],
+    });
+
+    res.send({
+      user,
+      project,
+    });
   } catch (err) {
     next(err);
   }

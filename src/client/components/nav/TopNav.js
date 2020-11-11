@@ -4,7 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { removeJWT } from "../../utils/axios";
 
 // store
-import { signout } from "../../store/store";
+import {
+  signout,
+  declineProjectInvite,
+  acceptProjectInvite,
+} from "../../store/store";
 
 // components
 import SearchBar from "./SearchBar";
@@ -88,12 +92,15 @@ const TopNav = ({ open, setOpen }) => {
     closeMobileMenu();
   };
 
-  const declineInvite = (id) => {};
+  const declineInvite = (id) => {
+    dispatch(declineProjectInvite(id));
+  };
 
-  const acceptInvite = (id) => {};
+  const acceptInvite = (id) => {
+    dispatch(acceptProjectInvite(id));
+  };
 
   const userInvites = useSelector(({ user }) => user.invitee);
-  const userId = useSelector(({ user }) => user.id);
 
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
@@ -155,31 +162,35 @@ const TopNav = ({ open, setOpen }) => {
       open={isNotificationOpen}
       onClose={closeNotificationMenu}
     >
-      {userInvites.map(({ inviter, project, id }) => {
-        return (
-          <MenuItem key={id} className="notification-item">
-            <div>
-              {inviter.fullName} invites you to {project.title}
-            </div>
-            <div>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => declineInvite(id)}
-              >
-                Decline
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={() => acceptInvite(id)}
-              >
-                Accept
-              </Button>
-            </div>
-          </MenuItem>
-        );
-      })}
+      {userInvites.length !== 0 ? (
+        userInvites.map(({ inviter, project, id }) => {
+          return (
+            <MenuItem key={id} className="notification-item">
+              <div>
+                {inviter.fullName} invites you to {project.title}
+              </div>
+              <div>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => declineInvite(id)}
+                >
+                  Decline
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={() => acceptInvite(id)}
+                >
+                  Accept
+                </Button>
+              </div>
+            </MenuItem>
+          );
+        })
+      ) : (
+        <MenuItem>No notifications</MenuItem>
+      )}
     </Menu>
   );
 

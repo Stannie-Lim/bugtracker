@@ -70,7 +70,20 @@ export const inviteUserToProject = (userToInvite, projectId) => {
           userToInvite,
         })
       ).data;
-      // dispatch(_inviteUserToProject(project));
+      dispatch(_login(user));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const declineProjectInvite = (id) => {
+  return async (dispatch) => {
+    try {
+      const user = (
+        await AxiosHttpRequest("POST", `/api/projects/invitation/${id}/decline`)
+      ).data;
+      dispatch(_login(user));
     } catch (err) {
       console.log(err);
     }

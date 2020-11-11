@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const { Op } = require("sequelize");
 const router = require("express").Router();
 module.exports = router;
 
@@ -105,7 +106,6 @@ router.get("/me", isLoggedIn, async (req, res, next) => {
         ],
       },
     });
-
     res.send(user);
   } catch (err) {
     next(err);

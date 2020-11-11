@@ -6,15 +6,20 @@ import { createLogger } from "redux-logger";
 import user from "./user/reducer";
 import {
   login,
+  signout,
   register,
   setTicketCardOrder,
-  signout,
   inviteUserToProject,
+  declineProjectInvite,
 } from "./user/thunks";
 
 // projects
 import projects from "./projects/reducer";
-import { getProjects, createProject } from "./projects/thunks";
+import {
+  getProjects,
+  createProject,
+  acceptProjectInvite,
+} from "./projects/thunks";
 
 // tickets
 import tickets from "./tickets/reducer";
@@ -22,8 +27,8 @@ import {
   getTickets,
   createTicket,
   assignTicket,
-  unassignTicket,
   resolveTicket,
+  unassignTicket,
 } from "./tickets/thunks";
 
 const reducer = combineReducers({
@@ -52,4 +57,6 @@ export {
   resolveTicket,
   setTicketCardOrder,
   inviteUserToProject,
+  declineProjectInvite,
+  acceptProjectInvite,
 };

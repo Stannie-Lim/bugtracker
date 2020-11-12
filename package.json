@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --mode=\"production\"",
-    "start": "npm run seed && node src/server.js",
+    "start": "npm run seed && node src/server && npm run build",
     "build:dev": "npm run build -- --watch --mode=development",
     "seed": "node scripts/seed.js",
     "prettify": "prettier --write \"**/*.{js,jsx,json,css,scss,md}\"",

@@ -10,15 +10,29 @@ import { register } from "../../store/store";
 
 const Register = () => {
   const [email, setEmail] = useState("");
+  const [image, setImage] = useState(null);
   const [lastName, setLastName] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
-
   const dispatch = useDispatch();
 
   const registerNewAccount = (ev) => {
     ev.preventDefault();
-    dispatch(register(firstName, lastName, email, password));
+
+    const formData = makeFormData();
+    console.log(formData);
+
+    // dispatch(register(firstName, lastName, email, password));
+  };
+
+  const makeFormData = () => {
+    const formData = new FormData();
+    formData.append("email", email);
+    formData.append("image", image);
+    formData.append("firstName", firstName);
+    formData.append("lastName", lastName);
+    formData.append("password", password);
+    return formData;
   };
 
   const isLoggedIn = useSelector(({ user }) => !!user.id);
@@ -53,6 +67,13 @@ const Register = () => {
           value={password}
           placeholder="Password"
         />
+        <input
+          type="file"
+          name="image"
+          onChange={({ target }) => setImage(target.files[0])}
+          required
+        />
+        {image && <img src={window.URL.createObjectURL(image)} />}
         <button>Register</button>
         <h1>
           Already have an account? <Link to="login">Click here</Link> to sign

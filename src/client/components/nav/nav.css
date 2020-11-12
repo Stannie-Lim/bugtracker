@@ -8,3 +8,8 @@
   display: flex;
   flex-direction: column;
 }
+
+.menu-item-link {
+  text-decoration: none;
+  color: black;
+}

@@ -17,6 +17,7 @@ import Register from "./components/auth/Register";
 // authed components
 import Nav from "./components/nav/Nav";
 import Home from "./components/dashboard/Home";
+import Profile from "./components/user/Profile";
 import YourTickets from "./components/dashboard/YourTickets";
 import Projects from "./components/dashboard/projects/Projects";
 import TicketsByType from "./components/dashboard/TicketsByType";
@@ -85,6 +86,7 @@ const App = () => {
           path="/home/your-assigned-tickets"
           component={YourTickets}
         />
+        <AuthenticatedRoute exact={true} path="/profile" component={Profile} />
       </HashRouter>
     </DndProvider>
   );

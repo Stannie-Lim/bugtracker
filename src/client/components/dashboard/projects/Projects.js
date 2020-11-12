@@ -52,7 +52,7 @@ const Projects = ({ history }) => {
 
   const classes = useStyles();
   return (
-    <div className="main">
+    <div className="table">
       <Link to="/add/projects" className="add-project-button">
         <Button variant="contained" classes={{ root: classes.button }}>
           Add Project

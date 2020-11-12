@@ -1,7 +1,8 @@
 import clsx from "clsx";
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { removeJWT } from "../../utils/axios";
+import { useDispatch, useSelector } from "react-redux";
 
 // store
 import {
@@ -67,7 +68,6 @@ const TopNav = ({ open, setOpen }) => {
   };
 
   const goToProfile = () => {
-    console.log("profile");
     closeAccountMenu();
     closeMobileMenu();
   };
@@ -146,7 +146,9 @@ const TopNav = ({ open, setOpen }) => {
       open={isMenuOpen}
       onClose={closeAccountMenu}
     >
-      <MenuItem onClick={goToProfile}>Profile</MenuItem>
+      <Link to="/profile" className="menu-item-link">
+        <MenuItem onClick={goToProfile}>Profile</MenuItem>
+      </Link>
       <MenuItem onClick={goToAccount}>My account</MenuItem>
       <MenuItem onClick={logout}>Log out</MenuItem>
     </Menu>

@@ -2,6 +2,13 @@ import clsx from "clsx";
 import { Link } from "react-router-dom";
 import React, { useState } from "react";
 
+// icons
+import PersonIcon from "@material-ui/icons/Person";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import AccountTreeIcon from "@material-ui/icons/AccountTree";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+
 // materialui
 import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
@@ -10,10 +17,6 @@ import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import IconButton from "@material-ui/core/IconButton";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import AccountTreeIcon from "@material-ui/icons/AccountTree";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { fade, makeStyles, useTheme } from "@material-ui/core/styles";
 
 const drawerWidth = 240;
@@ -48,7 +51,7 @@ const SideNav = ({ open, setOpen }) => {
           <Link to={`/${text.toLowerCase()}`} key={text} className="side-bar">
             <ListItem button>
               <ListItemIcon>
-                {index % 2 === 0 ? (
+                {index === 0 ? (
                   <HomeIcon style={{ color: "white" }} />
                 ) : (
                   <AccountTreeIcon style={{ color: "white" }} />
@@ -61,17 +64,19 @@ const SideNav = ({ open, setOpen }) => {
       </List>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? (
-                <HomeIcon style={{ color: "white" }} />
-              ) : (
-                <AccountTreeIcon style={{ color: "white" }} />
-              )}
-            </ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
+        {["Profile"].map((text, index) => (
+          <Link to={`/${text.toLowerCase()}`} key={text} className="side-bar">
+            <ListItem button key={text}>
+              <ListItemIcon>
+                {index === 0 ? (
+                  <PersonIcon style={{ color: "white" }} />
+                ) : (
+                  <AccountTreeIcon style={{ color: "white" }} />
+                )}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItem>
+          </Link>
         ))}
       </List>
     </Drawer>

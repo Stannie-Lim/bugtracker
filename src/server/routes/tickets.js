@@ -34,7 +34,6 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         },
         {
           model: TicketHistory,
-          order: '"updatedAt" ASC',
           include: {
             model: User,
             attributes: {
@@ -43,6 +42,7 @@ router.get("/", isLoggedIn, async (req, res, next) => {
           },
         },
       ],
+      order: [[{ model: TicketHistory }, "updatedAt", "DESC"]],
     });
     const userAvailableTickets = allTickets.filter(({ projectId }) =>
       userAssignedProjects.has(projectId)
@@ -94,6 +94,7 @@ router.post("/:projectId", isLoggedIn, async (req, res, next) => {
           },
         },
       ],
+      order: [[{ model: TicketHistory }, "updatedAt", "DESC"]],
     });
 
     res.status(201).json(ticket);
@@ -137,6 +138,7 @@ router.put("/:ticketId/assign", isLoggedIn, async (req, res, next) => {
           },
         },
       ],
+      order: [[{ model: TicketHistory }, "updatedAt", "DESC"]],
     });
 
     res.send(ticket);
@@ -185,6 +187,7 @@ router.put("/:ticketId/unassign", isLoggedIn, async (req, res, next) => {
           },
         },
       ],
+      order: [[{ model: TicketHistory }, "updatedAt", "DESC"]],
     });
     res.send(ticket);
   } catch (err) {
@@ -236,6 +239,7 @@ router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
           },
         },
       ],
+      order: [[{ model: TicketHistory }, "updatedAt", "DESC"]],
     });
     res.send(ticket);
   } catch (err) {

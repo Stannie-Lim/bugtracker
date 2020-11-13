@@ -25,7 +25,7 @@ const ProjectDetail = ({ match }) => {
   );
 
   return (
-    <div className="main">
+    <div className="project-detail">
       <ProjectDetailHeader project={project} />
       <ProjectDetailControls projectId={projectId} />
       <ProjectDetailTicketsList tickets={tickets} />

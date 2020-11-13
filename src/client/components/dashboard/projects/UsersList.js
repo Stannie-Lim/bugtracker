@@ -1,4 +1,6 @@
+import moment from "moment";
 import React, { useState } from "react";
+import { capitalize } from "../../../utils/common";
 
 // materialui
 import { makeStyles } from "@material-ui/core/styles";
@@ -57,8 +59,8 @@ const Row = ({ row }) => {
                 <TableHead>
                   <TableRow>
                     <TableCell>Date</TableCell>
-                    <TableCell>Customer</TableCell>
-                    <TableCell align="right">Amount</TableCell>
+                    <TableCell>Information</TableCell>
+                    <TableCell>Priority</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -67,8 +69,8 @@ const Row = ({ row }) => {
                       <TableCell component="th" scope="row">
                         {ticket.date}
                       </TableCell>
-                      <TableCell>{ticket.customerId}</TableCell>
-                      <TableCell align="right">{ticket.amount}</TableCell>
+                      <TableCell>{ticket.info}</TableCell>
+                      <TableCell>{ticket.priority}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -84,20 +86,23 @@ const Row = ({ row }) => {
 const UsersList = ({ project }) => {
   const rows = project.users.map(
     ({ id, fullName, email, imageUrl, tickets }) => {
-      const _tickets = tickets.filter(
-        (ticket) => ticket.projectId === project.id
-      );
-      console.log(_tickets);
+      const _tickets = tickets
+        .filter((ticket) => ticket.projectId === project.id)
+        .map(({ updatedAt, priority, info }) => {
+          return {
+            info,
+            date: moment(updatedAt).format("llll"),
+            priority: capitalize(priority),
+          };
+        });
+
       return {
         id,
         name: fullName,
         email: email,
         imageUrl,
         assignedTicketsCount: _tickets.length,
-        assignedTickets: [
-          { date: "2020-01-05", customerId: "11091700", amount: 3 },
-          { date: "2020-01-02", customerId: "Anonymous", amount: 1 },
-        ],
+        assignedTickets: _tickets,
       };
     }
   );

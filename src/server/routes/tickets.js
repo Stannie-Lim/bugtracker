@@ -138,6 +138,7 @@ router.put("/:ticketId/assign", isLoggedIn, async (req, res, next) => {
         },
       ],
     });
+
     res.send(ticket);
   } catch (err) {
     next(err);

@@ -1,6 +1,8 @@
 import { _getTickets, _createTicket, _editTicketUser } from "./actions";
 import { AxiosHttpRequest } from "../../utils/axios";
 
+import { _getProjects } from "../projects/actions";
+
 export const getTickets = () => {
   return async (dispatch) => {
     try {
@@ -38,6 +40,8 @@ export const assignTicket = (userId, ticketId) => {
           userId,
         })
       ).data;
+      const projects = (await AxiosHttpRequest("GET", "/api/projects")).data;
+      dispatch(_getProjects(projects));
       dispatch(_editTicketUser(ticket));
     } catch (err) {
       console.log(err);
@@ -53,6 +57,8 @@ export const unassignTicket = (userId, ticketId) => {
           userId,
         })
       ).data;
+      const projects = (await AxiosHttpRequest("GET", "/api/projects")).data;
+      dispatch(_getProjects(projects));
       dispatch(_editTicketUser(ticket));
     } catch (err) {
       console.log(err);
@@ -68,6 +74,8 @@ export const resolveTicket = (userId, ticketId) => {
           userId,
         })
       ).data;
+      const projects = (await AxiosHttpRequest("GET", "/api/projects")).data;
+      dispatch(_getProjects(projects));
       dispatch(_editTicketUser(ticket));
     } catch (err) {
       console.log(err);

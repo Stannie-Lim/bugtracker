@@ -37,26 +37,28 @@ const ProjectDetailControls = ({ projectId }) => {
           </Button>
         </Link>
 
-        <Button
-          variant="contained"
-          onClick={() => setAddUserVisibility(!addUserVisibility)}
-          classes={{ root: classes.button }}
-          className="add-ticket-button"
-        >
-          Invite another user
-        </Button>
+        <div className="add-another-user">
+          <Button
+            variant="contained"
+            onClick={() => setAddUserVisibility(!addUserVisibility)}
+            classes={{ root: classes.button }}
+            className="add-ticket-button"
+          >
+            Invite another user
+          </Button>
+          <form
+            className={addUserVisibility ? "" : "hide"}
+            onSubmit={sendUserInvite}
+          >
+            <input
+              type="text"
+              onChange={({ target }) => setInviteUser(target.value)}
+              value={inviteUser}
+            />
+            <button>Invite user</button>
+          </form>
+        </div>
       </div>
-      <form
-        className={addUserVisibility ? "" : "hide"}
-        onSubmit={sendUserInvite}
-      >
-        <input
-          type="text"
-          onChange={({ target }) => setInviteUser(target.value)}
-          value={inviteUser}
-        />
-        <button>Invite user</button>
-      </form>
     </div>
   );
 };

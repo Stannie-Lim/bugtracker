@@ -11,6 +11,7 @@ import Box from "@material-ui/core/Box";
 import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
 import Switch from "@material-ui/core/Switch";
+import Divider from "@material-ui/core/Divider";
 import Collapse from "@material-ui/core/Collapse";
 import Checkbox from "@material-ui/core/Checkbox";
 import TableRow from "@material-ui/core/TableRow";
@@ -174,6 +175,8 @@ const ProjectDetailTicketsList = ({ tickets }) => {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+
+      <Divider />
     </div>
   );
 };

@@ -16,6 +16,9 @@ router.get("/", isLoggedIn, async (req, res, next) => {
         {
           model: User,
           as: "users",
+          include: {
+            model: Ticket,
+          },
           attributes: {
             exclude: ["password"],
           },

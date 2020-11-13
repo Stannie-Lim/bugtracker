@@ -11,3 +11,8 @@
 .controls-div {
   width: 85%;
 }
+
+.add-another-user {
+  display: flex;
+  flex-direction: column;
+}

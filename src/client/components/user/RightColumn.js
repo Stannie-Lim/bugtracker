@@ -14,18 +14,14 @@ const RightColumn = ({
 }) => {
   return (
     <div className="column">
-      {!editNameVisibility ? (
-        <Typography
-          variant="h6"
-          className="right-column-text"
-          gutterBottom
-          onClick={() => setEditNameVisibility(!editNameVisibility)}
-        >
-          Edit
-        </Typography>
-      ) : (
-        ""
-      )}
+      <Typography
+        variant="h6"
+        className="right-column-text"
+        gutterBottom
+        onClick={() => setEditNameVisibility(!editNameVisibility)}
+      >
+        Edit
+      </Typography>
       <Typography
         variant="h6"
         className="right-column-text"

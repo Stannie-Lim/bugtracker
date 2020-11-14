@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 // components
@@ -13,11 +13,31 @@ import TextField from "@material-ui/core/TextField";
 import "./EditProfile.css";
 
 const EditProfile = ({ user }) => {
+  const [editNameVisibility, setEditNameVisibility] = useState(false);
+  const [editEmailVisibility, setEditEmailVisibility] = useState(false);
+  const [editPasswordVisibility, setEditPasswordVisibility] = useState(false);
+
   return (
     <div className="edit-profile">
       <LeftColumn user={user} />
-      <MiddleColumn user={user} />
-      <RightColumn user={user} />
+      <MiddleColumn
+        user={user}
+        setEditNameVisibility={setEditNameVisibility}
+        setEditEmailVisibility={setEditEmailVisibility}
+        setEditPasswordVisibility={setEditPasswordVisibility}
+        editNameVisibility={editNameVisibility}
+        editEmailVisibility={editEmailVisibility}
+        editPasswordVisibility={editPasswordVisibility}
+      />
+      <RightColumn
+        user={user}
+        setEditNameVisibility={setEditNameVisibility}
+        setEditEmailVisibility={setEditEmailVisibility}
+        setEditPasswordVisibility={setEditPasswordVisibility}
+        editNameVisibility={editNameVisibility}
+        editEmailVisibility={editEmailVisibility}
+        editPasswordVisibility={editPasswordVisibility}
+      />
       {/* <TextField id="outlined-basic" label="Outlined" variant="outlined" /> */}
     </div>
   );

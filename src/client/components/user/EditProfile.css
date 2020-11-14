@@ -5,3 +5,15 @@
 
 .column {
 }
+
+.middle-column-text {
+  color: grey;
+}
+
+.right-column-text {
+  color: dodgerblue;
+}
+
+.right-column-text:hover {
+  cursor: pointer;
+}

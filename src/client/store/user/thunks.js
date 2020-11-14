@@ -1,6 +1,9 @@
 import { _login, _register } from "./actions";
 import { AxiosHttpRequest, setJWT, getMe } from "../../utils/axios";
 
+// error handling
+import { _setError } from "../error/actions";
+
 export const login = (email, password, signinToken = null) => {
   return async (dispatch) => {
     try {
@@ -86,6 +89,51 @@ export const declineProjectInvite = (id) => {
       dispatch(_login(user));
     } catch (err) {
       console.log(err);
+    }
+  };
+};
+
+export const changeName = (firstName, lastName) => {
+  return async (dispatch) => {
+    try {
+      const user = (
+        await AxiosHttpRequest("PUT", `/api/user/edit/name`, {
+          firstName,
+          lastName,
+        })
+      ).data;
+      dispatch(_login(user));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const changeEmail = (email) => {
+  return async (dispatch) => {
+    try {
+      const user = (
+        await AxiosHttpRequest("PUT", `/api/user/edit/email`, { email })
+      ).data;
+      dispatch(_login(user));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const changePassword = (oldPassword, newPassword) => {
+  return async (dispatch) => {
+    try {
+      const user = (
+        await AxiosHttpRequest("PUT", `/api/user/edit/password`, {
+          oldPassword,
+          newPassword,
+        })
+      ).data;
+      dispatch(_login(user));
+    } catch (err) {
+      dispatch(_setError("Incorrect password"));
     }
   };
 };

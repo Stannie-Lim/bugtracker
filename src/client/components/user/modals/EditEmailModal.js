@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // bootstrap
 import Modal from "react-bootstrap/Modal";
@@ -10,6 +11,9 @@ import TextField from "@material-ui/core/TextField";
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// store
+import { changeEmail } from "../../../store/store";
+
 const EditEmailModal = ({
   user,
   editEmailVisibility,
@@ -19,9 +23,10 @@ const EditEmailModal = ({
 
   const handleClose = () => setEditEmailVisibility(false);
 
+  const dispatch = useDispatch();
   const submit = () => {
     handleClose();
-    console.log(email);
+    dispatch(changeEmail(email));
   };
 
   return (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // bootstrap
 import Modal from "react-bootstrap/Modal";
@@ -10,6 +11,9 @@ import TextField from "@material-ui/core/TextField";
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// store
+import { changePassword } from "../../../store/store";
+
 const EditPasswordModal = ({
   user,
   editPasswordVisibility,
@@ -20,9 +24,10 @@ const EditPasswordModal = ({
 
   const handleClose = () => setEditPasswordVisibility(false);
 
+  const dispatch = useDispatch();
   const submit = () => {
     handleClose();
-    console.log(oldPassword, newPassword);
+    dispatch(changePassword(oldPassword, newPassword));
   };
 
   return (

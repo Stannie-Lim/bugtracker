@@ -8,6 +8,9 @@ import {
   login,
   signout,
   register,
+  changeName,
+  changeEmail,
+  changePassword,
   setTicketCardOrder,
   inviteUserToProject,
   declineProjectInvite,
@@ -31,8 +34,12 @@ import {
   unassignTicket,
 } from "./tickets/thunks";
 
+// error
+import error from "./error/reducer";
+
 const reducer = combineReducers({
   user,
+  error,
   projects,
   tickets,
 });
@@ -48,11 +55,14 @@ export {
   login,
   signout,
   register,
-  getProjects,
   getTickets,
-  createProject,
+  changeName,
+  changeEmail,
+  getProjects,
   createTicket,
   assignTicket,
+  createProject,
+  changePassword,
   unassignTicket,
   resolveTicket,
   setTicketCardOrder,

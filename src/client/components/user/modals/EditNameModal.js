@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // bootstrap
 import Modal from "react-bootstrap/Modal";
@@ -10,15 +11,19 @@ import TextField from "@material-ui/core/TextField";
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// store
+import { changeName } from "../../../store/store";
+
 const EditNameModal = ({ user, editNameVisibility, setEditNameVisibility }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
 
   const handleClose = () => setEditNameVisibility(false);
 
+  const dispatch = useDispatch();
   const submit = () => {
     handleClose();
-    console.log(firstName, lastName);
+    dispatch(changeName(firstName.trim(), lastName.trim()));
   };
 
   return (

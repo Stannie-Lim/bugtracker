@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { ItemTypes } from "../ItemTypes";
 
 // sort
 import sortByPriority from "../sorts/sortByPriority";
@@ -17,6 +18,7 @@ import Typography from "@material-ui/core/Typography";
 
 const TicketsByPriority = () => {
   const tickets = useSelector(({ tickets }) => sortByPriority(tickets));
+
   return (
     <div className="main">
       <Back />

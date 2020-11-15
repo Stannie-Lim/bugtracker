@@ -116,9 +116,31 @@ router.post("/cardorder", isLoggedIn, async (req, res, next) => {
   const { order } = req.body;
   const { id } = req.user;
   try {
-    const user = await User.findByPk(id);
-    await user.update({ cardOrder: order });
-    res.sendStatus(204);
+    const _user = await User.findByPk(id);
+    await _user.update({ cardOrder: order });
+    const user = await User.findByPk(id, {
+      attributes: {
+        exclude: ["password"],
+      },
+      include: {
+        model: ProjectInvite,
+        as: "invitee",
+        foreignKey: "inviteeId",
+        include: [
+          {
+            model: User,
+            as: "inviter",
+            attributes: {
+              exclude: ["password"],
+            },
+          },
+          {
+            model: Project,
+          },
+        ],
+      },
+    });
+    res.send(user);
   } catch (err) {
     next(err);
   }

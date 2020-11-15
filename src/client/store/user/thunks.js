@@ -45,9 +45,12 @@ export const register = (firstName, lastName, email, password) => {
 };
 
 export const setTicketCardOrder = (order) => {
-  return async () => {
+  return async (dispatch) => {
     try {
-      await AxiosHttpRequest("POST", `/api/auth/cardorder`, { order });
+      const user = (
+        await AxiosHttpRequest("POST", `/api/auth/cardorder`, { order })
+      ).data;
+      dispatch(_login(user));
     } catch (err) {
       console.log(err);
     }

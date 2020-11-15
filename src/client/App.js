@@ -24,7 +24,7 @@ import TicketsByType from "./components/dashboard/TicketsByType";
 import AddTicket from "./components/dashboard/projects/AddTicket";
 import AddProject from "./components/dashboard/projects/AddProject";
 import TicketsByStatus from "./components/dashboard/TicketsByStatus";
-import TicketsByPriority from "./components/dashboard/TicketsByPriority";
+import TicketsByPriority from "./components/dashboard/priorityTickets/TicketsByPriority";
 import ProjectDetail from "./components/dashboard/projects/ProjectDetail";
 
 // store

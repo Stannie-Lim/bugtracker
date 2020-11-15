@@ -1,0 +1,17 @@
+.columns {
+  display: flex;
+  justify-content: space-around;
+}
+
+.priority-column {
+  border: 1px solid black;
+  height: 100vh;
+  overflow: auto;
+}
+
+.priority-ticket-card {
+  border: 1px solid black;
+  padding: 1rem;
+  margin: 0.5rem;
+  text-align: center;
+}

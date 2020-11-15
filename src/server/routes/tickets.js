@@ -27,6 +27,9 @@ router.get("/", isLoggedIn, async (req, res, next) => {
     const allTickets = await Ticket.findAll({
       include: [
         {
+          model: Project,
+        },
+        {
           model: User,
           attributes: {
             exclude: ["password"],
@@ -78,6 +81,9 @@ router.post("/:projectId", isLoggedIn, async (req, res, next) => {
     const ticket = await Ticket.findByPk(_ticket.id, {
       include: [
         {
+          model: Project,
+        },
+        {
           model: User,
           attributes: {
             exclude: ["password"],
@@ -121,6 +127,9 @@ router.put("/:ticketId/assign", isLoggedIn, async (req, res, next) => {
 
     const ticket = await Ticket.findByPk(ticketId, {
       include: [
+        {
+          model: Project,
+        },
         {
           model: User,
           attributes: {
@@ -170,6 +179,9 @@ router.put("/:ticketId/unassign", isLoggedIn, async (req, res, next) => {
 
     const ticket = await Ticket.findByPk(ticketId, {
       include: [
+        {
+          model: Project,
+        },
         {
           model: User,
           attributes: {
@@ -222,6 +234,9 @@ router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
 
     const ticket = await Ticket.findByPk(ticketId, {
       include: [
+        {
+          model: Project,
+        },
         {
           model: User,
           attributes: {

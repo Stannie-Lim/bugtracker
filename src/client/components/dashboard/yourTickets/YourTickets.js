@@ -7,9 +7,6 @@ import { useSelector, useDispatch } from "react-redux";
 // components
 import TicketRow from "./TicketRow";
 
-// store
-import { unassignTicket, resolveTicket } from "../../../store/store";
-
 // materialui
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -17,6 +14,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
+import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import TableContainer from "@material-ui/core/TableContainer";
 
@@ -41,26 +39,16 @@ const YourTickets = () => {
       );
       return {
         info,
-        priority,
-        type,
+        priority: capitalize(priority),
+        type: capitalize(type),
         project,
-        status,
+        status: capitalize(status),
         user,
         id,
         history,
       };
     }
   );
-
-  const dispatch = useDispatch();
-
-  const unassignYourself = (ticketId) => {
-    dispatch(unassignTicket(user.id, ticketId));
-  };
-
-  const resolve = (ticketId) => {
-    dispatch(resolveTicket(user.id, ticketId));
-  };
 
   const classes = useStyles();
   return (
@@ -72,7 +60,9 @@ const YourTickets = () => {
             <TableHead>
               <TableRow>
                 <TableCell align="center" colSpan={7}>
-                  Your Tickets
+                  <Typography variant="h2" gutterBottom>
+                    Your Tickets
+                  </Typography>
                 </TableCell>
               </TableRow>
 

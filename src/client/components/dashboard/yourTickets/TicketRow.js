@@ -1,4 +1,8 @@
+import { useSelector, useDispatch } from "react-redux";
 import React, { useState, Fragment } from "react";
+
+// store
+import { unassignTicket, resolveTicket } from "../../../store/store";
 
 // materialui
 import Box from "@material-ui/core/Box";
@@ -18,6 +22,17 @@ import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const TicketRow = ({ ticket }) => {
   const [open, setOpen] = useState(false);
+
+  const user = useSelector(({ user }) => user);
+  const dispatch = useDispatch();
+  const unassignYourself = (ticketId) => {
+    dispatch(unassignTicket(user.id, ticketId));
+  };
+
+  const resolve = (ticketId) => {
+    dispatch(resolveTicket(user.id, ticketId));
+  };
+
   return (
     <Fragment>
       <TableRow key={ticket.id}>

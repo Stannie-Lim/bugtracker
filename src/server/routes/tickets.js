@@ -214,6 +214,7 @@ router.put("/:ticketId/resolve", isLoggedIn, async (req, res, next) => {
   try {
     const _ticket = await Ticket.findByPk(ticketId);
     const user = await User.findByPk(userId);
+    await user.update({ resolvedTickets: user.resolvedTickets + 1 });
     if (_ticket.userId !== user.id)
       res
         .status(403)

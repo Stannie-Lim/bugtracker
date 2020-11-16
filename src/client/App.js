@@ -18,7 +18,7 @@ import Register from "./components/auth/Register";
 import Nav from "./components/nav/Nav";
 import Home from "./components/dashboard/Home";
 import Profile from "./components/user/Profile";
-import YourTickets from "./components/dashboard/YourTickets";
+import YourTickets from "./components/dashboard/yourTickets/YourTickets";
 import Projects from "./components/dashboard/projects/Projects";
 import TicketsByType from "./components/dashboard/TicketsByType";
 import AddTicket from "./components/dashboard/projects/AddTicket";

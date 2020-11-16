@@ -55,6 +55,10 @@ const User = db.define("user", {
     type: Sequelize.ARRAY(INTEGER),
     defaultValue: [2, 1, 3, 4],
   },
+  resolvedTickets: {
+    type: INTEGER,
+    defaultValue: 0,
+  },
 });
 
 module.exports = User;

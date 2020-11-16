@@ -1,7 +1,11 @@
 import { _getTickets, _createTicket, _editTicketUser } from "./actions";
-import { AxiosHttpRequest } from "../../utils/axios";
+import { AxiosHttpRequest, getMe } from "../../utils/axios";
 
+// projects
 import { _getProjects } from "../projects/actions";
+
+// user
+import { _login } from "../user/actions";
 
 export const getTickets = () => {
   return async (dispatch) => {
@@ -75,8 +79,10 @@ export const resolveTicket = (userId, ticketId) => {
         })
       ).data;
       const projects = (await AxiosHttpRequest("GET", "/api/projects")).data;
+      const user = await getMe();
       dispatch(_getProjects(projects));
       dispatch(_editTicketUser(ticket));
+      dispatch(_login(user));
     } catch (err) {
       console.log(err);
     }

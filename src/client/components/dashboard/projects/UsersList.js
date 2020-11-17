@@ -86,15 +86,17 @@ const Row = ({ row }) => {
 const UsersList = ({ project }) => {
   const rows = project.users.map(
     ({ id, fullName, email, imageUrl, tickets }) => {
-      const _tickets = tickets
-        .filter((ticket) => ticket.projectId === project.id)
-        .map(({ updatedAt, priority, info }) => {
-          return {
-            info,
-            date: moment(updatedAt).format("llll"),
-            priority: capitalize(priority),
-          };
-        });
+      let _tickets = tickets;
+      if (tickets.length)
+        _tickets = tickets
+          .filter((ticket) => ticket.projectId === project.id)
+          .map(({ updatedAt, priority, info }) => {
+            return {
+              info,
+              date: moment(updatedAt).format("llll"),
+              priority: capitalize(priority),
+            };
+          });
 
       return {
         id,

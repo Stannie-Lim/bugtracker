@@ -35,7 +35,9 @@ const Projects = ({ history }) => {
   ];
 
   const rows = projects.map(({ id, title, description, users, tickets }) => {
-    tickets = tickets.filter((ticket) => ticket.status !== "RESOLVED");
+    if (tickets.length)
+      tickets = tickets.filter((ticket) => ticket.status !== "RESOLVED");
+
     return {
       id,
       Title: title,

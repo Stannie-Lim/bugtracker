@@ -12,7 +12,6 @@ import PriorityGraph from "./graphs/PriorityGraph";
 
 // css
 import "./ticketInfoCard.css";
-import { Typography } from "@material-ui/core";
 
 const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
   const [hover, setHover] = useState(false);
@@ -43,7 +42,9 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
     },
   });
 
-  const classes = hover ? "scale-up-center" : "scale-down-center";
+  const classes = hover
+    ? "ticket-info-card scale-up-center"
+    : "ticket-info-card scale-down-center";
 
   const tickets = useSelector(({ tickets }) => tickets);
   const userId = useSelector(({ user }) => user.id);
@@ -89,21 +90,18 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
   };
 
   return (
-    <div className="ticket-info-card">
-      <Link
-        to={`/home/${text.toLowerCase().split(" ").join("-")}`}
-        className={classes}
-        onMouseOver={() => setHover(true)}
-        onMouseLeave={() => setHover(false)}
-        ref={(node) => drag(drop(node))}
-      >
-        {displayedData()}
-
-        <div className="tag">
-          <Typography variant="h3">{text}</Typography>
-        </div>
-      </Link>
-    </div>
+    <Link
+      to={`/home/${text.toLowerCase().split(" ").join("-")}`}
+      className={classes}
+      onMouseOver={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
+      ref={(node) => drag(drop(node))}
+    >
+      {displayedData()}
+      <div className="tag">
+        <h1>{text}</h1>
+      </div>
+    </Link>
   );
 };
 

@@ -19,10 +19,10 @@ const Register = () => {
   const registerNewAccount = (ev) => {
     ev.preventDefault();
 
-    const formData = makeFormData();
-    console.log(formData);
+    // const formData = makeFormData();
+    // console.log(formData);
 
-    // dispatch(register(firstName, lastName, email, password));
+    dispatch(register(firstName, lastName, email, password));
   };
 
   const makeFormData = () => {
@@ -67,12 +67,12 @@ const Register = () => {
           value={password}
           placeholder="Password"
         />
-        <input
+        {/* <input
           type="file"
           name="image"
           onChange={({ target }) => setImage(target.files[0])}
           required
-        />
+        /> */}
         {image && <img src={window.URL.createObjectURL(image)} />}
         <button>Register</button>
         <h1>

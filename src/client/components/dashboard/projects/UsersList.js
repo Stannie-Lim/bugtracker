@@ -64,15 +64,16 @@ const Row = ({ row }) => {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {row.assignedTickets.map((ticket) => (
-                    <TableRow key={ticket.date}>
-                      <TableCell component="th" scope="row">
-                        {ticket.date}
-                      </TableCell>
-                      <TableCell>{ticket.info}</TableCell>
-                      <TableCell>{ticket.priority}</TableCell>
-                    </TableRow>
-                  ))}
+                  {row.assignedTickets &&
+                    row.assignedTickets.map((ticket) => (
+                      <TableRow key={ticket.date}>
+                        <TableCell component="th" scope="row">
+                          {ticket.date}
+                        </TableCell>
+                        <TableCell>{ticket.info}</TableCell>
+                        <TableCell>{ticket.priority}</TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </Box>
@@ -87,7 +88,7 @@ const UsersList = ({ project }) => {
   const rows = project.users.map(
     ({ id, fullName, email, imageUrl, tickets }) => {
       let _tickets = tickets;
-      if (tickets.length)
+      if (tickets) {
         _tickets = tickets
           .filter((ticket) => ticket.projectId === project.id)
           .map(({ updatedAt, priority, info }) => {
@@ -97,13 +98,14 @@ const UsersList = ({ project }) => {
               priority: capitalize(priority),
             };
           });
+      }
 
       return {
         id,
         name: fullName,
         email: email,
         imageUrl,
-        assignedTicketsCount: _tickets.length,
+        assignedTicketsCount: _tickets ? _tickets.length : 0,
         assignedTickets: _tickets,
       };
     }
@@ -122,9 +124,7 @@ const UsersList = ({ project }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <Row key={row.name} row={row} />
-            ))}
+            {rows && rows.map((row) => <Row key={row.name} row={row} />)}
           </TableBody>
         </Table>
       </TableContainer>

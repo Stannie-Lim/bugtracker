@@ -13,6 +13,9 @@ import PriorityGraph from "./graphs/PriorityGraph";
 // css
 import "./ticketInfoCard.css";
 
+// materialui
+import Typography from "@material-ui/core/Typography";
+
 const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
   const [hover, setHover] = useState(false);
 
@@ -46,48 +49,18 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
     ? "ticket-info-card scale-up-center"
     : "ticket-info-card scale-down-center";
 
-  const tickets = useSelector(({ tickets }) => tickets);
-  const userId = useSelector(({ user }) => user.id);
-  const displayedData = () => {
-    switch (type) {
-      case "PRIORITY":
-        return <PriorityGraph />;
-      case "TYPE":
-        const categorizedByType = {
-          BUG: 0,
-          ERROR: 0,
-          FEATURE_REQUEST: 0,
-          "TO-DO": 0,
-        };
-
-        for (const ticket of tickets) {
-          categorizedByType[ticket.type]++;
-        }
-
-        return <TypeGraph />;
-      case "STATUS":
-        const categorizedByStatus = {
-          OPEN: 0,
-          IN_PROGRESS: 0,
-          RESOLVED: 0,
-        };
-
-        for (const ticket of tickets) {
-          categorizedByStatus[ticket.status]++;
-        }
-
-        return <StatusGraph />;
-      case "YOURS":
-        const yourTickets = [];
-        for (const ticket of tickets) {
-          if (ticket.userId === userId) yourTickets.push(ticket);
-        }
-
-        return <YourGraph />;
-      default:
-        return <h1>Not a valid type</h1>;
-    }
-  };
+  const displayedData =
+    type === "PRIORITY" ? (
+      <PriorityGraph />
+    ) : type === "TYPE" ? (
+      <TypeGraph />
+    ) : type === "STATUS" ? (
+      <StatusGraph />
+    ) : type === "YOURS" ? (
+      <YourGraph />
+    ) : (
+      <h1>Not a valid type</h1>
+    );
 
   return (
     <Link
@@ -97,9 +70,9 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
       onMouseLeave={() => setHover(false)}
       ref={(node) => drag(drop(node))}
     >
-      {displayedData()}
+      {displayedData}
       <div className="tag">
-        <h1>{text}</h1>
+        <Typography variant="h2">{text}</Typography>
       </div>
     </Link>
   );

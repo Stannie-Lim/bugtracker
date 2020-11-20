@@ -1,4 +1,5 @@
 import React from "react";
+import { capitalize } from "../../../utils/common";
 import { useSelector, useDispatch } from "react-redux";
 
 // store
@@ -42,15 +43,15 @@ const PriorityTicketCard = ({ ticket }) => {
       <Typography variant="h4" gutterBottom>
         {ticket.project.title}
       </Typography>
-      <Typography variant="h5" gutterBottom>
-        {ticket.info}
-      </Typography>
       <Divider />
-      <Typography variant="h6" gutterBottom>
-        Status: {ticket.status}
+      <Typography variant="h5" gutterBottom>
+        Information: {ticket.info}
       </Typography>
       <Typography variant="h6" gutterBottom>
-        Type: {ticket.type}
+        Status: {capitalize(ticket.status)}
+      </Typography>
+      <Typography variant="h6" gutterBottom>
+        Type: {capitalize(ticket.type)}
       </Typography>
       {ticket.status === "RESOLVED" ? (
         ""

@@ -24,7 +24,7 @@ const TicketsByPriority = () => {
       <Back />
       <div className="columns">
         <div className="priority-column">
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             No Priority
           </Typography>
           {tickets &&
@@ -35,7 +35,7 @@ const TicketsByPriority = () => {
               ))}
         </div>
         <div className="priority-column">
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Low Priority
           </Typography>
           {tickets &&
@@ -46,7 +46,7 @@ const TicketsByPriority = () => {
               ))}
         </div>
         <div className="priority-column">
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Medium Priority
           </Typography>
           {tickets &&
@@ -57,7 +57,7 @@ const TicketsByPriority = () => {
               ))}
         </div>
         <div className="priority-column">
-          <Typography variant="h2" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             High Priority
           </Typography>
           {tickets &&

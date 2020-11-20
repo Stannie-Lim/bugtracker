@@ -12,8 +12,13 @@ import {
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
-import { green, purple } from "@material-ui/core/colors";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { purple } from "@material-ui/core/colors";
+import {
+  createMuiTheme,
+  withStyles,
+  makeStyles,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 
 const PriorityTicketCard = ({ ticket }) => {
   const ticketUser = ticket.user;
@@ -65,11 +70,9 @@ const PriorityTicketCard = ({ ticket }) => {
             </Button>
           </div>
           <div className="user-ticket-button">
-            <ThemeProvider theme={theme}>
-              <Button variant="contained" color="primary" onClick={resolve}>
-                Resolve ticket
-              </Button>
-            </ThemeProvider>
+            <ColorButton variant="contained" color="primary" onClick={resolve}>
+              Resolve ticket
+            </ColorButton>
           </div>
         </div>
       ) : (
@@ -81,8 +84,12 @@ const PriorityTicketCard = ({ ticket }) => {
 
 export default PriorityTicketCard;
 
-const theme = createMuiTheme({
-  palette: {
-    primary: green,
+const ColorButton = withStyles((theme) => ({
+  root: {
+    color: theme.palette.getContrastText(purple[500]),
+    backgroundColor: purple[500],
+    "&:hover": {
+      backgroundColor: purple[700],
+    },
   },
-});
+}))(Button);

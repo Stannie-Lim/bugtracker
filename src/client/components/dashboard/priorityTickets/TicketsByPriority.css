@@ -1,9 +1,10 @@
 .columns {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
 }
 
 .priority-column {
+  margin: 2rem;
   border-radius: 5px;
   height: 80vh;
   padding: 1rem;

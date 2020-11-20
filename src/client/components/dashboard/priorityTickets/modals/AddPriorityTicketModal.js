@@ -9,6 +9,7 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 // materialui
+import Alert from "@material-ui/lab/Alert";
 import Radio from "@material-ui/core/Radio";
 import Select from "@material-ui/core/Select";
 import MenuItem from "@material-ui/core/MenuItem";
@@ -25,13 +26,19 @@ import FormControlLabel from "@material-ui/core/FormControlLabel";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const AddPriorityTicketModal = ({
+  priority,
   modalVisible,
   setModalVisible,
-  priority,
 }) => {
   const [info, setInfo] = useState("");
   const [type, setType] = useState("BUG");
+  const [error, setError] = useState("");
   const [projectId, setProjectId] = useState("");
+
+  const fillOutFields = () => {
+    setError("Fill out all required fields");
+    setTimeout(() => setError(""), 6000);
+  };
 
   const classes = useStyles();
 
@@ -59,8 +66,18 @@ const AddPriorityTicketModal = ({
   };
 
   const submit = () => {
+    if (info === "" || projectId === "") {
+      fillOutFields();
+      return;
+    }
+
     closeModal();
-    dispatch(createTicket(info, type, priority, projectId));
+    setInfo("");
+    setType("BUG");
+    setProjectId("");
+    dispatch(
+      createTicket(info, type, priority === "no" ? "NONE" : priority, projectId)
+    );
   };
 
   return (
@@ -68,6 +85,13 @@ const AddPriorityTicketModal = ({
       <Modal.Header closeButton>
         <Modal.Title>Add a {priority} priority ticket</Modal.Title>
       </Modal.Header>
+      {error.length ? (
+        <Alert variant="filled" severity="error">
+          Please fill out all required fields!
+        </Alert>
+      ) : (
+        ""
+      )}
       <Modal.Body>
         <FormControl component="fieldset">
           <FormLabel component="legend">Type</FormLabel>
@@ -94,6 +118,7 @@ const AddPriorityTicketModal = ({
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={projectId}
+            required
             onChange={handleProjectChange}
           >
             {projects &&
@@ -125,6 +150,7 @@ const AddPriorityTicketModal = ({
           />
         </div>
       </Modal.Body>
+
       <Modal.Footer>
         <Button variant="secondary" onClick={closeModal}>
           Close

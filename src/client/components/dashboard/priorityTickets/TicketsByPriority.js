@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { ItemTypes } from "../ItemTypes";
+import sortByStatus from "../sorts/sortByStatus";
 
 // sort
 import sortByPriority from "../sorts/sortByPriority";
@@ -8,7 +8,6 @@ import sortByPriority from "../sorts/sortByPriority";
 // components
 import Back from "../Back";
 import AddTicketCard from "./AddTicketCard";
-import TicketCard from "../cards/TicketCard";
 import PriorityTicketCard from "./PriorityTicketCard";
 
 // css
@@ -29,43 +28,46 @@ const TicketsByPriority = () => {
             No Priority
           </Typography>
           {tickets &&
-            tickets
+            sortByStatus(tickets)
               .filter((ticket) => ticket.priority === "NONE")
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
           <AddTicketCard priority="no" />
         </div>
+
         <div className="priority-column">
           <Typography variant="h4" gutterBottom>
             Low Priority
           </Typography>
           {tickets &&
-            tickets
+            sortByStatus(tickets)
               .filter((ticket) => ticket.priority === "LOW")
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
           <AddTicketCard priority="low" />
         </div>
+
         <div className="priority-column">
           <Typography variant="h4" gutterBottom>
             Medium Priority
           </Typography>
           {tickets &&
-            tickets
+            sortByStatus(tickets)
               .filter((ticket) => ticket.priority === "MEDIUM")
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
           <AddTicketCard priority="medium" />
         </div>
+
         <div className="priority-column">
           <Typography variant="h4" gutterBottom>
             High Priority
           </Typography>
           {tickets &&
-            tickets
+            sortByStatus(tickets)
               .filter((ticket) => ticket.priority === "HIGH")
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />

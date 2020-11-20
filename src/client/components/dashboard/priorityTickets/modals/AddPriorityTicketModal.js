@@ -5,7 +5,12 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 
 // materialui
+import Radio from "@material-ui/core/Radio";
+import FormLabel from "@material-ui/core/FormLabel";
 import TextField from "@material-ui/core/TextField";
+import RadioGroup from "@material-ui/core/RadioGroup";
+import FormControl from "@material-ui/core/FormControl";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 
 // bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -15,12 +20,19 @@ const AddPriorityTicketModal = ({
   setModalVisible,
   priority,
 }) => {
-  const [type, setType] = useState("");
   const [info, setInfo] = useState("");
+  const [type, setType] = useState("BUG");
 
-  const closeModal = () => setModalVisible(!modalVisible);
+  const handleChange = (event) => {
+    setType(event.target.value);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   const submit = () => {
+    closeModal();
     console.log(type, info);
   };
 
@@ -30,24 +42,32 @@ const AddPriorityTicketModal = ({
         <Modal.Title>Add a {priority} priority ticket</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <div>
-          <TextField
-            id="outlined-basic-1"
-            label="Type"
-            type="text"
-            variant="outlined"
-            margin="dense"
+        <FormControl component="fieldset">
+          <FormLabel component="legend">Type</FormLabel>
+          <RadioGroup
+            aria-label="type"
+            name="type1"
             value={type}
-            onChange={({ target }) => setType(target.value)}
-          />
-        </div>
+            onChange={handleChange}
+          >
+            <FormControlLabel value="BUG" control={<Radio />} label="Bug" />
+            <FormControlLabel value="ERROR" control={<Radio />} label="Error" />
+            <FormControlLabel
+              value="FEATURE_REQUEST"
+              control={<Radio />}
+              label="Feature Request"
+            />
+            <FormControlLabel value="TODO" control={<Radio />} label="To do" />
+          </RadioGroup>
+        </FormControl>
         <div>
           <TextField
             id="outlined-basic-2"
-            label="Info"
+            label="Information"
             type="text"
             variant="outlined"
             margin="dense"
+            required
             value={info}
             onChange={({ target }) => setInfo(target.value)}
           />

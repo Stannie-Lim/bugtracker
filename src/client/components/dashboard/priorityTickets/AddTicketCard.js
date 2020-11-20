@@ -13,8 +13,10 @@ const AddTicketCard = ({ priority }) => {
   const openModal = () => setModalVisible(!modalVisible);
 
   return (
-    <div className="priority-ticket-card add-ticket-card" onClick={openModal}>
-      <AddIcon />
+    <div>
+      <div className="priority-ticket-card add-ticket-card" onClick={openModal}>
+        <AddIcon />
+      </div>
       <AddPriorityTicketModal
         modalVisible={modalVisible}
         setModalVisible={setModalVisible}

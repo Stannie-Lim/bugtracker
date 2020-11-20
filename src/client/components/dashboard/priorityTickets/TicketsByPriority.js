@@ -7,6 +7,7 @@ import sortByPriority from "../sorts/sortByPriority";
 
 // components
 import Back from "../Back";
+import AddTicketCard from "./AddTicketCard";
 import TicketCard from "../cards/TicketCard";
 import PriorityTicketCard from "./PriorityTicketCard";
 
@@ -33,6 +34,7 @@ const TicketsByPriority = () => {
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
+          <AddTicketCard priority="no" />
         </div>
         <div className="priority-column">
           <Typography variant="h4" gutterBottom>
@@ -44,6 +46,7 @@ const TicketsByPriority = () => {
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
+          <AddTicketCard priority="low" />
         </div>
         <div className="priority-column">
           <Typography variant="h4" gutterBottom>
@@ -55,6 +58,7 @@ const TicketsByPriority = () => {
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
+          <AddTicketCard priority="medium" />
         </div>
         <div className="priority-column">
           <Typography variant="h4" gutterBottom>
@@ -66,6 +70,7 @@ const TicketsByPriority = () => {
               .map((ticket) => (
                 <PriorityTicketCard key={ticket.id} ticket={ticket} />
               ))}
+          <AddTicketCard priority="high" />
         </div>
       </div>
     </div>

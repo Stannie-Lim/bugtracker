@@ -1,5 +1,6 @@
 .ticket {
   border: 1px solid black;
+  /* margin: 1rem 0.2rem; */
 }
 
 .hide {
@@ -9,4 +10,8 @@
 .project-detail {
   width: 100vw;
   margin: 5rem 10%;
+}
+
+.user-ticket-button {
+  margin: 0.5rem 0;
 }

@@ -9,8 +9,11 @@ import {
 } from "../../../store/store";
 
 // materialui
+import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
+import { green, purple } from "@material-ui/core/colors";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const PriorityTicketCard = ({ ticket }) => {
   const ticketUser = ticket.user;
@@ -29,7 +32,6 @@ const PriorityTicketCard = ({ ticket }) => {
     dispatch(resolveTicket(userId, ticket.id));
   };
 
-  console.log(ticket);
   return (
     <div className="priority-ticket-card">
       <Typography variant="h4" gutterBottom>
@@ -48,11 +50,27 @@ const PriorityTicketCard = ({ ticket }) => {
       {ticket.status === "RESOLVED" ? (
         ""
       ) : !ticketUser ? (
-        <button onClick={assignYourself}>Assign yourself to this ticket</button>
+        <Button variant="contained" color="primary" onClick={assignYourself}>
+          Assign yourself to this ticket
+        </Button>
       ) : userId === ticketUser.id ? (
         <div>
-          <button onClick={unassignYourself}>Unassign yourself</button>
-          <button onClick={resolve}>Resolve ticket</button>
+          <div className="user-ticket-button">
+            <Button
+              variant="contained"
+              color="secondary"
+              onClick={unassignYourself}
+            >
+              Unassign yourself
+            </Button>
+          </div>
+          <div className="user-ticket-button">
+            <ThemeProvider theme={theme}>
+              <Button variant="contained" color="primary" onClick={resolve}>
+                Resolve ticket
+              </Button>
+            </ThemeProvider>
+          </div>
         </div>
       ) : (
         <h1>Ticket assigned to {ticketUser.fullName}</h1>
@@ -62,3 +80,9 @@ const PriorityTicketCard = ({ ticket }) => {
 };
 
 export default PriorityTicketCard;
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green,
+  },
+});

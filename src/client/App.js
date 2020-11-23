@@ -20,7 +20,7 @@ import Home from "./components/dashboard/Home";
 import Profile from "./components/user/Profile";
 import YourTickets from "./components/dashboard/yourTickets/YourTickets";
 import Projects from "./components/dashboard/projects/Projects";
-import TicketsByType from "./components/dashboard/TicketsByType";
+import TicketsByType from "./components/dashboard/typeTickets/TicketsByType";
 import AddTicket from "./components/dashboard/projects/AddTicket";
 import AddProject from "./components/dashboard/projects/AddProject";
 import TicketsByStatus from "./components/dashboard/TicketsByStatus";

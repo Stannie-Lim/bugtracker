@@ -1,8 +1,6 @@
 const dotenv = require("dotenv");
 dotenv.config();
 
-console.log(process.env.NODE_ENV);
-
 const Sequelize = require("sequelize");
 const db = new Sequelize(
   process.env.NODE_ENV !== "development"

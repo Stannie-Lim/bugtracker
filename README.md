@@ -3,7 +3,7 @@
 #### if you want to run in development mode and connect to the development db (on your local machine)
 
 - createdb bug_tracker
-- npm run seed
+- npm run seed:dev
 - npm run start:dev
 
 #### if you want to run in the digitalocean server and connect to production db (prob only for me)

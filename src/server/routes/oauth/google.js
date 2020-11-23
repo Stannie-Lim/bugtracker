@@ -20,7 +20,7 @@ const { User } = require("../../db/models");
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  "http://localhost:3000/api/oauth/google/callback"
+  `${WEBSITE_URL}/api/oauth/google/callback`
 );
 
 router.get("/login", async (req, res, next) => {
@@ -76,7 +76,7 @@ router.get("/callback", async (req, res, next) => {
       // Read more here: https://owasp.org/www-community/HttpOnly
     });
     // We've successfully authenticated now redirect back to the front end server
-    res.redirect("http://localhost:3000");
+    res.redirect(process.env.WEBSITE_URL);
   } catch (err) {
     next(err);
   }

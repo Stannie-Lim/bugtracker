@@ -64,7 +64,7 @@ router.get("/callback", async (req, res, next) => {
       // Read more here: https://owasp.org/www-community/HttpOnly
     });
     // We've successfully authenticated now redirect back to the front end server
-    res.redirect("http://localhost:3000");
+    res.redirect(process.env.WEBSITE_URL);
   } catch (err) {
     next(err);
   }

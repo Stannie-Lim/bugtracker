@@ -22,6 +22,8 @@ const developmentSequelize = new Sequelize(
   { logging: false }
 );
 
+console.log(productionSequelize);
+
 const db =
   process.NODE_ENV === "production"
     ? productionSequelize

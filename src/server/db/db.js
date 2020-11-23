@@ -2,7 +2,8 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const Sequelize = require("sequelize");
-const db = new Sequelize(
+
+const productiondb = new Sequelize(
   process.env.DB_SCHEMA || "postgres",
   process.env.DB_USER || "postgres",
   process.env.DB_PASSWORD || "",
@@ -14,8 +15,13 @@ const db = new Sequelize(
       ssl: process.env.DB_SSL == "true",
     },
   }
-  // process.env.DATABASE_URL || "postgres://localhost/bug_tracker",
-  // { logging: false }
 );
+
+const developmentdb = new Sequelize(
+  process.env.DATABASE_URL || "postgres://localhost/bug_tracker",
+  { logging: false }
+);
+
+const db = process.env.NODE_ENV === "production" ? productiondb : developmentdb;
 
 module.exports = db;

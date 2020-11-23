@@ -4,14 +4,22 @@ import React from "react";
 import github from "../../../../static/assets/github.svg";
 import google from "../../../../static/assets/btn_google_dark_normal_ios.png";
 
+// TODO take the url out
+
 const OAuth = () => {
   return (
     <div className="oauth">
-      <a href="/api/oauth/github/login" className="github-oauth-icon">
+      <a
+        href="http://204.48.29.255:3000/api/oauth/github/login"
+        className="github-oauth-icon"
+      >
         <img src={github} alt="github" />
       </a>
 
-      <a href="/api/oauth/google/login" className="google-oauth-icon">
+      <a
+        href="http://204.48.29.255:3000/api/oauth/google/login"
+        className="google-oauth-icon"
+      >
         <img src={google} alt="google" />
       </a>
     </div>

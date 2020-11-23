@@ -9,7 +9,7 @@ import google from "../../../../static/assets/btn_google_dark_normal_ios.png";
 const OAuth = () => {
   return (
     <div className="oauth">
-      {/* <a
+      <a
         href="http://204.48.29.255:3000/api/oauth/github/login"
         className="github-oauth-icon"
       >
@@ -21,8 +21,8 @@ const OAuth = () => {
         className="google-oauth-icon"
       >
         <img src={google} alt="google" />
-      </a> */}
-      <a
+      </a>
+      {/* <a
         href="http://localhost:3000/api/oauth/github/login"
         className="github-oauth-icon"
       >
@@ -34,7 +34,7 @@ const OAuth = () => {
         className="google-oauth-icon"
       >
         <img src={google} alt="google" />
-      </a>
+      </a> */}
     </div>
   );
 };

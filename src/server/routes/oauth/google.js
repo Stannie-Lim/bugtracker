@@ -20,7 +20,7 @@ const { User } = require("../../db/models");
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_CLIENT_SECRET,
-  `${WEBSITE_URL}/api/oauth/google/callback`
+  `${process.env.WEBSITE_URL}/api/oauth/google/callback`
 );
 
 router.get("/login", async (req, res, next) => {

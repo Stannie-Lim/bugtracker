@@ -2,6 +2,7 @@
 
 #### if you want to run in development mode and connect to the development db (on your local machine)
 
+- createdb bug_tracker
 - npm run seed
 - npm run start:dev
 

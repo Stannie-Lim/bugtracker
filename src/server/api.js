@@ -1,11 +1,11 @@
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const router = require("express").Router();
 const cookieParser = require("cookie-parser");
 module.exports = router;
 
 router.use(cookieParser());
-dotenv.config();
+// dotenv.config();
 
 // root route is '/api'
 

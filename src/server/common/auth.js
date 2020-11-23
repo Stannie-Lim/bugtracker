@@ -1,8 +1,8 @@
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-dotenv.config();
+// dotenv.config();
 
 const generateJWT = ({ firstName, lastName, id, email }) => {
   return jwt.sign(

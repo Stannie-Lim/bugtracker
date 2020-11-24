@@ -43,6 +43,7 @@
     "@material-ui/lab": "^4.0.0-alpha.56",
     "@material-ui/x-grid-data-generator": "^4.0.0-alpha.8",
     "@nivo/bar": "^0.64.0",
+    "@nivo/network": "^0.64.0",
     "@nivo/pie": "^0.64.0",
     "axios": "^0.19.2",
     "babel-loader": "^8.1.0",

@@ -14,6 +14,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 import ListSubheader from "@material-ui/core/ListSubheader";
 
 const TodoTickets = ({ tickets }) => {
+  console.log(tickets);
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -33,12 +34,17 @@ const TodoTickets = ({ tickets }) => {
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          <ListItem button className={classes.nested}>
-            {/* <ListItemIcon>
-              <StarBorder />
-            </ListItemIcon>
-            <ListItemText primary="Starred" /> */}
-          </ListItem>
+          {tickets &&
+            tickets.map((ticket) => {
+              return (
+                <ListItem button className={classes.nested} key={ticket.id}>
+                  <ListItemIcon>
+                    <StarBorder />
+                  </ListItemIcon>
+                  <ListItemText primary={ticket.info} />
+                </ListItem>
+              );
+            })}
         </List>
       </Collapse>
     </div>

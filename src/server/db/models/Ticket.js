@@ -1,4 +1,3 @@
-const { TEXT } = require("sequelize");
 const Sequelize = require("sequelize");
 const db = require("../db");
 const { UUID, UUIDV4, INTEGER, STRING, VIRTUAL, BOOLEAN, ENUM } = Sequelize;

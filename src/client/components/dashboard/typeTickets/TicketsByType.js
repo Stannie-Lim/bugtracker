@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 // components
 import TypeTickets from "./TypeTickets";
-import TicketCard from "../cards/TicketCard";
 
 const TicketsByType = () => {
   return (

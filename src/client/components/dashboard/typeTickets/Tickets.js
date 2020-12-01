@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// components
+import TicketHistory from "./TicketHistory";
+
 // materialui
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -8,12 +11,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListSubheader from "@material-ui/core/ListSubheader";
 
-const FeatureRequestTickets = ({ tickets }) => {
+const Tickets = ({ tickets, type }) => {
   const [open, setOpen] = useState(false);
 
   const classes = useStyles();
@@ -28,29 +29,26 @@ const FeatureRequestTickets = ({ tickets }) => {
         <ListItemIcon>
           <InboxIcon />
         </ListItemIcon>
-        <ListItemText primary="Feature Request" />
+        <ListItemText primary={type} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {tickets &&
-            tickets.map((ticket) => {
-              return (
-                <ListItem button className={classes.nested} key={ticket.id}>
-                  <ListItemIcon>
-                    <StarBorder />
-                  </ListItemIcon>
-                  <ListItemText primary={ticket.info} />
-                </ListItem>
-              );
-            })}
+            tickets.map((ticket) => (
+              <TicketHistory
+                ticket={ticket}
+                tickets={tickets}
+                key={ticket.id}
+              />
+            ))}
         </List>
       </Collapse>
     </div>
   );
 };
 
-export default FeatureRequestTickets;
+export default Tickets;
 
 const useStyles = makeStyles((theme) => ({
   root: {

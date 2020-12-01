@@ -1,14 +1,9 @@
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { ResponsiveNetwork } from "@nivo/network";
 import React, { useState, useEffect } from "react";
 import { capitalize } from "../../../utils/common";
 
 // components
-import BugTickets from "./BugTickets";
-import TodoTickets from "./TodoTickets";
-import ErrorTickets from "./ErrorTickets";
-import FeatureRequestTickets from "./FeatureRequestTickets";
+import Tickets from "./Tickets";
 
 // materialui
 import List from "@material-ui/core/List";
@@ -40,10 +35,9 @@ const TypeTickets = () => {
         </ListSubheader>
       }
     >
-      <BugTickets tickets={tickets.BUG} />
-      <TodoTickets tickets={tickets["TO-DO"]} />
-      <ErrorTickets tickets={tickets.ERROR} />
-      <FeatureRequestTickets tickets={tickets.FEATURE_REQUEST} />
+      {Object.keys(tickets).map((type) => (
+        <Tickets tickets={tickets[type]} type={capitalize(type)} key={type} />
+      ))}
     </List>
   );
 };

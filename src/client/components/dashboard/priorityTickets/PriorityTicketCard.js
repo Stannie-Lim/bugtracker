@@ -12,14 +12,9 @@ import {
 // materialui
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
-import Typography from "@material-ui/core/Typography";
 import { purple } from "@material-ui/core/colors";
-import {
-  createMuiTheme,
-  withStyles,
-  makeStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
 
 const PriorityTicketCard = ({ ticket }) => {
   const ticketUser = ticket.user;

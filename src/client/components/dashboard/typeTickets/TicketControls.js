@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// icons
+import ControlCameraIcon from "@material-ui/icons/ControlCamera";
+
 // materialui
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -7,6 +10,7 @@ import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 const TicketControls = () => {
@@ -20,6 +24,9 @@ const TicketControls = () => {
   return (
     <div>
       <ListItem button onClick={handleControlsOpen} className={classes.nested}>
+        <ListItemIcon>
+          <ControlCameraIcon />
+        </ListItemIcon>
         <ListItemText primary="Controls" />
         {controlsOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>

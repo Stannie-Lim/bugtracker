@@ -36,7 +36,10 @@ const TicketVisibility = ({ tickets, ticket }) => {
         <ListItemIcon>
           <ConfirmationNumberIcon />
         </ListItemIcon>
+
         <ListItemText primary={ticket.info} />
+        <ListItemText secondary={ticket.project.title} />
+
         {ticketVisibilityOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
 

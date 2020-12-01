@@ -14,7 +14,7 @@ import StarBorder from "@material-ui/icons/StarBorder";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-const HistoryItem = ({ history, ticket }) => {
+const HistoryItem = ({ history }) => {
   const classes = useStyles();
   return (
     <ListItem button className={classes.nested}>

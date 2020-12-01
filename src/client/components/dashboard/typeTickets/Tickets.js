@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 
 // components
-import TicketHistory from "./TicketHistory";
+import TicketVisibility from "./TicketVisbility";
 
 // materialui
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Collapse from "@material-ui/core/Collapse";
-import { makeStyles } from "@material-ui/core/styles";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
@@ -34,7 +33,7 @@ const Tickets = ({ tickets, type }) => {
         <List component="div" disablePadding>
           {tickets &&
             tickets.map((ticket) => (
-              <TicketHistory
+              <TicketVisibility
                 ticket={ticket}
                 tickets={tickets}
                 key={ticket.id}

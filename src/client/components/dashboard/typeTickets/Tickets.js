@@ -3,6 +3,12 @@ import React, { useState } from "react";
 // components
 import TicketVisibility from "./TicketVisbility";
 
+// icons
+import HelpIcon from "@material-ui/icons/Help";
+import ListAltIcon from "@material-ui/icons/ListAlt";
+import BugReportIcon from "@material-ui/icons/BugReport";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+
 // materialui
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -20,12 +26,21 @@ const Tickets = ({ tickets, type }) => {
     setOpen(!open);
   };
 
+  const icon =
+    type === "Bug" ? (
+      <BugReportIcon />
+    ) : type === "Error" ? (
+      <ErrorOutlineIcon />
+    ) : type === "Feature request" ? (
+      <HelpIcon />
+    ) : (
+      <ListAltIcon />
+    );
+
   return (
     <div>
       <ListItem button onClick={handleClick}>
-        <ListItemIcon>
-          <InboxIcon />
-        </ListItemIcon>
+        <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText primary={type} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>

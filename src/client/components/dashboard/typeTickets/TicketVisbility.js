@@ -4,6 +4,9 @@ import React, { useState } from "react";
 import TicketHistory from "./TicketHistory";
 import TicketControls from "./TicketControls";
 
+// icons
+import ConfirmationNumberIcon from "@material-ui/icons/ConfirmationNumber";
+
 // materialui
 import ListItem from "@material-ui/core/ListItem";
 import Collapse from "@material-ui/core/Collapse";
@@ -31,7 +34,7 @@ const TicketVisibility = ({ tickets, ticket }) => {
         className={classes.nested}
       >
         <ListItemIcon>
-          <InboxIcon />
+          <ConfirmationNumberIcon />
         </ListItemIcon>
         <ListItemText primary={ticket.info} />
         {ticketVisibilityOpen ? <ExpandLess /> : <ExpandMore />}

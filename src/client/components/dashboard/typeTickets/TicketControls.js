@@ -26,7 +26,7 @@ const TicketControls = () => {
       <List component="div" disablePadding>
         <Collapse in={controlsOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
-            <h1>Controls</h1>
+            <ListItem className={classes.moreNested}>Controls</ListItem>
           </List>
         </Collapse>
       </List>
@@ -44,5 +44,8 @@ const useStyles = makeStyles((theme) => ({
   },
   nested: {
     paddingLeft: theme.spacing(8),
+  },
+  moreNested: {
+    paddingLeft: theme.spacing(12),
   },
 }));

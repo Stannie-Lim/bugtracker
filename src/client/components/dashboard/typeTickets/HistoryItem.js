@@ -3,24 +3,14 @@ import moment from "moment";
 import { capitalize } from "../../../utils/common";
 
 // materialui
-import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
-import Collapse from "@material-ui/core/Collapse";
 import { makeStyles } from "@material-ui/core/styles";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import ExpandLess from "@material-ui/icons/ExpandLess";
-import ExpandMore from "@material-ui/icons/ExpandMore";
-import StarBorder from "@material-ui/icons/StarBorder";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
 const HistoryItem = ({ history }) => {
   const classes = useStyles();
   return (
-    <ListItem button className={classes.nested}>
-      <ListItemIcon>
-        <StarBorder />
-      </ListItemIcon>
+    <ListItem className={classes.nested}>
       <ListItemText primary={moment(history.createdAt).format("llll")} />
       <ListItemText primary={capitalize(history.priority)} />
       <ListItemText primary={capitalize(history.status)} />
@@ -38,6 +28,6 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(8),
+    paddingLeft: theme.spacing(12),
   },
 }));

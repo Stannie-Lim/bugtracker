@@ -57,15 +57,14 @@ const TicketHistory = ({ tickets, ticket }) => {
         >
           <ListItemText primary="Controls" />
           {ticketVisibilityOpen ? <ExpandLess /> : <ExpandMore />}
-
-          <List component="div" disablePadding>
-            <Collapse in={controlsOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                <h1>Controls</h1>
-              </List>
-            </Collapse>
-          </List>
         </ListItem>
+        <List component="div" disablePadding>
+          <Collapse in={controlsOpen} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+              <h1>Controls</h1>
+            </List>
+          </Collapse>
+        </List>
 
         <ListItem
           button
@@ -74,17 +73,17 @@ const TicketHistory = ({ tickets, ticket }) => {
         >
           <ListItemText primary="History" />
           {historyOpen ? <ExpandLess /> : <ExpandMore />}
-          <Collapse in={historyOpen} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-              {tickets &&
-                tickets.map(({ tickethistories }) => {
-                  return tickethistories.map((history) => (
-                    <HistoryItem key={history.id} history={history} />
-                  ));
-                })}
-            </List>
-          </Collapse>
         </ListItem>
+        <Collapse in={historyOpen} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            {tickets &&
+              tickets.map(({ tickethistories }) => {
+                return tickethistories.map((history) => (
+                  <HistoryItem key={history.id} history={history} />
+                ));
+              })}
+          </List>
+        </Collapse>
       </Collapse>
     </div>
   );

@@ -17,8 +17,6 @@ import ListItemText from "@material-ui/core/ListItemText";
 const Tickets = ({ tickets, type }) => {
   const [open, setOpen] = useState(false);
 
-  const classes = useStyles();
-
   const handleClick = () => {
     setOpen(!open);
   };
@@ -49,14 +47,3 @@ const Tickets = ({ tickets, type }) => {
 };
 
 export default Tickets;
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  nested: {
-    paddingLeft: theme.spacing(4),
-  },
-}));

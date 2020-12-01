@@ -2,6 +2,9 @@ import moment from "moment";
 import React, { useState } from "react";
 import { capitalize } from "../../../utils/common";
 
+// components
+import HistoryItem from "./HistoryItem";
+
 // materialui
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -31,26 +34,14 @@ const TicketHistory = ({ tickets, ticket }) => {
         <ListItemText primary={ticket.info} />
         {historyOpen ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
+
       <Collapse in={historyOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
           {tickets &&
             tickets.map(({ tickethistories }) => {
-              return tickethistories.map((history) => {
-                console.log(history, "<--");
-                return (
-                  <ListItem button className={classes.nested} key={ticket.id}>
-                    <ListItemIcon>
-                      <StarBorder />
-                    </ListItemIcon>
-                    <ListItemText
-                      primary={moment(history.createdAt).format("llll")}
-                    />
-                    <ListItemText primary={capitalize(history.priority)} />
-                    <ListItemText primary={capitalize(history.status)} />
-                    <ListItemText primary={capitalize(history.user.fullName)} />
-                  </ListItem>
-                );
-              });
+              return tickethistories.map((history) => (
+                <HistoryItem key={history.id} history={history} />
+              ));
             })}
         </List>
       </Collapse>

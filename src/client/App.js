@@ -18,14 +18,14 @@ import Register from "./components/auth/Register";
 import Nav from "./components/nav/Nav";
 import Home from "./components/dashboard/Home";
 import Profile from "./components/user/Profile";
-import YourTickets from "./components/dashboard/yourTickets/YourTickets";
 import Projects from "./components/dashboard/projects/Projects";
-import TicketsByType from "./components/dashboard/typeTickets/TicketsByType";
 import AddTicket from "./components/dashboard/projects/AddTicket";
 import AddProject from "./components/dashboard/projects/AddProject";
 import TicketsByStatus from "./components/dashboard/TicketsByStatus";
-import TicketsByPriority from "./components/dashboard/priorityTickets/TicketsByPriority";
+import YourTickets from "./components/dashboard/yourTickets/YourTickets";
 import ProjectDetail from "./components/dashboard/projects/ProjectDetail";
+import TicketsByType from "./components/dashboard/typeTickets/TicketsByType";
+import TicketsByPriority from "./components/dashboard/priorityTickets/TicketsByPriority";
 
 // store
 import { login } from "./store/store";

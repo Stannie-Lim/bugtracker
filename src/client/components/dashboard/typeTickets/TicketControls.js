@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
 
-// store
-import {
-  assignTicket,
-  unassignTicket,
-  resolveTicket,
-} from "../../../store/store";
+// components
+import TicketButtons from "../TicketButtons";
 
 // icons
 import ControlCameraIcon from "@material-ui/icons/ControlCamera";
@@ -31,22 +26,6 @@ const TicketControls = ({ ticket }) => {
     setControlsOpen(!controlsOpen);
   };
 
-  const ticketUser = ticket.user;
-  const userId = useSelector(({ user }) => user.id);
-
-  const dispatch = useDispatch();
-  const assignYourself = () => {
-    dispatch(assignTicket(userId, ticket.id));
-  };
-
-  const unassignYourself = () => {
-    dispatch(unassignTicket(userId, ticket.id));
-  };
-
-  const resolve = () => {
-    dispatch(resolveTicket(userId, ticket.id));
-  };
-
   return (
     <div>
       <ListItem button onClick={handleControlsOpen} className={classes.nested}>
@@ -60,40 +39,7 @@ const TicketControls = ({ ticket }) => {
         <Collapse in={controlsOpen} timeout="auto" unmountOnExit>
           <List component="div" disablePadding>
             <ListItem className={classes.moreNested}>
-              {ticket.status === "RESOLVED" ? (
-                ""
-              ) : !ticketUser ? (
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={assignYourself}
-                >
-                  Assign yourself to this ticket
-                </Button>
-              ) : userId === ticketUser.id ? (
-                <div>
-                  <div className="user-ticket-button">
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={unassignYourself}
-                    >
-                      Unassign yourself
-                    </Button>
-                  </div>
-                  <div className="user-ticket-button">
-                    <ColorButton
-                      variant="contained"
-                      color="primary"
-                      onClick={resolve}
-                    >
-                      Resolve ticket
-                    </ColorButton>
-                  </div>
-                </div>
-              ) : (
-                <h1>Ticket assigned to {ticketUser.fullName}</h1>
-              )}
+              <TicketButtons ticket={ticket} />
             </ListItem>
           </List>
         </Collapse>

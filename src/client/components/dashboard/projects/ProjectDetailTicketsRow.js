@@ -1,32 +1,25 @@
 import React, { useState, Fragment } from "react";
-import { useSelector, useDispatch } from "react-redux";
 import { capitalize } from "../../../utils/common";
 
-// store
-import {
-  assignTicket,
-  unassignTicket,
-  resolveTicket,
-} from "../../../store/store";
+// components
+import TicketButtons from "../TicketButtons";
 
 // css
 import "./ProjectDetailTicketsRow.css";
 
 // materialui
-import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import Collapse from "@material-ui/core/Collapse";
-import IconButton from "@material-ui/core/IconButton";
 import Table from "@material-ui/core/Table";
+import TableRow from "@material-ui/core/TableRow";
+import Collapse from "@material-ui/core/Collapse";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
 import Typography from "@material-ui/core/Typography";
-import Paper from "@material-ui/core/Paper";
-import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
+import IconButton from "@material-ui/core/IconButton";
+import { makeStyles } from "@material-ui/core/styles";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
+import KeyboardArrowDownIcon from "@material-ui/icons/KeyboardArrowDown";
 
 const useRowStyles = makeStyles({
   root: {
@@ -39,22 +32,6 @@ const useRowStyles = makeStyles({
 const ProjectDetailTicketsRow = ({ row }) => {
   const [open, setOpen] = useState(false);
   const classes = useRowStyles();
-
-  const ticketUser = row.user;
-  const userId = useSelector(({ user }) => user.id);
-
-  const dispatch = useDispatch();
-  const assignYourself = () => {
-    dispatch(assignTicket(userId, row.id));
-  };
-
-  const unassignYourself = () => {
-    dispatch(unassignTicket(userId, row.id));
-  };
-
-  const resolve = () => {
-    dispatch(resolveTicket(userId, row.id));
-  };
 
   return (
     <Fragment>
@@ -73,22 +50,7 @@ const ProjectDetailTicketsRow = ({ row }) => {
         <TableCell align="right">{capitalize(row.type)}</TableCell>
         <TableCell align="right">{capitalize(row.status)}</TableCell>
         <TableCell align="right">
-          {row.status === "RESOLVED" ? (
-            "Resolved"
-          ) : !ticketUser ? (
-            <div className="assign-buttons">
-              <button onClick={assignYourself}>Assign yourself</button>
-            </div>
-          ) : userId === ticketUser.id ? (
-            <div className="assign-buttons">
-              <button onClick={unassignYourself}>Unassign yourself</button>
-              <button onClick={resolve}>Resolve ticket</button>
-            </div>
-          ) : (
-            <div className="assign-buttons">
-              Assigned to {ticketUser.fullName}
-            </div>
-          )}
+          <TicketButtons ticket={row} />
         </TableCell>
       </TableRow>
       <TableRow>

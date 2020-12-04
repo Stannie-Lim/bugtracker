@@ -45,7 +45,7 @@ const TicketVisibility = ({ tickets, ticket }) => {
 
       <Collapse in={ticketVisibilityOpen} timeout="auto" unmountOnExit>
         <TicketControls ticket={ticket} />
-        <TicketHistory tickets={tickets} />
+        <TicketHistory ticket={ticket} />
       </Collapse>
     </div>
   );

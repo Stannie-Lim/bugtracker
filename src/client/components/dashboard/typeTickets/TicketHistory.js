@@ -16,7 +16,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 
-const TicketHistory = ({ tickets }) => {
+const TicketHistory = ({ ticket }) => {
   const classes = useStyles();
   const [historyOpen, setHistoryOpen] = useState(false);
 
@@ -34,11 +34,9 @@ const TicketHistory = ({ tickets }) => {
       </ListItem>
       <Collapse in={historyOpen} timeout="auto" unmountOnExit>
         <List component="div" disablePadding>
-          {tickets &&
-            tickets.map(({ tickethistories }) => {
-              return tickethistories.map((history) => (
-                <HistoryItem key={history.id} history={history} />
-              ));
+          {ticket &&
+            ticket.tickethistories.map((history) => {
+              return <HistoryItem key={history.id} history={history} />;
             })}
         </List>
       </Collapse>

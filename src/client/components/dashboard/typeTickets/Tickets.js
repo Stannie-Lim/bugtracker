@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// css
+import "./tickets.css";
+
 // components
 import TicketVisibility from "./TicketVisbility";
 
@@ -37,11 +40,20 @@ const Tickets = ({ tickets, type }) => {
       <ListAltIcon />
     );
 
+  const color =
+    type === "Bug"
+      ? "red"
+      : type === "Error"
+      ? "pink"
+      : type === "Feature request"
+      ? "cyan"
+      : "lightgreen";
+
   return (
     <div>
       <ListItem button onClick={handleClick}>
         <ListItemIcon>{icon}</ListItemIcon>
-        <ListItemText primary={type} />
+        <ListItemText primary={type} className={`ticket-${color}`} />
         {open ? <ExpandLess /> : <ExpandMore />}
       </ListItem>
       <Collapse in={open} timeout="auto" unmountOnExit>

@@ -1,0 +1,16 @@
+.status-ticket-card {
+  width: 45vw;
+  flex: 45%;
+  padding: 1rem;
+  height: 40vh;
+  overflow: auto;
+}
+
+.ticket-labels {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ticket-click {
+  cursor: pointer;
+}

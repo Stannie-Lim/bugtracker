@@ -21,10 +21,10 @@ import Profile from "./components/user/Profile";
 import Projects from "./components/dashboard/projects/Projects";
 import AddTicket from "./components/dashboard/projects/AddTicket";
 import AddProject from "./components/dashboard/projects/AddProject";
-import TicketsByStatus from "./components/dashboard/TicketsByStatus";
 import YourTickets from "./components/dashboard/yourTickets/YourTickets";
 import ProjectDetail from "./components/dashboard/projects/ProjectDetail";
 import TicketsByType from "./components/dashboard/typeTickets/TicketsByType";
+import TicketsByStatus from "./components/dashboard/statusTickets/TicketsByStatus";
 import TicketsByPriority from "./components/dashboard/priorityTickets/TicketsByPriority";
 
 // store

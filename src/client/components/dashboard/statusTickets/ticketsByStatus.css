@@ -14,3 +14,8 @@
 .ticket-click {
   cursor: pointer;
 }
+
+.ticket-history-status {
+  overflow: auto;
+  height: 100%;
+}

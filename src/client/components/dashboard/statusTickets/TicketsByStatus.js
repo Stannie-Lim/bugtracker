@@ -22,14 +22,13 @@ const TicketsByType = () => {
 
   const tickets = useSelector(({ tickets }) => {
     const categorized = {
-      BUG: [],
-      ERROR: [],
-      FEATURE_REQUEST: [],
-      "TO-DO": [],
+      OPEN: [],
+      IN_PROGRESS: [],
+      RESOLVED: [],
     };
 
     for (const ticket of tickets) {
-      categorized[ticket.type].push(ticket);
+      categorized[ticket.status].push(ticket);
     }
 
     return categorized;

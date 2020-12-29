@@ -4,6 +4,9 @@ import React, { useState, Fragment } from "react";
 // store
 import { unassignTicket, resolveTicket } from "../../../store/store";
 
+// components
+import TicketButtons from "../TicketButtons";
+
 // materialui
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
@@ -51,12 +54,13 @@ const TicketRow = ({ ticket }) => {
         <TableCell align="right">{ticket.status}</TableCell>
         <TableCell align="right">{ticket.project.title}</TableCell>
         <TableCell align="right">
-          <div>
+          <TicketButtons ticket={ticket} />
+          {/* <div>
             <button onClick={() => unassignYourself(ticket.id)}>
               Unassign yourself
             </button>
             <button onClick={() => resolve(ticket.id)}>Resolve ticket</button>
-          </div>
+          </div> */}
         </TableCell>
       </TableRow>
       <TableRow>

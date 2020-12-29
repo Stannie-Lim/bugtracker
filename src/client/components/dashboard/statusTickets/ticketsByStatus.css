@@ -1,14 +1,16 @@
 .status-ticket-card {
-  width: 45vw;
-  flex: 45%;
+  width: 35vw;
+  flex: 35%;
   padding: 1rem;
   height: 40vh;
-  overflow: auto;
 }
 
 .ticket-labels {
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: space-around;
+  height: 100vh;
 }
 
 .ticket-click {
@@ -18,4 +20,13 @@
 .ticket-history-status {
   overflow: auto;
   height: 100%;
+}
+
+.status-type {
+  width: 35vw;
+}
+
+.ticket-list {
+  overflow: auto;
+  height: 40vh;
 }

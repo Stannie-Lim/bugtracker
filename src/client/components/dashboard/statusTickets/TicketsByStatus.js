@@ -1,12 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { capitalize } from "../../../utils/common";
 
 // css
 import "./ticketsByStatus.css";
-
-// sort
-import sortByStatus from "../sorts/sortByStatus";
 
 // components
 import StatusTickets from "./StatusTickets";
@@ -40,15 +38,26 @@ const TicketsByType = () => {
 
       <div className="ticket-labels">
         {Object.keys(tickets).map((category) => {
+          const color =
+            category === "OPEN"
+              ? "green"
+              : category === "IN_PROGRESS"
+              ? "red"
+              : "blue";
+
           return (
-            <div className="status-ticket-card" key={category}>
+            <div key={category}>
               <Paper className={classes.paper}>
-                <Grid container wrap="nowrap" spacing={2}>
-                  <div key={category}>
-                    <Typography variant="h6">{category}</Typography>
-                    {tickets[category].map((ticket) => (
-                      <StatusTickets key={ticket.id} ticket={ticket} />
-                    ))}
+                <Grid container spacing={2}>
+                  <div key={category} className="status-type">
+                    <Typography variant="h6" style={{ color }}>
+                      {capitalize(category)}
+                    </Typography>
+                    <div className="ticket-list">
+                      {tickets[category].map((ticket) => (
+                        <StatusTickets key={ticket.id} ticket={ticket} />
+                      ))}
+                    </div>
                   </div>
                 </Grid>
               </Paper>

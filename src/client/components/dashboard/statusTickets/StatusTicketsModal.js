@@ -38,7 +38,7 @@ const StatusTicketsModal = ({ modalVisible, showModal, ticket }) => {
           <List className={classes.root}>
             {ticket.tickethistories.map((history) => {
               return (
-                <ListItem>
+                <ListItem key={history.id}>
                   <ListItemText
                     primary={moment(history.createdAt).format("llll")}
                     secondary={capitalize(history.priority)}

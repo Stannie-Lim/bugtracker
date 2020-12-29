@@ -217,7 +217,7 @@ const TopNav = ({ open, setOpen }) => {
         </IconButton>
 
         <TopHeader />
-        <SearchBar />
+        {/* <SearchBar /> */}
         <div className={classes.grow} />
         <TopRightBar
           openNotificationMenu={openNotificationMenu}

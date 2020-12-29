@@ -44,10 +44,7 @@ const reducer = combineReducers({
   tickets,
 });
 
-const store = createStore(
-  reducer,
-  applyMiddleware(thunks, createLogger({ collapsed: true }))
-);
+const store = createStore(reducer, applyMiddleware(thunks));
 
 export default store;
 

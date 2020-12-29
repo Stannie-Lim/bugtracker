@@ -64,8 +64,8 @@ const TicketInfoCard = ({ id, moveCard, findCard, text, type }) => {
 
   return (
     <Link
-      to={`/home/${text.toLowerCase().split(" ").join("-")}`}
       className={classes}
+      to={`/home/${text.toLowerCase().split(" ").join("-")}`}
       onMouseOver={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       ref={(node) => drag(drop(node))}

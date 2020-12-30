@@ -30,3 +30,12 @@
   overflow: auto;
   height: 40vh;
 }
+
+.ticket-click:hover {
+  border: 2px solid lightseagreen;
+  border-radius: 10px;
+}
+
+.single-status-ticket {
+  padding: 0.5rem 0;
+}

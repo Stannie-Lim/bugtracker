@@ -149,7 +149,7 @@ const TopNav = ({ open, setOpen }) => {
       <Link to="/profile" className="menu-item-link">
         <MenuItem onClick={goToProfile}>Profile</MenuItem>
       </Link>
-      <MenuItem onClick={goToAccount}>My account</MenuItem>
+      {/* <MenuItem onClick={goToAccount}>My account</MenuItem> */}
       <MenuItem onClick={logout}>Log out</MenuItem>
     </Menu>
   );

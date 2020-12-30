@@ -18,7 +18,7 @@ const StatusTickets = ({ ticket }) => {
   };
 
   return (
-    <div>
+    <div className="single-status-ticket">
       <div onClick={showModal} className="ticket-click">
         <Paper className={classes.paper}>
           <Grid container wrap="nowrap" spacing={2}>

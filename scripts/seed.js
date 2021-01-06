@@ -41,13 +41,13 @@ const seed = async () => {
     });
 
     const invite = await ProjectInvite.create({
-      inviterId: user.id,
-      inviteeId: user2.id,
-      projectId: project.id,
+      inviterId: user2.id,
+      inviteeId: user.id,
+      projectId: project2.id,
     });
 
     await project.setUsers(user.id);
-    await project2.setUsers(user.id);
+    await project2.setUsers(user2.id);
 
     const ticket = await Ticket.create({
       type: "BUG",
@@ -56,6 +56,12 @@ const seed = async () => {
       info: "Ticket1 for project1",
       projectId: project.id,
       userId: null,
+    });
+
+    const ticket1History = await TicketHistory.create({
+      priority: ticket.priority,
+      ticketId: ticket.id,
+      userId: user.id,
     });
 
     const ticket2 = await Ticket.create({

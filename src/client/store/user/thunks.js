@@ -19,7 +19,8 @@ export const login = (email, password, signinToken = null) => {
         dispatch(_login(user));
       }
     } catch (err) {
-      console.log(err);
+      dispatch(_setError("Incorrect email or password"));
+      setTimeout(() => dispatch(_setError("")), 6000);
     }
   };
 };

@@ -16,13 +16,27 @@ import { _login } from "../../store/user/actions";
 
 // materialui
 import Button from "@material-ui/core/Button";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const Login = ({ history }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [open, setOpen] = useState(false);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
 
   const dispatch = useDispatch();
 
@@ -44,9 +58,13 @@ const Login = ({ history }) => {
     }
   };
 
+  const error = useSelector(({ error }) => error);
   useEffect(() => {
     checkAuth();
-  }, []);
+    if (error.length) {
+      setOpen(true);
+    }
+  }, [error.length]);
 
   const classes = useStyles();
   const isLoggedIn = useSelector(({ user }) => !!user.id);
@@ -111,6 +129,11 @@ const Login = ({ history }) => {
           <OAuth />
         </form>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

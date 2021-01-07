@@ -29,7 +29,7 @@ app.use((err, req, res, next) => {
 const port = process.env.PORT || 3000;
 
 // db.sync().then(() => {
-const server = app.listen(port);
+const server = app.listen(port, "0.0.0.0");
 const io = socketio(server);
 require("./socket")(io);
 // });

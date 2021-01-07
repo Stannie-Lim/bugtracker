@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "build": "webpack --mode=production",
-    "start": "echo \"building\" ",
+    "start": "npm run seed",
     "build:dev": "webpack --mode=development --watch",
     "seed": "NODE_ENV=production node scripts/seed.js",
     "seed:dev": "NODE_ENV=development node scripts/seed.js",

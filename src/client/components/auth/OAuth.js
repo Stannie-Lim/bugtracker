@@ -16,12 +16,12 @@ const OAuth = () => {
         <img src={github} alt="github" />
       </a>
 
-      <a
+      {/* <a
         href="http://204.48.29.255:3000/api/oauth/google/login"
         className="google-oauth-icon"
       >
         <img src={google} alt="google" />
-      </a>
+      </a> */}
       {/* <a
         href="http://localhost:3000/api/oauth/github/login"
         className="github-oauth-icon"

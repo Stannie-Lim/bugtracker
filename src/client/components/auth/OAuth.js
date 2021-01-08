@@ -10,14 +10,14 @@ const OAuth = () => {
   return (
     <div className="oauth">
       <a
-        href="http://204.48.29.255:3000/api/oauth/github/login"
+        href="http://bug-tracker.us/api/oauth/github/login"
         className="github-oauth-icon"
       >
         <img src={github} alt="github" />
       </a>
 
       <a
-        href="http://204.48.29.255:3000/api/oauth/google/login"
+        href="http://bug-tracker.us/api/oauth/google/login"
         className="google-oauth-icon"
       >
         <img src={google} alt="google" />

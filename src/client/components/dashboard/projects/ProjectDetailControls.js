@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -10,21 +10,43 @@ import "./ProjectDetailControls.css";
 
 // materialui
 import Button from "@material-ui/core/Button";
-import { DataGrid } from "@material-ui/data-grid";
 import { makeStyles } from "@material-ui/core/styles";
+import MuiAlert from "@material-ui/lab/Alert";
+import Snackbar from "@material-ui/core/Snackbar";
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 const ProjectDetailControls = ({ projectId }) => {
+  const [open, setOpen] = useState(false);
   const [inviteUser, setInviteUser] = useState("");
   const [addUserVisibility, setAddUserVisibility] = useState(false);
+  const classes = useStyles();
 
   const userId = useSelector(({ user }) => user.id);
+  const error = useSelector(({ error }) => error);
+
   const dispatch = useDispatch();
   const sendUserInvite = (ev) => {
     ev.preventDefault();
     dispatch(inviteUserToProject(inviteUser, projectId, userId));
+    setInviteUser("");
   };
 
-  const classes = useStyles();
+  useEffect(() => {
+    if (error.length) {
+      setOpen(true);
+    }
+  }, [error.length]);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
+
   return (
     <div className="controls-div">
       <div className="controls">
@@ -59,6 +81,11 @@ const ProjectDetailControls = ({ projectId }) => {
           </form>
         </div>
       </div>
+      <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity="error">
+          {error}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

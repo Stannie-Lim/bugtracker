@@ -27,6 +27,9 @@ router.post("/invite/:projectId", isLoggedIn, async (req, res, next) => {
     if (!_userToInvite) {
       return res.status(500).json({ message: "User not found" });
     }
+    if (_userToInvite.id === id) {
+      return res.status(500).json({ message: "You cannot invite yourself" });
+    }
 
     const invite = await ProjectInvite.create({
       inviterId: id,

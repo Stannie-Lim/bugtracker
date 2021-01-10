@@ -77,9 +77,13 @@ export const inviteUserToProject = (userToInvite, projectId) => {
           userToInvite,
         })
       ).data;
+      dispatch(_setError("Successfully invited"));
       dispatch(_login(user));
+
+      setTimeout(() => dispatch(_setError("")), 6000);
     } catch (err) {
-      console.log(err);
+      dispatch(_setError(err.response.data.message));
+      setTimeout(() => dispatch(_setError("")), 6000);
     }
   };
 };

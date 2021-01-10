@@ -5,7 +5,10 @@ const socketio = require("socket.io");
 // const db = require("./db/db");
 const app = express();
 
-app.use(volleyball);
+if (process.env.NODE_DEV === "development") {
+  app.use(volleyball);
+}
+
 app.use(express.json());
 
 const staticFolder = path.join(__dirname, "..", "..", "static");

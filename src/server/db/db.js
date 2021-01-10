@@ -14,12 +14,12 @@ const productiondb = new Sequelize(
     dialectOptions: {
       ssl: process.env.DB_SSL == "true",
     },
+    logging: false,
   }
 );
 
 const developmentdb = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost/bug_tracker",
-  { logging: false }
+  process.env.DATABASE_URL || "postgres://localhost/bug_tracker"
 );
 
 const db = process.env.NODE_ENV === "production" ? productiondb : developmentdb;

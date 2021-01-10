@@ -30,7 +30,7 @@ router.use((req, res, next) => {
       next();
     });
   } else {
-    console.log("no token found, authentication failed");
+    console.log("Not using oAuth");
     next();
   }
 });
